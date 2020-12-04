@@ -12,12 +12,7 @@
 
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-
-    {% if title %}
-    <title>College Finder | {{title}}</title>
-    {% else %}
     <title>College Finder</title>
-    {% endif %}
 </head>
 
 <body id="body-pd">
@@ -27,7 +22,7 @@
         </div>
 
         <div class="header__img">
-            <img src="{%static 'main/img/avatar.svg'%}" alt="Profile" />
+            <img src="{%static 'img/avatar.svg'%}" alt="Profile" />
         </div>
     </header>
 
