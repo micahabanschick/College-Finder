@@ -17,3 +17,18 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
 });
+
+
+// ALERTS
+const close = document.getElementsByClassName("closebtn");
+let i;
+
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+        let div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function() {
+            div.style.display = "none";
+        }, 600);
+    }
+}
