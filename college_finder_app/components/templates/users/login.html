@@ -21,15 +21,18 @@
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="#" class="sign-in-form">
+                    {% csrf_token %}
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class='bx bxs-user'></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" placeholder="Username" name="username" />
                     </div>
+
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Password" name="password" />
                     </div>
+
                     <input type="submit" value="Login" class="btn solid" />
                     <a href="#" class="social-text">Forgot Password?</a>
                     <p class="social-text">Sign in with social platforms</p>
@@ -46,28 +49,46 @@
 
                 <form action="{% url 'register' %}" class="sign-up-form" method="POST">
                     {% csrf_token %}
-                    {{form}}
                     <h2 class="title">Sign up</h2>
+                    <p>All Fields Mandatory.*</p>
                     <div class="input-field">
                         <i class='bx bx-id-card'></i>
-                        <input type="text" placeholder="Full Name" />
+                        <input type="text" placeholder="Full Name" name="fullname" {% if  reg_form.is_bound %}
+                            value="{{reg_form.fullname.value}}{% endif %}" />
                     </div>
+
                     <div class="input-field">
                         <i class='bx bxs-envelope'></i>
-                        <input type="email" placeholder="Email" />
+                        <input type="email" placeholder="Email" name="email" {% if  reg_form.is_bound %}
+                            value="{{reg_form.email.value}}{% endif %}" />
                     </div>
+
                     <div class="input-field">
                         <i class='bx bxs-user'></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" placeholder="Username" name="reg_username"
+                            {% if  reg_form.is_bound %}value="{{reg_form.reg_username.value}}{% endif %}" />
                     </div>
+
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Password" name="reg_password" {% if  reg_form.is_bound %}
+                            value="{{reg_form.reg_password.value}}{% endif %}" />
                     </div>
+
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Confirm Password" />
+                        <input type="password" placeholder="Confirm Password" name="reg_password_repeat"
+                            {% if  reg_form.is_bound %} value="{{reg_form.reg_password_repeat.value}}{% endif %}" />
                     </div>
+
+                    {% if messages %}
+                    {% for message in  messages%}
+                    <div class="alert warning">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
                     <input type="submit" class="btn" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
                     <div class="social-media">
