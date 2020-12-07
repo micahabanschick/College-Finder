@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.contrib import messages
 from validate_email import validate_email
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from .forms import UserRegisterForm, UserLoginForm
 
 
@@ -25,12 +26,10 @@ class RegistrationView(View):
                                  'Please provide a valid email.')
             has_error = True
 
- 
-        
         try:
             if User.objects.get(email=email):
                 messages.add_message(request, messages.ERROR,
-                                    'Email is already taken.')
+                                     'Email is already taken.')
                 has_error = True
         except Exception as e:
             pass
@@ -38,38 +37,46 @@ class RegistrationView(View):
         try:
             if User.objects.get(reg_username=reg_username):
                 messages.add_message(request, messages.ERROR,
-                                    'Username is already taken.')
+                                     'Username is already taken.')
                 has_error = True
         except Exception as e:
             pass
 
-        if not fullname:
+        if len(reg_username) < 5 or len(reg_username) > 14:
             messages.add_message(
-                request, messages.ERROR, 'Please fill all the fields.')
+                request, messages.ERROR, 'Username must be between 5 and 14 characters.')
             has_error = True
 
-
-        if len(reg_password) < 8:
+        if len(reg_password) < 8 or len(reg_password) > 20:
             messages.add_message(
                 request, messages.ERROR, 'Your password must be between 8 and 20 characters.')
             has_error = True
 
         if reg_password != reg_password_repeat:
             messages.add_message(request, messages.ERROR,
-                                 'Passwords do not match.')
+                                 'Password does not match.')
             has_error = True
 
-        if has_error:
-            return render(request, 'users/login.html', context={'mode': 'signup', 'reg_form': reg_form, 'error': has_error})
+        if not has_error:
+            try:
+                user = User.objects.create(email=email, username=reg_username)
+                user.set_password(reg_password)
+                user.firstname = fullname
+                user.lastname = fullname
+                user.is_active = False
 
-        user = User.objects.create_user(email=email, username=reg_username)
-        user.set_password(reg_password)
-        user.fullname = fullname
-        user.is_active = False
-
-        user.save()
-        messages.add_message(request, messages.SUCCESS, 'Account created successfully.')
-        return redirect('login')
+                user.save()
+                messages.add_message(request, messages.SUCCESS,
+                                     'Account created successfully.')
+                return redirect('login')
+            except IntegrityError as e:
+                messages.add_message(request, messages.ERROR,
+                                     'Account already exists.')
+                has_error = True
+                return redirect('login')
+        else:
+            has_error = True
+            return render(request, 'users/login.html', status=400, context={'mode': 'signup', 'reg_form': reg_form, 'error': has_error})
 
         # print(reg_form)
         # if reg_form.is_valid():

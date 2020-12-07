@@ -276,13 +276,20 @@ form.sign-in-form {
 
 /* ALERTS */
 
+.alerts {
+    position: absolute;
+    bottom: 0.4em;
+    left: 50%;
+    width: auto;
+    z-index: 99;
+}
+
 .alert {
     padding: 1em;
     background-color: #f44336;
     color: white;
-    opacity: 1;
     transition: opacity 0.6s;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
     border-radius: 1em;
 }
 
@@ -311,6 +318,56 @@ form.sign-in-form {
 
 .closebtn:hover {
     color: black;
+}
+
+#alert {
+    -moz-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: alertAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: alertAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes alertAnimation {
+    to {
+        margin: 0;
+        padding: 0;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes alertAnimation {
+    to {
+        margin: 0;
+        padding: 0;
+        width: 0;
+        height: 0;
+        visibility: none;
+    }
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 /* ANIMATION */
