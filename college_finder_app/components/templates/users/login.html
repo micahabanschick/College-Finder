@@ -25,12 +25,12 @@
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class='bx bxs-user'></i>
-                        <input type="text" placeholder="Username" name="username" />
+                        <input type="text" placeholder="Username" name="username" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Password" name="password" />
+                        <input type="password" placeholder="Password" name="password" required />
                     </div>
 
                     <input type="submit" value="Login" class="btn solid" />
@@ -50,44 +50,33 @@
                 <form action="{% url 'register' %}" class="sign-up-form" method="POST">
                     {% csrf_token %}
                     <h2 class="title">Sign up</h2>
-                    <p>All Fields Mandatory.*</p>
                     <div class="input-field">
                         <i class='bx bx-id-card'></i>
-                        <input type="text" placeholder="Full Name" name="fullname" {% if  reg_form.is_bound %}
-                            value="{{reg_form.fullname.value}}{% endif %}" />
+                        <input type="text" placeholder="Full Name" name="fullname" value="{{reg_form.fullname}}" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-envelope'></i>
-                        <input type="email" placeholder="Email" name="email" {% if  reg_form.is_bound %}
-                            value="{{reg_form.email.value}}{% endif %}" />
+                        <input type="email" placeholder="Email" name="email" value="{{reg_form.email}}" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-user'></i>
                         <input type="text" placeholder="Username" name="reg_username"
-                            {% if  reg_form.is_bound %}value="{{reg_form.reg_username.value}}{% endif %}" />
+                            value="{{reg_form.reg_username}}" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Password" name="reg_password" {% if  reg_form.is_bound %}
-                            value="{{reg_form.reg_password.value}}{% endif %}" />
+                        <input type="password" placeholder="Password" name="reg_password" value="{{reg_form.reg_password}}" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
                         <input type="password" placeholder="Confirm Password" name="reg_password_repeat"
-                            {% if  reg_form.is_bound %} value="{{reg_form.reg_password_repeat.value}}{% endif %}" />
+                            value="{{reg_form.reg_password_repeat}}"
+                            required />
                     </div>
-
-                    {% if messages %}
-                    {% for message in  messages%}
-                    <div class="alert warning">
-                        {{message}}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
 
                     <input type="submit" class="btn" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
@@ -98,7 +87,6 @@
                         <a href="#" class="social-icon" id="google">
                             <i class='bx bxl-google'></i>
                         </a>
-
                     </div>
                 </form>
             </div>
@@ -129,6 +117,20 @@
                 </div>
                 <img src="{%static 'img/register.svg'%}" class="image" alt="" />
             </div>
+        </div>
+
+        <div class="alerts">
+            {% if messages %}
+            {% for message in  messages%}
+            <div class="alert {{message.tags}}" id="alert">
+                <span class="closebtn">&times;</span>
+                <p>{{message}}</p>
+                <script>
+                    sleep(2000);
+                </script>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
     <!-- ===== CHANGING MODES ===== -->
