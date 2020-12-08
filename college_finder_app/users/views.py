@@ -1,10 +1,21 @@
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
-from validate_email import validate_email
+from validate_email import DOMAIN, validate_email
+from usernames import is_safe_username
+import re
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .forms import UserRegisterForm, UserLoginForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import get_template, render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import SettingsReference, settings
+
+username_pattern = re.compile(
+    r'^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
 
 
 class RegistrationView(View):
@@ -42,9 +53,14 @@ class RegistrationView(View):
         except Exception as e:
             pass
 
-        if len(reg_username) < 5 or len(reg_username) > 14:
+        if not username_pattern.match(reg_username):
             messages.add_message(
-                request, messages.ERROR, 'Username must be between 5 and 14 characters.')
+                request, messages.ERROR, 'Username can only contain letters (a-z), numbers (0-9), underscores (_), and periods (.) and it must be between 5 and 15 characters.')
+            has_error = True
+
+        if not is_safe_username(reg_username):
+            messages.add_message(
+                request, messages.WARNING, 'Username contains illegal words.')
             has_error = True
 
         if len(reg_password) < 8 or len(reg_password) > 20:
@@ -61,13 +77,33 @@ class RegistrationView(View):
             try:
                 user = User.objects.create(email=email, username=reg_username)
                 user.set_password(reg_password)
-                user.firstname = fullname
-                user.lastname = fullname
+                user.first_name = fullname.split()[0]
+                user.last_name = " ".join(fullname.split()[1:])
                 user.is_active = False
 
                 user.save()
+
+                current_site = get_current_site(request)
+                email_subject = 'Activate your COLLEGE FINDER Account',
+                message = get_template('users/activate.html').render(context={
+                    'user': user,
+                    'domain': current_site.domain,
+                    'user_id': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': generate_token.make_token(user)
+                })
+
+                email_message = EmailMessage(
+                    email_subject,
+                    message,
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                )
+                email_message.content_subtype = 'html'
+
+                email_message.send()
+
                 messages.add_message(request, messages.SUCCESS,
-                                     'Account created successfully.')
+                                     'Account created successfully. Check your email to confirm your account.')
                 return redirect('login')
             except IntegrityError as e:
                 messages.add_message(request, messages.ERROR,
@@ -78,16 +114,24 @@ class RegistrationView(View):
             has_error = True
             return render(request, 'users/login.html', status=400, context={'mode': 'signup', 'reg_form': reg_form, 'error': has_error})
 
-        # print(reg_form)
-        # if reg_form.is_valid():
-        #     return redirect('register')
-        # else:
-
 
 class LoginView(View):
     def get(self, request):
         return render(request, 'users/login.html', context={'mode': 'signin', })
 
-    # def get(self, request):
-    #     login_form = UserLoginForm(request.POST)
-    #     return render(request, 'users/login.html', context={'mode': 'signin', 'login_form': login_form})
+
+class ActivateAccountView(View):
+    def get(self, request, uidb64, token):
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=user_id)
+        except Exception as identifier:
+            user = None
+
+        if user is not None and generate_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Account activated successfully. You can sign in to the app with your credentials now.')
+            return render(request, 'users/login.html', context={'mode': 'signin'})
+        return render(request, 'users/login.html', context={'mode': 'signup'}, status=401)
