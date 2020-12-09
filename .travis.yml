@@ -1,0 +1,15 @@
+language: python
+
+python: 
+      -"3.9.0"
+env:
+      -SECRET_KEY='TEST'
+
+services:
+      -mysql
+
+install:
+      -pip install
+
+script:
+      -py manage.py test
