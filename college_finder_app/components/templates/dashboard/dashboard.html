@@ -1,9 +1,15 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is a Dashboard...</h1>
-{% endblock content %} {% block script %}
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{greeting}}, {{name}}!</h1>
+<p>Current time is {{current_time}}</p>
+{% endblock content %}
+
+
+
+{% block script %}
 <script>
-  const linkColor = document.querySelector("#dashboard");
+  const linkColor=document.querySelector("#dashboard");
   linkColor.classList.add("active");
 </script>
-
 {% endblock script %}

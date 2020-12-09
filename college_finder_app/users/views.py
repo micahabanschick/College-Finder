@@ -1,3 +1,4 @@
+from django.db.utils import ConnectionDoesNotExist
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
@@ -5,6 +6,7 @@ from validate_email import DOMAIN, validate_email
 from usernames import is_safe_username
 import re
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import get_template, render_to_string
@@ -80,11 +82,10 @@ class RegistrationView(View):
                 user.first_name = fullname.split()[0]
                 user.last_name = " ".join(fullname.split()[1:])
                 user.is_active = False
-
                 user.save()
 
                 current_site = get_current_site(request)
-                email_subject = 'Activate your COLLEGE FINDER Account',
+                email_subject = 'Activate your College Finder account'
                 message = get_template('users/activate.html').render(context={
                     'user': user,
                     'domain': current_site.domain,
@@ -105,11 +106,19 @@ class RegistrationView(View):
                 messages.add_message(request, messages.SUCCESS,
                                      'Account created successfully. Check your email to confirm your account.')
                 return redirect('login')
+
+            except (ConnectionError, ConnectionAbortedError, ConnectionRefusedError, ConnectionDoesNotExist, ConnectionResetError):
+                messages.add_message(request, messages.ERROR,
+                                     'There was connection problems when signing up your account. Please try again with stable connection.')
+                has_error = True
+                return redirect('register')
+
             except IntegrityError as e:
                 messages.add_message(request, messages.ERROR,
                                      'Account already exists.')
                 has_error = True
                 return redirect('login')
+
         else:
             has_error = True
             return render(request, 'users/login.html', status=400, context={'mode': 'signup', 'reg_form': reg_form, 'error': has_error})
@@ -118,6 +127,37 @@ class RegistrationView(View):
 class LoginView(View):
     def get(self, request):
         return render(request, 'users/login.html', context={'mode': 'signin', })
+
+    def post(self, request):
+        context = {
+            'form': request.POST,
+            'has_error': False
+        }
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username == '':
+            messages.add_message(request, messages.ERROR,
+                                 'Username is required.')
+            context['has_error'] = True
+
+        if password == '':
+            messages.add_message(request, messages.ERROR,
+                                 'Password is required.')
+            context['has_error'] = True
+
+        user = authenticate(request, username=username, password=password)
+
+        if not user and not context['has_error']:
+            messages.add_message(request, messages.ERROR,
+                                 'Invalid Log In credentials.')
+            context['has_error'] = True
+
+        if context['has_error']:
+            return render(request, 'users/login.html', status=401, context=context)
+
+        login(request, user)
+        return redirect('dashboard')
 
 
 class ActivateAccountView(View):
