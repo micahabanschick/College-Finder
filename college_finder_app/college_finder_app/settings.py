@@ -144,4 +144,4 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 LOGIN_URL = 'login'
 LOGIN_REDIRECTED_URL = 'dashboard'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECTED_URL = 'login'
+LOGOUT_REDIRECTED_URL = 'login'

@@ -125,6 +125,7 @@ class RegistrationView(View):
 
 
 class LoginView(View):
+
     def get(self, request):
         return render(request, 'users/login.html', context={'mode': 'signin', })
 
@@ -175,3 +176,9 @@ class ActivateAccountView(View):
                                  'Account activated successfully. You can sign in to the app with your credentials now.')
             return render(request, 'users/login.html', context={'mode': 'signin'})
         return render(request, 'users/login.html', context={'mode': 'signup'}, status=401)
+
+
+def logout_page(request):
+    logout(request)
+    messages.add_message(request, messages.INFO, 'Logged out successfully.')
+    return redirect('login')
