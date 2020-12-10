@@ -7,6 +7,7 @@ from usernames import is_safe_username
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import get_template, render_to_string
@@ -22,6 +23,8 @@ username_pattern = re.compile(
 
 class RegistrationView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
         return render(request, 'users/login.html', context={'mode': 'signup', })
 
     def post(self, request):
@@ -62,7 +65,7 @@ class RegistrationView(View):
 
         if not is_safe_username(reg_username):
             messages.add_message(
-                request, messages.WARNING, 'Username contains illegal words.')
+                request, messages.WARNING, 'Username contains invalid word.')
             has_error = True
 
         if len(reg_password) < 8 or len(reg_password) > 20:
@@ -125,8 +128,9 @@ class RegistrationView(View):
 
 
 class LoginView(View):
-
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
         return render(request, 'users/login.html', context={'mode': 'signin', })
 
     def post(self, request):

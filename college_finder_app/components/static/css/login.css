@@ -286,24 +286,23 @@ form.sign-in-form {
 
 .alert {
     padding: 1em;
-    background-color: #f44336;
+    background-color: #d64242;
     color: white;
     transition: opacity 0.6s;
     margin-bottom: 0.4em;
     border-radius: 1em;
 }
 
-
 .alert.success {
-    background-color: #4CAF50;
+    background-color: #34c240;
 }
 
 .alert.info {
-    background-color: #2196F3;
+    background-color: #0090e0;
 }
 
 .alert.warning {
-    background-color: #ff9800;
+    background-color: #fa9f47;
 }
 
 .closebtn {

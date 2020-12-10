@@ -25,4 +25,5 @@ urlpatterns = [
     path('blogs', include('blogs.urls')),
     path('help', include('get_help.urls')),
     path('', include('users.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]

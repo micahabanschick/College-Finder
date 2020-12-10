@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{greeting}}, {{name}}!</h1>
+<h1>{{greeting.text}}, {{name}}! {{greeting.emoji}}</h1>
 <p>Current time is {{current_time}}</p>
 {% endblock content %}
 

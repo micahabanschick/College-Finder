@@ -131,13 +131,13 @@ a {
     font-size: 1.25rem;
 }
 
-/*Show navbar movil*/
+/*Show navbar mobile*/
 
 .show {
     left: 0;
 }
 
-/*Add padding body movil*/
+/*Add padding body mobile*/
 
 .body-pd {
     padding-left: calc(var(--nav-width) + 1rem);
@@ -188,4 +188,8 @@ a {
     .body-pd {
         padding-left: calc(var(--nav-width) + 188px);
     }
+}
+
+main {
+    margin-top: 0.5em;
 }
