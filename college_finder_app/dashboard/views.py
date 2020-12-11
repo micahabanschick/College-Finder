@@ -6,7 +6,7 @@ current_time = time.strftime("%H:%M:%S", t)
 greeting = "Hello"
 emoji = "👋"
 
-if int(time.strftime("%H", t)) < 4 and int(time.strftime("%H", t)) < 12:
+if int(time.strftime("%H", t)) > 4 and int(time.strftime("%H", t)) < 12:
     greeting = "Good Morning"
     emoji = "🌅"
 
