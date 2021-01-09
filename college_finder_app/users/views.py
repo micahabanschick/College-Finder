@@ -18,7 +18,7 @@ from django.core.mail import EmailMessage
 from django.conf import SettingsReference, settings
 
 username_pattern = re.compile(
-    r'^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
+    r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
 
 
 class RegistrationView(View):
@@ -60,7 +60,7 @@ class RegistrationView(View):
 
         if not username_pattern.match(reg_username):
             messages.add_message(
-                request, messages.ERROR, 'Username can only contain letters (a-z), numbers (0-9), underscores (_), and periods (.) and it must be between 5 and 15 characters.')
+                request, messages.ERROR, 'Username can only contain letters (a-z), numbers (0-9), underscores (_), and periods (.) and it must be between 5 and 20 characters.')
             has_error = True
 
         if not is_safe_username(reg_username):
@@ -68,9 +68,9 @@ class RegistrationView(View):
                 request, messages.WARNING, 'Username contains invalid word.')
             has_error = True
 
-        if len(reg_password) < 8 or len(reg_password) > 20:
+        if len(reg_password) < 8:
             messages.add_message(
-                request, messages.ERROR, 'Your password must be between 8 and 20 characters.')
+                request, messages.ERROR, 'Your password must not be less than 8 characters.')
             has_error = True
 
         if reg_password != reg_password_repeat:
@@ -118,9 +118,9 @@ class RegistrationView(View):
 
             except IntegrityError as e:
                 messages.add_message(request, messages.ERROR,
-                                     'Account already exists.')
+                                    'Username is already taken.')
                 has_error = True
-                return redirect('login')
+                return redirect('register')
 
         else:
             has_error = True

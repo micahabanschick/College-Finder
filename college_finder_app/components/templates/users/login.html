@@ -83,10 +83,10 @@
                     <input type="submit" class="btn" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
                     <div class="social-media">
-                        <a href="#" class="social-icon" id="facebook">
+                        <a href="{% url 'social:begin' 'facebook' %}" class="social-icon" id="facebook">
                             <i class='bx bxl-facebook'></i>
                         </a>
-                        <a href="#" class="social-icon" id="google">
+                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-icon" id="google">
                             <i class='bx bxl-google'></i>
                         </a>
                     </div>
@@ -125,8 +125,8 @@
             {% if messages %}
             {% for message in  messages%}
             <div class="alert {{message.tags}}" id="alert">
-                <span class="closebtn">&times;</span>
                 <p>{{message}}</p>
+                <i class='bx bx-x closebtn'></i>
             </div>
             {% endfor %}
             {% endif %}
