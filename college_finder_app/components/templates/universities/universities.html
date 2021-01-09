@@ -1,7 +1,41 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is Universities Section</h1>
-{% endblock content %} {% block script %}
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/universities/universities.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+<h1>Universities</h1>
+
+<div class="universities">
+
+  <div class="university-card">
+    <div class="university-card__content">
+      <div class="university-card__header">
+        <p class="university-card__headline">Stanford University</p>
+        <p class="university-card__location"><i class='bx bxs-map'></i> USA</p>
+      </div>
+      <hr>
+      <div class="university-card__body">
+        <p><span class="university-card__stats">Rank</span>: 1</p>
+        <p><span class="university-card__stats">No. of Students</span>: 14,732</p>
+        <p><span class="university-card__stats">Students per staff</span>: 4:1</p>
+        <p><span class="university-card__stats">International Students</span>: 35%</p>
+        <p><span class="university-card__stats">Female - Male ratio</span>: 49:51</p>
+      </div>
+    </div>
+    <div class="university-card__action">
+      <button class="university-card__btn">Learn More</button>
+      <i class='bx bx-bookmark university-card__bookmark'></i>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
+
+{% block script %}
 <script>
+
   const linkColor=document.querySelector("#universities");
   linkColor.classList.add("active");
 </script>

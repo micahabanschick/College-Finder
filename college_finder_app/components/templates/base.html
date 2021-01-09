@@ -12,6 +12,9 @@
 
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    {% block extracss %}
+
+    {% endblock extracss %}
 
     {% if title %}
     <title>College Finder | {{title}}</title>
@@ -83,8 +86,18 @@
         {% block content %}
 
         {% endblock content %}
-    </main>
 
+    </main>
+    <div class="alerts">
+        {% if messages %}
+        {% for message in messages%}
+        <div class="alert {{message.tags}}" id="alert">
+            <span class="closebtn">&times;</span>
+            <p>{{message}}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
     {% block script %}
 
     {% endblock script %}

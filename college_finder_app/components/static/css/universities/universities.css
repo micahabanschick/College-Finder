@@ -1,0 +1,102 @@
+:root {
+  /*===== Colors =====*/
+  --first-color: #1a237e;
+  --first-color-light: #AFA5D9;
+  --white-color: #F7F6FB;
+  /*===== Font and typography =====*/
+  --body-font: 'Nunito', sans-serif;
+  --normal-font-size: 1rem;
+  /*===== z index =====*/
+  --z-fixed: 100;
+}
+
+.universities {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.university-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.6rem;
+  border: solid 2px #ccc;
+  border-radius: 9px;
+}
+
+.university-card__header {
+  text-align: center;
+  line-height: 1.3rem;
+}
+
+.university-card__headline {
+  font-size: 1.2rem;
+}
+
+.university-card__body {
+  line-height: 0.6rem;
+}
+
+.university-card__stats {
+  font-weight: 700;
+}
+
+.university-card__action {
+  padding-top: 0.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+}
+
+.university-card__btn {
+  border: 0;
+  background-color: #666;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  -webkit-box-shadow: 4px 4px 15px rgba(7, 6, 6, 0.15);
+          box-shadow: 4px 4px 15px rgba(7, 6, 6, 0.15);
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+}
+
+.university-card__bookmark {
+  color: #666;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.university-card__content p {
+  font-weight: 600;
+}
+
+@media screen and (min-width: 730px) {
+  .universities {
+    -ms-grid-columns: (minmax(207px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(207px, 1fr));
+  }
+}
+
+@media screen and (min-width: 925px) and (max-width: 959px) {
+  .universities {
+    -ms-grid-columns: (minmax(210px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  }
+}
+/*# sourceMappingURL=universities.css.map */
