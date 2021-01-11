@@ -9,19 +9,23 @@
 
 <div class="universities">
 
+  {% for university in universities %}
+
   <div class="university-card">
     <div class="university-card__content">
       <div class="university-card__header">
-        <p class="university-card__headline">Stanford University</p>
-        <p class="university-card__location"><i class='bx bxs-map'></i> USA</p>
+        <p class="university-card__headline">{{ university.name }}</p>
+        <p class="university-card__location"><i class='bx bxs-map'></i> {{ university.location }}</p>
       </div>
       <hr>
       <div class="university-card__body">
-        <p><span class="university-card__stats">Rank</span>: 1</p>
-        <p><span class="university-card__stats">No. of Students</span>: 14,732</p>
-        <p><span class="university-card__stats">Students per staff</span>: 4:1</p>
-        <p><span class="university-card__stats">International Students</span>: 35%</p>
-        <p><span class="university-card__stats">Female - Male ratio</span>: 49:51</p>
+        <p><span class="university-card__stats">Rank</span>: {{ university.rank_order }}</p>
+        <p><span class="university-card__stats">No. of Students</span>: {{ university.stats_number_students }}</p>
+        <p><span class="university-card__stats">Students per staff</span>: {{ university.stats_student_staff_ratio }}
+        </p>
+        <p><span class="university-card__stats">International Students</span>: {{ university.stats_pc_intl_students }}
+        </p>
+        <p><span class="university-card__stats">Female - Male ratio</span>: {{ university.stats_female_male_ratio }}</p>
       </div>
     </div>
     <div class="university-card__action">
@@ -30,7 +34,28 @@
     </div>
   </div>
 
+  {% endfor %}
 </div>
+
+<!-- Pagination -->
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+<!-- End of Pagination -->
 {% endblock content %}
 
 {% block script %}
