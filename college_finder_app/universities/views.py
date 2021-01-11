@@ -1,10 +1,18 @@
+from django.core import paginator
 from django.shortcuts import render
-
-
-context = {
-    'title': 'Universities',
-}
+from django.core.paginator import Paginator
+from .models import Universities
 
 
 def universities_page(request):
+    data = Universities.objects.all()
+    paginator = Paginator(data, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'title': 'Universities',
+        'universities': page_obj,
+        'page_obj': page_obj,
+    }
     return render(request, 'universities/universities.html', context)
