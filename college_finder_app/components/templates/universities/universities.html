@@ -7,6 +7,15 @@
 {% block content %}
 <h1>Universities</h1>
 
+<!-- Search -->
+<div class="search">
+  <input type="text" class="searchTerm" placeholder="Search for Universities..">
+  <button type="submit" class="searchButton">
+    <i class='bx bx-search'></i>
+  </button>
+</div>
+
+<!-- Universities -->
 <div class="universities">
 
   {% for university in universities %}
@@ -39,21 +48,28 @@
 
 <!-- Pagination -->
 <div class="pagination">
-  <span class="step-links">
-    {% if page_obj.has_previous %}
-    <a href="?page=1">&laquo; first</a>
-    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+  {% if page_obj.has_previous %}
+  <a class="pagination-action" href="?page=1">
+    <i class='bx bxs-chevrons-left' aria-hidden="true" title="First"></i>
+    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
+      <i class='bx bxs-chevron-left' aria-hidden="true" title="Previous"></i>
+    </a>
     {% endif %}
-
-    <span class="current">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </span>
-
-    {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">next</a>
-    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-    {% endif %}
-  </span>
+    {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+    <span class="pagination-number pagination-current">{{ num }}</span>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="pagination-number"
+      href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+  <a class="pagination-action" href="?page={{ page_obj.next_page_number }}">
+    <i class='bx bxs-chevron-right' aria-hidden="true" title="Next"></i>
+  </a>
+  <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
+    <i class='bx bxs-chevrons-right' aria-hidden="true" title="Last"></i>
+  </a>
+  {% endif %}
 </div>
 <!-- End of Pagination -->
 {% endblock content %}
