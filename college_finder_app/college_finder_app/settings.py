@@ -148,7 +148,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'components/media')
-MEDIA_URL = os.path.join('/media/')
+MEDIA_URL = '/media/'
 
 load_dotenv()
 
