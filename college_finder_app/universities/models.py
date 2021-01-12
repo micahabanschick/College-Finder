@@ -22,7 +22,7 @@ class Universities(models.Model):
     scores_international_outlook_rank = models.IntegerField()
     record_type = models.CharField(max_length=16)
     member_level = models.IntegerField()
-    url = models.TextField()
+    slug = models.SlugField(default='not-found')
     nid = models.IntegerField()
     location = models.TextField()
     stats_number_students = models.IntegerField()

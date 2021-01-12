@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="">
+{% endblock extracss %}
+
+{% block content %}
+<h1>{{ university.name }}</h1>
+
+
+
+{% endblock content %}
+
+{% block script %}
+<script>
+
+    const linkColor=document.querySelector("#universities");
+    linkColor.classList.add("active");
+</script>
+{% endblock script %}
