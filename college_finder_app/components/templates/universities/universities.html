@@ -34,11 +34,12 @@
         </p>
         <p><span class="university-card__stats">International Students</span>: {{ university.stats_pc_intl_students }}
         </p>
-        <p><span class="university-card__stats">Female - Male ratio</span>: {{ university.stats_female_male_ratio }}</p>
+        <p><span class="university-card__stats">Overall Score</span>: {{ university.scores_overall }}</p>
       </div>
     </div>
     <div class="university-card__action">
-      <button class="university-card__btn">Learn More</button>
+      <a href="{% url 'university_detail' university.slug %}"><button class="university-card__btn">Learn More</button></a>
+      
       <i class='bx bx-bookmark university-card__bookmark'></i>
     </div>
   </div>
