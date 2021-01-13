@@ -61,9 +61,9 @@
   {% if page_obj %}
 
   {% if page_obj.has_previous %}
-  <a class="pagination-action" href="?page=1">
+  <a class="pagination-action" href="?page=1&search={{ search_query }}">
     <i class='bx bxs-chevrons-left' aria-hidden="true" title="First"></i>
-    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
+    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">
       <i class='bx bxs-chevron-left' aria-hidden="true" title="Previous"></i>
     </a>
     {% endif %}
@@ -71,14 +71,14 @@
     {% if page_obj.number == num %}
     <span class="pagination-number pagination-current">{{ num }}</span>
     {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="pagination-number"
-      href="?page={{ num }}">{{ num }}</a>
+      href="?page={{ num }}&search={{ search_query }}">{{ num }}</a>
   {% endif %}
   {% endfor %}
   {% if page_obj.has_next %}
-  <a class="pagination-action" href="?page={{ page_obj.next_page_number }}">
+  <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">
     <i class='bx bxs-chevron-right' aria-hidden="true" title="Next"></i>
   </a>
-  <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
+  <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">
     <i class='bx bxs-chevrons-right' aria-hidden="true" title="Last"></i>
   </a>
   {% endif %}

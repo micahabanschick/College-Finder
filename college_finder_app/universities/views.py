@@ -11,7 +11,7 @@ def universities_page(request):
 
     if search_query:
         data = Universities.objects.filter(
-            Q(name__icontains=search_query) | Q(location__icontains=search_query))
+            Q(name__icontains=search_query) | Q(location__icontains=search_query)).distinct()
     else:
         data = Universities.objects.all()
 
