@@ -1,5 +1,53 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is a College Comparison Section...</h1>
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/college_comparison/college_comparison.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+<h1>This is College Comparison Section...</h1>
+
+<!--  -->
+<div class='table-responsive'>
+    <table class="table">
+
+        <tr>
+            <th>CRITERIA</th>
+            <th>UNIVERSITY 1</th>
+            <th>UNIVERSITY 2</th>
+            <th>UNIVERSITY 3</th>
+        </tr>
+        <tr>
+            <td>Rank</td>
+            <td>150.000</td>
+            <td>110.000</td>
+            <td>120.000</td>
+
+        </tr>
+        <tr>
+            <td>No. of Students</td>
+            <td>150.000</td>
+            <td>110.000</td>
+            <td>120.000</td>
+
+        </tr>
+        <tr>
+            <td>Students per staff</td>
+            <td>150.000</td>
+            <td>110.000</td>
+            <td>120.000</td>
+
+        </tr>
+        <tr>
+            <td>International Students</td>
+            <td>150.000</td>
+            <td>110.000</td>
+            <td>120.000</td>
+
+        </tr>
+    </table>
+</div>
+
 {% endblock content %} {% block script %}
 <script>
     const linkColor=document.querySelector("#college-comparison");
