@@ -10,6 +10,12 @@
     --z-fixed: 100;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 // Search
 
 .search {
@@ -47,7 +53,15 @@
     outline: none;
 }
 
-// 
+// Search Results
+.search-results {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.1em;
+}
+
+// Universities
 .universities {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -62,17 +76,22 @@
     border: solid 2px #ccc;
     border-radius: 9px;
 
+    &__content{
+        line-height: 1.4rem;
+    }
+
     &__header {
         text-align: center;
-        line-height: 1.4rem;
+        padding: 0.2em;
     }
 
     &__headline {
         font-size: 1.2rem;
+        padding-bottom: 0.4em;
     }
 
     &__body {
-        line-height: 0.6rem;
+        margin-top: 0.5em;
     }
 
     &__stats {
