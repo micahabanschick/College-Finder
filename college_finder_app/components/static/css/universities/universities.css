@@ -10,6 +10,13 @@
   --z-fixed: 100;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .search {
   width: 290px;
   position: relative;
@@ -46,6 +53,17 @@
   outline: none;
 }
 
+.search-results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1em;
+  font-size: 1.1em;
+}
+
 .universities {
   display: -ms-grid;
   display: grid;
@@ -70,17 +88,22 @@
   border-radius: 9px;
 }
 
+.university-card__content {
+  line-height: 1.4rem;
+}
+
 .university-card__header {
   text-align: center;
-  line-height: 1.4rem;
+  padding: 0.2em;
 }
 
 .university-card__headline {
   font-size: 1.2rem;
+  padding-bottom: 0.4em;
 }
 
 .university-card__body {
-  line-height: 0.6rem;
+  margin-top: 0.5em;
 }
 
 .university-card__stats {
