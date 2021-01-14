@@ -8,9 +8,44 @@
     --body-font: 'Nunito', sans-serif;
 }
 
+.title {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.uni a {
+    text-decoration: underline;
+    color: #222;
+}
+
+/* Search */
+
+.search {
+    width: 250px;
+    position: relative;
+    display: flex;
+    margin: 1em auto;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 2px solid #ccc;
+    padding: 8px;
+    height: 2em;
+    font-size: 1.2em;
+    border-radius: 5px;
+    outline: none;
+}
+
+.searchTerm:focus {
+    color: #666;
+}
+
 .table-responsive {
     min-height: .01%;
-    overflow-x: auto
+    overflow-x: auto;
+    margin: 1em 0;
 }
 
 .table {
@@ -22,7 +57,7 @@
 
 .table td, .table th {
     border: 1px solid #bdc3c7;
-    padding: 10px;
+    padding: 0.5em;
     vertical-align: top
 }
 
@@ -33,6 +68,20 @@
 .table th {
     background-color: #ecf0f1;
     font-size: 110%
+}
+
+/* Discard Button */
+
+.discardbtn {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.discardbtn:hover {
+    color: red;
 }
 
 .table tr.even:hover td, .table tr:hover td {

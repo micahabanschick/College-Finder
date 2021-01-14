@@ -22,6 +22,7 @@ const showNavbar = (toggleId, navId, bodyId, headerId) =>{
 
 showNavbar('header-toggle','nav-bar','body-pd','header')
 
+
 // /*===== LINK ACTIVE  =====*/ 
 // const linkColor = document.querySelectorAll('.nav__link')
 
@@ -32,3 +33,18 @@ showNavbar('header-toggle','nav-bar','body-pd','header')
 //     }
 // }
 // linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
+
+// ALERTS
+const close = document.getElementsByClassName("closebtn");
+let i;
+
+for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+        let div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function() {
+            div.style.display = "none";
+        }, 600);
+    }
+}
