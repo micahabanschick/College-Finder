@@ -130,6 +130,8 @@ class RegistrationView(View):
 class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
+            messages.add_message(request, messages.SUCCESS,
+                                 'Logged in successfully.')
             return redirect('dashboard')
         return render(request, 'users/login.html', context={'mode': 'signin', })
 

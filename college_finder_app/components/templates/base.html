@@ -87,17 +87,19 @@
 
         {% endblock content %}
 
-    </main>
-    <div class="alerts">
-        {% if messages %}
-        {% for message in messages%}
-        <div class="alert {{message.tags}}" id="alert">
-            <span class="closebtn">&times;</span>
-            <p>{{message}}</p>
+        <div class="alerts">
+            {% if messages %}
+            {% for message in messages%}
+            <div class="alert {{message.tags}}" id="alert">
+                <p>{{message}}</p>
+                <i class='bx bx-x closebtn'></i>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
-        {% endfor %}
-        {% endif %}
-    </div>
+
+    </main>
+
     {% block script %}
 
     {% endblock script %}
