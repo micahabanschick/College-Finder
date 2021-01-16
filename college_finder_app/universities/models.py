@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Universities(models.Model):
@@ -33,3 +34,4 @@ class Universities(models.Model):
         max_length=16, null=False, blank=True)
     aliases = models.TextField()
     subjects_offered = models.TextField()
+    bookmarks = models.ManyToManyField(User, related_name='bookmarks', blank=True)
