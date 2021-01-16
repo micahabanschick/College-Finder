@@ -118,7 +118,7 @@ class RegistrationView(View):
 
             except IntegrityError as e:
                 messages.add_message(request, messages.ERROR,
-                                    'Username is already taken.')
+                                     'Username is already taken.')
                 has_error = True
                 return redirect('register')
 
@@ -130,8 +130,6 @@ class RegistrationView(View):
 class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated:
-            messages.add_message(request, messages.SUCCESS,
-                                 'Logged in successfully.')
             return redirect('dashboard')
         return render(request, 'users/login.html', context={'mode': 'signin', })
 
@@ -164,6 +162,8 @@ class LoginView(View):
             return render(request, 'users/login.html', status=401, context=context)
 
         login(request, user)
+        messages.add_message(request, messages.SUCCESS,
+                             'Logged in successfully.')
         return redirect('dashboard')
 
 

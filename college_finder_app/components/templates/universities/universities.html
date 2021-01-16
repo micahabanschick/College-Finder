@@ -8,7 +8,8 @@
 
 <!-- Search -->
 <form class="search" action="{% url 'universities' %}">
-  <input type="text" name="search" class="searchTerm" value="{{ search_query }}" placeholder="Search by name or location">
+  <input type="text" name="search" class="searchTerm" value="{{ search_query }}"
+    placeholder="Search by name or location">
   <button type="submit" class="searchButton">
     <i class='bx bx-search'></i>
   </button>
@@ -48,7 +49,20 @@
       <a href="{% url 'university_detail' university.slug %}"><button class="university-card__btn">Learn
           More</button></a>
 
-      <i class='bx bx-bookmark university-card__bookmark'></i>
+      {% if university.bookmarks.exists %}
+
+      <a href="{% url 'toggle_bookmark' university.id %}">
+        <i class='bx bxs-bookmark university-card__bookmark'></i>
+      </a>
+
+      {% else %}
+
+      <a href="{% url 'toggle_bookmark' university.id %}">
+        <i class='bx bx-bookmark university-card__bookmark'></i>
+      </a>
+
+      {% endif %}
+
     </div>
   </div>
 
@@ -95,10 +109,7 @@
 
 {% block script %}
 <script>
-  // 
-  // const data='{{ json_obj }}'
-  // console.log(data)
-  // // 
+
   const linkColor=document.querySelector("#universities");
   linkColor.classList.add("active");
 </script>
