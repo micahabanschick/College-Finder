@@ -129,9 +129,10 @@
     $(function() {
 
         $("#university-search").autocomplete({
-            source: uniNames,
-            minLength: 2,
-            // autoFocus:true,
+            source: function(request, response) {
+                var results=$.ui.autocomplete.filter(uniNames, request.term);
+                response(results.slice(0, 10));
+            }
         });
 
     });
