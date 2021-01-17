@@ -1,11 +1,7 @@
-{% extends "base.html" %}
-{% load static %}
-{% block extracss %}
-<link rel="stylesheet" href="{% static 'css/universities/universities.css' %}">
-{% endblock extracss %}
+{% extends "university-lists.html" %}
 
-{% block content %}
 
+{% block search_field %}
 <!-- Search -->
 <form class="search" action="{% url 'universities' %}">
   <input type="text" name="search" class="searchTerm" value="{{ search_query }}"
@@ -14,98 +10,8 @@
     <i class='bx bx-search'></i>
   </button>
 </form>
+{% endblock search_field %}
 
-<!-- Search Results -->
-{% if search_query %}
-<div class="search-results">
-  <p>Search Results for: &nbsp<b>{{ search_query.upper }}</b></p>
-</div>
-{% endif %}
-
-
-<!-- Universities -->
-<div class="universities">
-
-  {% for university in universities %}
-
-  <div class="university-card">
-    <div class="university-card__content">
-      <div class="university-card__header">
-        <p class="university-card__headline">{{ university.name }}</p>
-        <p class="university-card__location"><i class='bx bxs-map'></i> {{ university.location }}</p>
-      </div>
-      <hr>
-      <div class="university-card__body">
-        <p><span class="university-card__stats">Rank</span>: {{ university.rank_order }}</p>
-        <p><span class="university-card__stats">No. of Students</span>: {{ university.stats_number_students }}</p>
-        <p><span class="university-card__stats">Students per staff</span>: {{ university.stats_student_staff_ratio }}
-        </p>
-        <p><span class="university-card__stats">International Students</span>: {{ university.stats_pc_intl_students }}
-        </p>
-        <p><span class="university-card__stats">Overall Score</span>: {{ university.scores_overall }}</p>
-      </div>
-    </div>
-    <div class="university-card__action">
-      <a href="{% url 'university_detail' university.slug %}"><button class="university-card__btn">Learn
-          More</button></a>
-
-      {% if university.bookmarks.exists %}
-
-      <a href="{% url 'toggle_bookmark' university.id %}">
-        <i class='bx bxs-bookmark university-card__bookmark'></i>
-      </a>
-
-      {% else %}
-
-      <a href="{% url 'toggle_bookmark' university.id %}">
-        <i class='bx bx-bookmark university-card__bookmark'></i>
-      </a>
-
-      {% endif %}
-
-    </div>
-  </div>
-
-  {% endfor %}
-</div>
-
-<!-- Pagination -->
-<div class="pagination">
-
-  {% if page_obj %}
-
-  {% if page_obj.has_previous %}
-  <a class="pagination-action" href="?page=1&search={{ search_query }}">
-    <i class='bx bxs-chevrons-left' aria-hidden="true" title="First"></i>
-    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">
-      <i class='bx bxs-chevron-left' aria-hidden="true" title="Previous"></i>
-    </a>
-    {% endif %}
-    {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-    <span class="pagination-number pagination-current">{{ num }}</span>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="pagination-number"
-      href="?page={{ num }}&search={{ search_query }}">{{ num }}</a>
-  {% endif %}
-  {% endfor %}
-  {% if page_obj.has_next %}
-  <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">
-    <i class='bx bxs-chevron-right' aria-hidden="true" title="Next"></i>
-  </a>
-  <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">
-    <i class='bx bxs-chevrons-right' aria-hidden="true" title="Last"></i>
-  </a>
-  {% endif %}
-
-  {% else %}
-  <h4>No Universities</h4>
-  {% endif %}
-
-
-
-</div>
-<!-- End of Pagination -->
-{% endblock content %}
 
 {% block script %}
 <script>

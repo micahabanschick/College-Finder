@@ -1,7 +1,21 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is Bookmarks Section...</h1>
-{% endblock content %} {% block script %}
+{% extends "university-lists.html" %}
+
+
+{% block search_field %}
+<!-- Search -->
+<form class="search" action="{% url 'bookmarks' %}">
+    <input type="text" name="search" class="searchTerm" value="{{ search_query }}"
+        placeholder="Search bookmarks">
+    <button type="submit" class="searchButton">
+        <i class='bx bx-search'></i>
+    </button>
+</form>
+{% endblock search_field %}
+
+
+{% block script %}
 <script>
+
     const linkColor=document.querySelector("#bookmarks");
     linkColor.classList.add("active");
 </script>
