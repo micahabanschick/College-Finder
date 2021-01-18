@@ -58,11 +58,16 @@
 .table td, .table th {
     border: 1px solid #bdc3c7;
     padding: 0.5em;
-    vertical-align: top
+    vertical-align: top;
+    text-align: center;
 }
 
 .table tr:nth-child(odd) td {
     background-color: #f5f6fa;
+}
+
+.table tr td:first-child {
+    text-align: left;
 }
 
 .table th {
