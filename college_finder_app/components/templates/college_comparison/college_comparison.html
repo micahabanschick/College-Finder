@@ -28,86 +28,86 @@
         </tr>
         <tr>
             <td>Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Location</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>No. of Students</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>International Students</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Students per staff</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Female to Male Ratio</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Teaching Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Research Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Citation Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Industry Income Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>International Outlook Rank</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
         <tr>
             <td>Overall Score</td>
-            <td>150.000</td>
-            <td>110.000</td>
-            <td>120.000</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
 
         </tr>
 
@@ -145,7 +145,7 @@
         if (e.key==="Enter") {
             var uniQuery=searchValue.value;
             if (uniNames.includes(uniQuery)) {
-                if (unisForCompare.length <=2 && (!unisForCompare.includes(uniQuery))) {
+                if (unisForCompare.length<=2&&(!unisForCompare.includes(uniQuery))) {
                     unisForCompare.push(uniQuery);
                     console.log(unisForCompare);
                 }
@@ -153,7 +153,7 @@
         }
     });
 
-    request.session['comparison_set'] = unisForCompare;
+    request.session['comparison_set']=unisForCompare;
 
     // Getting Search Value End
 </script>
