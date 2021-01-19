@@ -1,6 +1,46 @@
-{% extends "base.html" %} {% block content %}
-<h1>This is Blogs Section...</h1>
-{% endblock content %} {% block script %}
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/blogs/blog-lists.css' %}">
+{% endblock extracss %}
+
+
+
+{% block content %}
+
+
+<div class="blog-card">
+    <div class="meta">
+        <div class="photo"
+            style="background-image: url(https://www.usnews.com/dims4/USNEWS/e206f43/2147483647/thumbnail/970x647/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F88%2Fb588d946d5c488d956f9da8e254725%2FScreen_Shot_2020-09-30_at_5.05.26_PM.png)">
+        </div>
+        <ul class="details">
+            <li class="author"><i class='bx bx-pencil'></i><a href="#"> Madan Neupane</a></li>
+            <li class="date"><i class='bx bx-calendar'></i> Jan. 05, 2021</li>
+            <li class="tags">
+                <ul>
+                    <li><i class='bx bxs-purchase-tag'></i></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Best Colleges</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="description">
+        <h1>10 Colleges That Enroll the Most Transfer Students</h1>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
+            praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+        <p class="read-more">
+            <a href="#">Read More <i class='bx bx-right-arrow-alt'></i></a>
+        </p>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+{% block script %}
 <script>
     const linkColor=document.querySelector("#blogs");
     linkColor.classList.add("active");
