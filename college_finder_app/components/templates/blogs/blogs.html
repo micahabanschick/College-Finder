@@ -5,37 +5,88 @@
 {% endblock extracss %}
 
 
-
 {% block content %}
+<!-- Search -->
+<form class="search" action="{% url 'blogs' %}">
+    <input type="text" name="search" class="searchTerm" value="{{ search_query }}" placeholder="Search Articles..">
+    <button type="submit" class="searchButton">
+        <i class='bx bx-search'></i>
+    </button>
+</form>
 
+<!-- Search Results -->
+{% if search_query %}
+<div class="search-results">
+    <p>Search Results for: &nbsp<b>{{ search_query.upper }}</b></p>
+</div>
+{% endif %}
 
-<div class="blog-card">
-    <div class="meta">
-        <div class="photo"
-            style="background-image: url(https://www.usnews.com/dims4/USNEWS/e206f43/2147483647/thumbnail/970x647/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F88%2Fb588d946d5c488d956f9da8e254725%2FScreen_Shot_2020-09-30_at_5.05.26_PM.png)">
+<!-- Blogs -->
+<div class="blogs">
+    {% for blog in blogs %}
+    <div class="blog-card">
+        <div class="meta">
+            <div class="photo" style="background-image: url({{ blog.image_url }})">
+            </div>
+            <ul class="details">
+                <li class="author"><i class='bx bx-pencil'></i><a href="#"> {{ blog.author }}</a></li>
+                <li class="date"><i class='bx bx-calendar'></i> {{ blog.posted_on }}</li>
+                <li class="tags">
+                    <ul>
+                        <li><i class='bx bxs-purchase-tag'></i></li>
+                        {% for tag in blog.tags.all %}
+                        <li><a href="{% url 'tagged' tag.slug %}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <ul class="details">
-            <li class="author"><i class='bx bx-pencil'></i><a href="#"> Madan Neupane</a></li>
-            <li class="date"><i class='bx bx-calendar'></i> Jan. 05, 2021</li>
-            <li class="tags">
-                <ul>
-                    <li><i class='bx bxs-purchase-tag'></i></li>
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Best Colleges</a></li>
-                </ul>
-            </li>
-        </ul>
+        <div class="description">
+            <h1><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h1>
+            <p>{{ blog.description }}</p>
+            <p class="read-more">
+                <a href="{% url 'blog_detail' blog.slug %}">Read More <i class='bx bx-right-arrow-alt'></i></a>
+            </p>
+        </div>
     </div>
-    <div class="description">
-        <h1>10 Colleges That Enroll the Most Transfer Students</h1>
-        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
-            praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-        <p class="read-more">
-            <a href="#">Read More <i class='bx bx-right-arrow-alt'></i></a>
-        </p>
-    </div>
+    {% endfor %}
 </div>
 
+
+<!-- Pagination -->
+<div class="pagination">
+
+    {% if page_obj %}
+
+    {% if page_obj.has_previous %}
+    <a class="pagination-action" href="?page=1&search={{ search_query }}">
+        <i class='bx bxs-chevrons-left' aria-hidden="true" title="First"></i>
+        <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">
+            <i class='bx bxs-chevron-left' aria-hidden="true" title="Previous"></i>
+        </a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <span class="pagination-number pagination-current">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a class="pagination-number"
+            href="?page={{ num }}&search={{ search_query }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">
+        <i class='bx bxs-chevron-right' aria-hidden="true" title="Next"></i>
+    </a>
+    <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">
+        <i class='bx bxs-chevrons-right' aria-hidden="true" title="Last"></i>
+    </a>
+    {% endif %}
+
+    {% else %}
+    <h4>No Articles Found.</h4>
+    {% endif %}
+
+</div>
+<!-- End of Pagination -->
 
 {% endblock content %}
 
