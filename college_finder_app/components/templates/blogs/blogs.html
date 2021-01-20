@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load mathfilters %}
 {% block extracss %}
 <link rel="stylesheet" href="{% static 'css/blogs/blog-lists.css' %}">
 {% endblock extracss %}
@@ -21,6 +22,11 @@
 </div>
 {% endif %}
 
+{% if tagged %}
+<div class="search-results">
+    <p>Articles tagged with: &nbsp<b>{{ tag }}</b></p>
+</div>
+{% endif %}
 <!-- Blogs -->
 <div class="blogs">
     {% for blog in blogs %}
@@ -31,6 +37,9 @@
             <ul class="details">
                 <li class="author"><i class='bx bx-pencil'></i><a href="#"> {{ blog.author }}</a></li>
                 <li class="date"><i class='bx bx-calendar'></i> {{ blog.posted_on }}</li>
+                <li class="duration"><i class='bx bx-show'></i> {{ blog.description|length|intdiv:1500 }} mins read</li>
+                <li class="likes"><i class='bx bxs-like'></i> 0 Likes</li>
+                <li class="comments"><i class='bx bxs-comment-detail'></i> 0 Comments</li>
                 <li class="tags">
                     <ul>
                         <li><i class='bx bxs-purchase-tag'></i></li>
@@ -43,7 +52,7 @@
         </div>
         <div class="description">
             <h1><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h1>
-            <p>{{ blog.description|truncatechars:140 }}</p>
+            <p>{{ blog.description|truncatewords:20 }}</p>
             <p class="read-more">
                 <a href="{% url 'blog_detail' blog.slug %}">Read More <i class='bx bx-right-arrow-alt'></i></a>
             </p>

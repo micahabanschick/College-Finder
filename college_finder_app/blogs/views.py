@@ -9,7 +9,7 @@ from taggit.models import Tag
 
 
 def blogs_page(request):
-    
+
     title = 'Blogs'
 
     search_query = request.GET.get('search', '')
@@ -36,16 +36,21 @@ def blogs_page(request):
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    previous_post = post.get_previous_by_posted_on
+    next_post = post.get_next_by_posted_on
+
 
     return render(request, 'blogs/blog-detail.html', context={
         'title': post.title,
         'blog': post,
+        'previous_post': previous_post,
+        'next_post': next_post,
     })
 
 
 # def blogs_page(request):
 #     posts = Post.objects.order_by('-published')
-#     # Show most common tags 
+#     # Show most common tags
 #     common_tags = Post.tags.most_common()[:4]
 #     form = PostForm(request.POST)
 #     if form.is_valid():
@@ -64,9 +69,9 @@ def blog_detail(request, slug):
 
 def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
-    # Filter posts by tag name  
+    # Filter posts by tag name
     posts = Post.objects.filter(tags=tag)
-    title = f'Search results for {tag}' 
+    title = f'Articles tagged under "{tag}"'
     paginator = Paginator(posts, 5)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
@@ -75,5 +80,7 @@ def tagged(request, slug):
         'title': title,
         'blogs': page_obj,
         'page_obj': page_obj,
+        'tagged': True,
+        'tag': tag,
     }
     return render(request, 'blogs/blogs.html', context)

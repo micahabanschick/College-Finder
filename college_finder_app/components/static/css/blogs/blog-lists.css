@@ -55,17 +55,21 @@
   font-size: 1.1em;
 }
 
+.blogs {
+  margin-top: 0.5em;
+}
+
 .blog-card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin: 1rem auto;
   -webkit-box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.6%;
   background: var(--white-color);
   line-height: 1.4;
@@ -103,7 +107,8 @@
   transition: transform .2s, -webkit-transform .2s;
 }
 
-.blog-card .details, .blog-card .details ul {
+.blog-card .details,
+.blog-card .details ul {
   margin: auto;
   padding: 0;
   list-style: none;
@@ -135,7 +140,8 @@
   z-index: 1;
 }
 
-.blog-card .description h1, .blog-card .description h2 {
+.blog-card .description h1,
+.blog-card .description h2 {
   font-family: var(--body-font);
 }
 
@@ -182,22 +188,22 @@
   .blog-card {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
     max-width: 1000px;
   }
   .blog-card .meta {
     -ms-flex-preferred-size: 40%;
-    flex-basis: 40%;
+        flex-basis: 40%;
     height: auto;
   }
   .blog-card .description {
     -ms-flex-preferred-size: 60%;
-    flex-basis: 60%;
+        flex-basis: 60%;
   }
   .blog-card .description:before {
     -webkit-transform: skewX(-3deg);
-    transform: skewX(-3deg);
+            transform: skewX(-3deg);
     content: "";
     background: #fff;
     width: 30px;
@@ -210,7 +216,6 @@
 }
 
 /* Pagination */
-
 .pagination {
   position: relative;
   display: -webkit-box;
@@ -238,7 +243,8 @@
   font-weight: 600;
 }
 
-.pagination-number:hover, .pagination-current {
+.pagination-number:hover,
+.pagination-current {
   color: var(--white-color);
   background-color: var(--first-color);
 }
@@ -251,8 +257,9 @@
   font-size: 1.3em;
 }
 
-.pagination-action:hover, .pagination-previous, .pagination-next {
+.pagination-action:hover,
+.pagination-previous,
+.pagination-next {
   color: var(--first-color);
 }
-
 /*# sourceMappingURL=blog-lists.css.map */
