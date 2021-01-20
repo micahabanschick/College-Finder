@@ -43,7 +43,7 @@
         </div>
         <div class="description">
             <h1><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h1>
-            <p>{{ blog.description }}</p>
+            <p>{{ blog.description|truncatechars:140 }}</p>
             <p class="read-more">
                 <a href="{% url 'blog_detail' blog.slug %}">Read More <i class='bx bx-right-arrow-alt'></i></a>
             </p>

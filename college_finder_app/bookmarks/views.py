@@ -1,6 +1,4 @@
-from django.http.response import HttpResponseRedirect
 from universities.models import Universities
-from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -8,7 +6,6 @@ from django.contrib import messages
 
 
 def bookmark(request, id):
-    user = request.user
 
     university = get_object_or_404(Universities, id=id)
     if university.bookmarks.filter(id=request.user.id).exists():
@@ -20,7 +17,7 @@ def bookmark(request, id):
         messages.add_message(
             request, messages.SUCCESS, f'{university.name} added to your bookmark.')
 
-    return redirect('bookmarks')
+    return redirect(request.META['HTTP_REFERER'])
 
 
 def bookmarks_page(request):
