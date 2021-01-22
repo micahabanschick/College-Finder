@@ -1,0 +1,62 @@
+:root {
+    /*===== Colors =====*/
+    --first-color: #1a237e;
+    --second-color: #512da8;
+    --first-color-light: #AFA5D9;
+    --white-color: #F7F6FB;
+}
+
+form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+
+h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+input[type="text"], input[type="date"], input[type="datetime"], input[type="number"], input[type="time"], input[type="url"], textarea, select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 100%;
+    background-color: #e8eeef;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 30px;
+}
+
+textarea {
+    resize: none;
+    height: 200px;
+}
+
+input[type="submit"] {
+    padding: 1em;
+    margin: 1em;
+    color: #FFF;
+    background-color: var(--first-color);
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    width: 50%;
+    outline: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+@media screen and (min-width: 480px) {
+    form {
+        max-width: 80%;
+    }
+}
