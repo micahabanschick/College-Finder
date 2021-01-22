@@ -3,8 +3,8 @@ from .models import Post
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-# from django.template.defaultfilters import slugify
-# from .forms import PostForm
+from django.template.defaultfilters import slugify
+from .forms import PostForm
 from taggit.models import Tag
 
 
@@ -39,7 +39,6 @@ def blog_detail(request, slug):
     previous_post = post.get_previous_by_posted_on
     next_post = post.get_next_by_posted_on
 
-
     return render(request, 'blogs/blog-detail.html', context={
         'title': post.title,
         'blog': post,
@@ -48,23 +47,25 @@ def blog_detail(request, slug):
     })
 
 
-# def blogs_page(request):
-#     posts = Post.objects.order_by('-published')
-#     # Show most common tags
-#     common_tags = Post.tags.most_common()[:4]
-#     form = PostForm(request.POST)
-#     if form.is_valid():
-#         newpost = form.save(commit=False)
-#         newpost.slug = slugify(newpost.title)
-#         newpost.save()
-#         # Without this next line the tags won't be saved.
-#         form.save_m2m()
-#     context = {
-#         'posts':posts,
-#         'common_tags':common_tags,
-#         'form':form,
-#     }
-#     return render(request, 'blogs/blogs.html', context)
+def create_post(request):
+    # Show most common tags
+    common_tags = Post.tags.most_common()[:3]
+
+    form = PostForm(request.POST)
+    if form.is_valid():
+        newpost = form.save(commit=False)
+        newpost.slug = slugify(newpost.title)
+        newpost.save()
+        # Without this next line the tags won't be saved.
+        form.save_m2m()
+    else:
+        form = PostForm()
+    
+    return render(request, 'blogs/create-post.html', {
+        'form': form,
+        'common_tags': common_tags,
+        'title': 'Create Post'
+        })
 
 
 def tagged(request, slug):

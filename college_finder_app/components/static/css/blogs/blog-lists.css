@@ -51,6 +51,7 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  text-align: center;
   margin: 1em;
   font-size: 1.1em;
 }
