@@ -50,7 +50,7 @@
     flex-direction: column;
     justify-content: space-around;
     height: 70px;
-    padding: 25px;
+    padding: 30px;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
@@ -98,7 +98,6 @@
     color: var(--first-color-light);
 }
 
-
 .charts__left__title>i, .charts__right__title>i {
     color: #fff;
     font-size: 20px;
@@ -133,5 +132,16 @@
     .charts {
         grid-template-columns: 1fr;
         margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .main__cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+    .card__inner>span {
+        font-size: 20px;
     }
 }

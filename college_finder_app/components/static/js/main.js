@@ -22,6 +22,25 @@ const showNavbar = (toggleId, navId, bodyId, headerId) =>{
 
 showNavbar('header-toggle','nav-bar','body-pd','header')
 
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function dropdownFunction() {
+    document.getElementById("dropdown").classList.toggle("show-dropdown");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show-dropdown')) {
+                openDropdown.classList.remove('show-dropdown');
+            }
+        }
+    }
+}
 
 // /*===== LINK ACTIVE  =====*/ 
 // const linkColor = document.querySelectorAll('.nav__link')

@@ -29,8 +29,12 @@
             <i class="bx bx-menu" id="header-toggle"></i>
         </div>
 
-        <div class="header__img">
-            <img src="{{ user.profile.avatar.url }}" alt="Profile" />
+        <div class="header__img dropdown">
+            <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
+            <div id="dropdown" class="dropdown-content">
+                <a href="#">Settings</a>
+                <a href="#">Change Theme</a>
+            </div>
         </div>
     </header>
 
@@ -104,7 +108,9 @@
 
     {% endblock script %}
 
+    <!--===== BOXICONS JS =====-->
     <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+
     <!--===== MAIN JS =====-->
     <script src="{%static 'js/main.js'%}"></script>
 </body>
