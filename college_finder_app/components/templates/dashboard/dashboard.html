@@ -1,11 +1,111 @@
 {% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css' %}">
+{% endblock extracss %}
 
 {% block content %}
-<h1>{{greeting.text}}, {{name}}! {{greeting.emoji}}</h1>
-<p>Current time is {{current_time}}</p>
+
+<div class="container">
+  <div class="main__container">
+    <div class="main__title">
+      <img src="{{ user.profile.avatar.url }}" alt="">
+      <div class="main__greeting">
+        <h1>{{greeting}}, {{name}}!</h1>
+        <p>Current time is {{current_time}}</p>
+      </div>
+    </div>
+
+    <div class="main__cards">
+
+      <div class="card">
+        <box-icon name='pie-chart-alt' type='solid'></box-icon>
+        <div class="card__inner">
+          <p class="text-primary-p">Profile Completion</p>
+          <span class="font-bold text-title">75%</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <box-icon name='time'></box-icon>
+        <div class="card__inner">
+          <p class="text-primary-p">Last Signed In</p>
+          <span class="font-bold text-title">{{ current_time }}</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <box-icon name='bookmarks'></box-icon>
+        <div class="card__inner">
+          <p class="text-primary-p">Bookmarked Colleges</p>
+          <span class="font-bold text-title">4</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="charts">
+      <div class="charts__left">
+        <div class="charts__left__title">
+          <div>
+            <h1>Report</h1>
+            <p>Click to Edit <a href="#"><i class='bx bx-edit'></i></a> </p>
+          </div>
+          <i class='bx bxs-report'></i>
+        </div>
+        <div id="apex1"> </div>
+      </div>
+
+      <div class="charts__right">
+        <div class="charts__right__title">
+          <div>
+            <h1>Academics</h1>
+            <p>Click to Edit <a href="#"><i class='bx bx-edit'></i></a> </p>
+          </div>
+          <i class='bx bxs-medal'></i>
+        </div>
+
+        <div class="charts__right__cards">
+
+          <div class="card1">
+            <h2>GPA</h2>
+            <h3>3.75</h3>
+          </div>
+
+          <div class="card1">
+            <h2>GRE</h2>
+            <h3>375</h3>
+          </div>
+
+          <div class="card1">
+            <h2>TOEFL</h2>
+            <h3>85</h3>
+          </div>
+
+          <div class="card1">
+            <h2>Research</h2>
+            <box-icon name='check-circle'></box-icon>
+          </div>
+
+          <div class="card1">
+            <h2>SOP</h2>
+            <h3>⭐⭐⭐⭐</h3>
+          </div>
+
+          <div class="card1">
+            <h2>LOR</h2>
+            <h3>⭐⭐⭐</h3>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
-
-
 
 {% block script %}
 <script>

@@ -7,7 +7,6 @@ from usernames import is_safe_username
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import get_template, render_to_string

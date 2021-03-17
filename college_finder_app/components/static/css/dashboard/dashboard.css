@@ -1,0 +1,137 @@
+:root {
+    /*===== Colors =====*/
+    --first-color: #1a237e;
+    --first-color-light: #AFA5D9;
+    --white-color: #F7F6FB;
+}
+
+.container {
+    grid-area: main;
+    background: #fafafa;
+}
+
+.main__container {
+    padding: 10px;
+}
+
+.main__title {
+    display: flex;
+    align-items: center;
+}
+
+.main__title>img {
+    max-height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.main__greeting>h1 {
+    font-size: 24px;
+    color: var(--first-color);
+    margin-bottom: 5px;
+}
+
+.main__greeting>p {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--first-color);
+    margin-bottom: 5px;
+}
+
+.main__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0px 10px 0px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 70px;
+    padding: 25px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+}
+
+.card__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card__inner>span {
+    font-size: 25px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.charts__left, .charts__right {
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+}
+
+.charts__left__title, .charts__right__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.charts__left__title>div>h1, .charts__right__title>div>h1 {
+    font-size: 24px;
+    color: var(--first-color);
+    margin-bottom: 5px;
+}
+
+.charts__left__title>div>p, .charts__right__title>div>p {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--first-color-light);
+}
+
+
+.charts__left__title>i, .charts__right__title>i {
+    color: #fff;
+    font-size: 20px;
+    background: var(--first-color);
+    border-radius: 200px 0 200px 200px;
+    border: 0px solid #fff;
+    padding: 15px;
+}
+
+.charts__right__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card1 {
+    background: silver;
+    color: var(--first-color);
+    text-align: center;
+    padding: 25px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 855px) {
+    .main__cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+    .charts {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+    }
+}
