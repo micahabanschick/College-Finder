@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/settings/update-profile.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+
+<!-- gdfgsg -->
+<h1>Update Profile</h1>
+
+<form action="{% url 'update_profile' %}" id="survey-form" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label id="name-label" for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required />
+    </div>
+    <div class="form-group">
+        <label id="avatar-label" for="avatar">Avatar</label>
+        <input type="file" name="avatar" id="avatar" class="form-control" accept="image/*" />
+    </div>
+    <div class="form-group">
+        <p>Bio</p>
+        <textarea id="bio" class="input-textarea" name="bio" placeholder="Add your Bio..." maxlength="140"></textarea>
+    </div>
+
+    <div id="academics">
+
+        <div class="form-group">
+            <label id="gpa-label" for="number">GPA</label>
+            <input type="number" name="gpa" id="number" min="1" max="4" step="0.1" class="form-control"
+                placeholder="GPA" />
+        </div>
+
+        <div class="form-group">
+            <label id="gre-label" for="number">GRE</label>
+            <input type="number" name="gre" id="number" min="170" max="340" step="10" class="form-control"
+                placeholder="GRE" />
+        </div>
+
+        <div class="form-group">
+            <label id="toefl-label" for="number">TOEFL</label>
+            <input type="number" name="toefl" id="number" min="40" max="120" step="5" class="form-control"
+                placeholder="TOEFL" />
+        </div>
+
+        <div class="form-group">
+            <label id="sop-label" for="number">How strong do you think your SOP is?</label>
+            <input type="range" id="sop" name="sop" min="1" max="5" step="0.5" />
+        </div>
+
+        <div class="form-group">
+            <label id="lor-label" for="number">How strong do you think your Letter of Recommendation is?</label>
+            <input type="range" id="lor" name="lor" min="1" max="5" step="0.5" />
+        </div>
+
+        <div class="form-group">
+            <label id="uni-label" for="number">Rate your current university's reputation:</label>
+            <input type="range" id="uni" name="uni" min="1" max="5" step="1" />
+        </div>
+
+        <div class="form-group">
+            <p>Research Experience</p>
+            <label>
+                <input name="research-experience" value="Yes" type="radio" class="input-radio" checked />Yes
+            </label>
+            <label>
+                <input name="research-experience" value="No" type="radio" class="input-radio" />No
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" id="submit" class="submit-button">
+            Submit
+        </button>
+    </div>
+</form>
+{% endblock content %}
+
+{% block script %}
+<!-- <script>
+    const linkColor=document.querySelector("#universities");
+    linkColor.classList.add("active");
+</script> -->
+{% endblock script %}

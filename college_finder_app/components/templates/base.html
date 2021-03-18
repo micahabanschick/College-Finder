@@ -32,7 +32,7 @@
         <div class="header__img dropdown">
             <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
             <div id="dropdown" class="dropdown-content">
-                <a href="#">Settings</a>
+                <a href="{% url 'update_profile' %}">Settings</a>
                 <a href="#">Change Theme</a>
             </div>
         </div>

@@ -17,5 +17,5 @@ class UserLoginForm(forms.Form):
 
 class ProfileUpdateForm(forms.Form):
     model = Profile
-    field = ['bio', 'avatar', 'country', 'gpa', 'gre_score',
+    field = ['name', 'bio', 'avatar', 'gpa', 'gre_score',
              'toefl_score', 'sop_score', 'lor_score', 'uni_score', 'research']

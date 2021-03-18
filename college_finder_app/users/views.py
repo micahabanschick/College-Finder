@@ -2,19 +2,20 @@ from django.db.utils import ConnectionDoesNotExist
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
-from validate_email import DOMAIN, validate_email
+from validate_email import validate_email
 from usernames import is_safe_username
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import get_template, render_to_string
+from django.template.loader import get_template
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_text
 from .utils import generate_token
 from django.core.mail import EmailMessage
-from django.conf import SettingsReference, settings
+from django.conf import settings
+from .forms import ProfileUpdateForm
 
 username_pattern = re.compile(
     r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
@@ -187,3 +188,8 @@ def logout_page(request):
     logout(request)
     messages.add_message(request, messages.INFO, 'Logged out successfully.')
     return redirect('login')
+
+def profile_update_form(request):
+    p_form = ProfileUpdateForm()
+
+    return render(request, 'users/update-profile.html', {'p_form': p_form, 'title': 'Update Profile'})
