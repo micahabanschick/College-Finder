@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Profile
 
 
@@ -15,7 +16,16 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-class ProfileUpdateForm(forms.Form):
-    model = Profile
-    field = ['name', 'bio', 'avatar', 'gpa', 'gre_score',
-             'toefl_score', 'sop_score', 'lor_score', 'uni_score', 'research']
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'avatar', 'gpa', 'gre_score',
+                  'toefl_score', 'sop_score', 'lor_score', 'uni_score', 'research']
+        widgets = {'research': forms.RadioSelect}
+        

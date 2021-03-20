@@ -1,4 +1,4 @@
-from django.db.utils import ConnectionDoesNotExist
+from django.db.utils import ConnectionDoesNotExist, Error
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
@@ -15,7 +15,7 @@ from django.utils.encoding import force_bytes, force_text
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
-from .forms import ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 username_pattern = re.compile(
     r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
@@ -189,7 +189,28 @@ def logout_page(request):
     messages.add_message(request, messages.INFO, 'Logged out successfully.')
     return redirect('login')
 
-def profile_update_form(request):
-    p_form = ProfileUpdateForm()
 
-    return render(request, 'users/update-profile.html', {'p_form': p_form, 'title': 'Update Profile'})
+def profile_update_form(request):
+
+    if request.method == 'POST':
+
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+
+        if p_form.is_valid() and u_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Profile has been updated!')
+            return redirect('update_profile')
+
+        messages.error(request, f'Something went wrong.')
+        messages.error(request, f'{p_form.is_valid()}')
+
+        return redirect('update_profile')
+
+    else:
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+        u_form = UserUpdateForm(instance=request.user)
+
+    return render(request, 'users/update-profile.html', {'u_form': u_form, 'p_form': p_form, 'title': 'Update Profile'})
