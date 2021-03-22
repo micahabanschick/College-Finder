@@ -20,12 +20,14 @@ def universities_page(request):
     paginator = Paginator(data, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
+    bookmarked_unis = request.user.bookmarks.all()
 
     context = {
         'title': title,
         'universities': page_obj,
         'page_obj': page_obj,
         'search_query': search_query,
+        'bookmarked_unis': bookmarked_unis
     }
     return render(request, 'universities/universities.html', context)
 

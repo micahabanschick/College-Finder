@@ -55,7 +55,7 @@
                     More</button>
             </a>
 
-            {% if university.bookmarks.exists %}
+            {% if university in bookmarked_unis %}
 
             <a href="{% url 'toggle_bookmark' university.id %}">
                 <i class='bx bxs-bookmark university-card__bookmark'></i>
@@ -66,7 +66,7 @@
             <a href="{% url 'toggle_bookmark' university.id %}">
                 <i class='bx bx-bookmark university-card__bookmark'></i>
             </a>
-
+            
             {% endif %}
 
         </div>
