@@ -11,8 +11,12 @@
     <div class="main__title">
       <img src="{{ user.profile.avatar.url }}" alt="">
       <div class="main__greeting">
-        <h1>{{greeting}}, {{name}}!</h1>
-        <p>Current time is {{current_time}}</p>
+        <h1>Hello, {{name}}!</h1>
+        {% if request.user.profile.bio != 'None' %}
+        <p>{{ request.user.profile.bio }}</p>
+        {% else %}
+        <p>Set a custom bio <a href="{% url 'update_profile' %}"><i class='bx bx-edit'></i></a> </p>
+        {% endif %}
       </div>
     </div>
 
@@ -22,7 +26,7 @@
         <box-icon name='pie-chart-alt' type='solid'></box-icon>
         <div class="card__inner">
           <p class="text-primary-p">Profile Completion</p>
-          <span class="font-bold text-title">75%</span>
+          <span class="font-bold text-title">{{ profile_completed }}%</span>
         </div>
       </div>
 
@@ -38,7 +42,7 @@
         <box-icon name='bookmarks'></box-icon>
         <div class="card__inner">
           <p class="text-primary-p">Bookmarked Colleges</p>
-          <span class="font-bold text-title">4</span>
+          <span class="font-bold text-title">{{ bookmarks_count }}</span>
         </div>
       </div>
 
@@ -69,32 +73,38 @@
 
           <div class="card1">
             <h2>GPA</h2>
-            <h3>3.75</h3>
+            <h3>{{ request.user.profile.gpa }}</h3>
           </div>
 
           <div class="card1">
             <h2>GRE</h2>
-            <h3>375</h3>
+            <h3>{{ request.user.profile.gre_score }}</h3>
           </div>
 
           <div class="card1">
             <h2>TOEFL</h2>
-            <h3>85</h3>
+            <h3>{{ request.user.profile.toefl_score }}</h3>
           </div>
 
           <div class="card1">
             <h2>Research</h2>
+            {% if request.user.profile.research == 1 %}
             <box-icon name='check-circle'></box-icon>
+            {% else %}
+            <box-icon name='x'></box-icon>
+            {% endif %}
+
+
           </div>
 
           <div class="card1">
             <h2>SOP</h2>
-            <h3>⭐⭐⭐⭐</h3>
+            <progress value="{{ request.user.profile.sop_score }}" max="5"> </progress>
           </div>
 
           <div class="card1">
             <h2>LOR</h2>
-            <h3>⭐⭐⭐</h3>
+            <progress value="{{ request.user.profile.lor_score }}" max="5"> </progress>
           </div>
 
         </div>

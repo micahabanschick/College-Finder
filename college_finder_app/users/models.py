@@ -5,7 +5,7 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default='avatar.svg', upload_to='profile_pics')
+    avatar = models.ImageField(default='avatar.png', upload_to='profile_pics')
     bio = models.TextField(blank=True, null=True)
     gpa = models.DecimalField(
         decimal_places=2, max_digits=3, blank=True, null=True)
@@ -16,14 +16,14 @@ class Profile(models.Model):
     lor_score = models.DecimalField(
         decimal_places=1, max_digits=2, blank=True, null=True)
     uni_score = models.IntegerField(blank=True, null=True)
-    CHOICES = [('1', 'Yes'), ('0', 'No')]
-    research = models.CharField(max_length=1, choices=CHOICES, default='0')
+    CHOICES = [(1, 'Yes'), (0, 'No')]
+    research = models.IntegerField(max_length=1, choices=CHOICES, default=0)
 
     def __str__(self):
         return f'{self.user.username}\'s Profile'
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.avatar.path)
 
