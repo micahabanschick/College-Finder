@@ -22,14 +22,13 @@
 
 .searchTerm {
     width: 100%;
-    border: 2px solid #ccc;
+    border: 1.8px solid #dadce1;
     border-right: none;
     padding: 8px;
     height: 2em;
     font-size: 1.2em;
     border-radius: 5px 0 0 5px;
     outline: none;
-   
 }
 
 .searchTerm:focus { 
@@ -39,7 +38,7 @@
 .searchButton {
     width: 40px;
     height: 2em;
-    border: 2px solid #ccc;
+    border: 1.8px solid #dadce1;
     text-align: center;
     color: var(--first-color);
     border-radius: 0 5px 5px 0;
@@ -68,8 +67,10 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 0.6rem;
-    border: solid 2px #ccc;
-    border-radius: 9px;
+    border-radius: 0.6em;
+    border: 1.9px solid #dadce1;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05),
+    0 15px 40px rgba(166, 173, 201, .2);
 
     &__content{
         line-height: 1.4rem;
@@ -121,6 +122,9 @@
         cursor: pointer;
     }
 
+}
+.university-card:hover{
+  box-shadow:2px 5px 6px rgba(0, 0, 0, .2);
 }
 
 .university-card__content p {

@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator
 from django.db.models import Q
-
+from django.contrib import messages
 from django.template.defaultfilters import slugify
 from .forms import PostForm
 from taggit.models import Tag
@@ -50,22 +50,30 @@ def blog_detail(request, slug):
 def create_post(request):
     # Show most common tags
     common_tags = Post.tags.most_common()[:3]
+    if request.method == 'POST':
+        print(request.POST)
+        blog_form = PostForm(request.POST)
+        if blog_form.is_valid():
+            newpost = blog_form.save(commit=False)
+            newpost.slug = slugify(newpost.title)
+            newpost.author = request.user
+            newpost.save()
+            # Without this next line the tags won't be saved.
+            blog_form.save_m2m()
+            messages.success(request, 'Successfully Posted!')
+            return redirect('blogs')
+        else:
+            messages.info(
+                request, f'Could not post, {blog_form.errors}')
 
-    form = PostForm(request.POST)
-    if form.is_valid():
-        newpost = form.save(commit=False)
-        newpost.slug = slugify(newpost.title)
-        newpost.save()
-        # Without this next line the tags won't be saved.
-        form.save_m2m()
     else:
-        form = PostForm()
-    
+        blog_form = PostForm()
+
     return render(request, 'blogs/create-post.html', {
-        'form': form,
+        'blog_form': blog_form,
         'common_tags': common_tags,
         'title': 'Create Post'
-        })
+    })
 
 
 def tagged(request, slug):

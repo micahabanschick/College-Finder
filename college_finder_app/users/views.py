@@ -205,7 +205,6 @@ def profile_update_form(request):
             return redirect('update_profile')
 
         messages.error(request, f'Something went wrong.')
-        messages.error(request, f'{p_form.is_valid()}')
 
         return redirect('update_profile')
 

@@ -54,7 +54,8 @@ main {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: var(--white-color);
+    background-color: white;
+    border: 1.8px solid #eee;
     z-index: var(--z-fixed);
     transition: .5s;
 }

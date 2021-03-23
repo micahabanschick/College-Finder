@@ -50,10 +50,11 @@
     flex-direction: column;
     justify-content: space-around;
     height: 70px;
-    padding: 30px;
+    padding: 42px;
     border-radius: 10px;
     background: #fff;
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+    border-top: 2px solid var(--first-color);
 }
 
 .card__inner {
@@ -74,7 +75,6 @@
 }
 
 /* Charts test */
-
 
 /* Charts test end */
 
@@ -120,7 +120,7 @@
 }
 
 .card1 {
-    background: silver;
+    background: #eee;
     color: var(--first-color);
     text-align: center;
     padding: 25px;

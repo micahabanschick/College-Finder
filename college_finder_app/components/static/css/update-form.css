@@ -6,6 +6,11 @@
     --white-color: #F7F6FB;
 }
 
+h1 {
+    margin: 10px 0;
+    text-align: center;
+}
+
 p {
     font-size: 1.125rem;
     margin-top: 0;
@@ -46,6 +51,8 @@ form {
     padding: 2.5rem 0.625rem;
     border-radius: 0.25rem;
     max-width: 720px;
+    margin: 10px auto;
+    background: #eee;
 }
 
 .form-group {
@@ -88,7 +95,6 @@ form {
     min-width: 1.25rem;
 }
 
-
 .submit-button {
     display: block;
     width: 100%;
@@ -97,4 +103,11 @@ form {
     border-radius: 2px;
     color: white;
     cursor: pointer;
+}
+
+@media screen and (min-width: 480px) {
+    form {
+        max-width: 95%;
+        padding: 2.5rem 5rem;
+    }
 }

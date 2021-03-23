@@ -21,7 +21,7 @@
 
 .searchTerm {
   width: 100%;
-  border: 2px solid #ccc;
+  border: 1.8px solid #dadce1;
   border-right: none;
   padding: 8px;
   height: 2em;
@@ -37,7 +37,7 @@
 .searchButton {
   width: 40px;
   height: 2em;
-  border: 2px solid #ccc;
+  border: 1.8px solid #dadce1;
   text-align: center;
   color: var(--first-color);
   border-radius: 0 5px 5px 0;
@@ -77,8 +77,10 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0.6rem;
-  border: solid 2px #ccc;
-  border-radius: 9px;
+  border-radius: 0.6em;
+  border: 1.9px solid #dadce1;
+  -webkit-box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(166, 173, 201, 0.2);
+          box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(166, 173, 201, 0.2);
 }
 
 .university-card__content {
@@ -132,6 +134,11 @@
   color: var(--first-color);
   font-size: 2rem;
   cursor: pointer;
+}
+
+.university-card:hover {
+  -webkit-box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.2);
 }
 
 .university-card__content p {

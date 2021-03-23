@@ -32,16 +32,18 @@ def bookmarks_page(request):
             Q(name__icontains=search_query) | Q(location__icontains=search_query)).distinct()
         title = f'Search results for {search_query}'
     else:
-        data = user.bookmarks.all().order_by('-id')
+        data = user.bookmarks.all().order_by('-bookmarks__id')
 
     paginator = Paginator(data, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-
+    bookmarked_unis = user.bookmarks.all()
+    
     context = {
         'title': title,
         'universities': page_obj,
         'page_obj': page_obj,
         'search_query': search_query,
+        'bookmarked_unis': bookmarked_unis,
     }
     return render(request, 'bookmarks/bookmarks.html', context)
