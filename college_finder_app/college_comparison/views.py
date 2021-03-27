@@ -10,17 +10,14 @@ for university in universities:
     uni_names.append(university.name)
 
 
-context = {
-    'title': 'College Comparison',
-    'universities': universities,
-    'uni_names': uni_names,
-}
-
-
 def college_comparison_page(request):
-    # if 'term' in request.GET:
-    #     qs = Universities.objects.filter(
-    #         name__icontains=request.GET.get('term'))
-    # messages.add_message(request, messages.SUCCESS,
-    #                      'Logged in successfully.')
+    # unis_list_to_compare = request.POST.getlist('unisForCompare')
+
+    context = {
+        'title': 'College Comparison',
+        'universities': universities,
+        'uni_names': uni_names,
+        # 'unis_list_to_compare': unis_list_to_compare,
+    }
+
     return render(request, 'college_comparison/college_comparison.html', context)

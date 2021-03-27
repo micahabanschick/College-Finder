@@ -1,19 +1,72 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extracss %}
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="{% static 'css/universities/university-detail.css' %}">
 {% endblock extracss %}
 
 {% block content %}
 <h1>{{ university.name }} <i class='bx bxs-bookmark-plus'></i></h1>
 
+<div class="container">
+    <div class="top">
+        <div class="radar">
+            <canvas id="radar"></canvas>
+        </div>
+        <div class="table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, score in info %}
+                    <tr>
+                        <td>{{ index }}</td>
+                        <td>{{ score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
+    <div class="bottom">
+
+    </div>
+</div>
 
 {% endblock content %}
 
 {% block script %}
-<script>
+<!--===== JQUERY =====-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
 
+<script>
+    $(document).ready(function() {
+        var ctx=document.getElementById('radar').getContext('2d');
+        var chart=new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [{% for label in labels%}'{{label}}',{%endfor%}],
+        datasets: [{
+            borderColor: '#1a237e',
+            data: [{% for score in data%}'{{score}}', {%endfor%}]
+                }]
+            },
+
+        // Configuration options go here
+        options: {
+        devicePixelRatio: 2.5
+    }
+        });
+    });
+</script>
+
+<script>
     const linkColor=document.querySelector("#universities");
     linkColor.classList.add("active");
 </script>

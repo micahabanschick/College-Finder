@@ -132,9 +132,9 @@
             source: function(request, response) {
                 var results=$.ui.autocomplete.filter(uniNames, request.term);
                 response(results.slice(0, 10));
+                // console.log(results)
             }
         });
-
     });
     // JQuery Autocomplete End
 
@@ -145,15 +145,13 @@
         if (e.key==="Enter") {
             var uniQuery=searchValue.value;
             if (uniNames.includes(uniQuery)) {
-                if (unisForCompare.length<=2&&(!unisForCompare.includes(uniQuery))) {
+                if (unisForCompare.length<3&&(!unisForCompare.includes(uniQuery))) {
                     unisForCompare.push(uniQuery);
                     console.log(unisForCompare);
                 }
             }
         }
     });
-
-    request.session['comparison_set']=unisForCompare;
 
     // Getting Search Value End
 </script>

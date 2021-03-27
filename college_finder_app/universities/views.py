@@ -1,4 +1,4 @@
-from django.shortcuts import  render
+from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Universities
 from django.db.models import Q
@@ -18,8 +18,8 @@ def universities_page(request):
         data = Universities.objects.all()
 
     paginator = Paginator(data, 10)
-    page_number = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_number)
+    page_int = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_int)
     bookmarked_unis = request.user.bookmarks.all()
 
     context = {
@@ -34,8 +34,17 @@ def universities_page(request):
 
 def university_detail(request, slug):
     university = Universities.objects.get(slug=slug)
+    labels = ['Teaching', 'Research',
+              'Citations', 'Industry Income', 'International Outlook']
+    data = [float(university.scores_teaching),
+            float(university.scores_research), float(university.scores_citations), float(university.scores_industry_income), float(university.scores_international_outlook)]
+
+    info = zip(labels, data)
 
     return render(request, 'universities/university-detail.html', context={
         'title': university.name,
-        'university': university
+        'university': university,
+        'labels': labels,
+        'data': data,
+        'info': info,
     })
