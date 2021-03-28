@@ -5,14 +5,14 @@
 {% endblock extracss %}
 
 {% block content %}
-<h1>{{ university.name }} <i class='bx bxs-bookmark-plus'></i></h1>
+<h1 class="center">{{ university.name }} <i class='bx bxs-bookmark-plus'></i></h1>
 
 <div class="container">
     <div class="top">
         <div class="radar">
             <canvas id="radar"></canvas>
         </div>
-        <div class="table">
+        <div class="table center">
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -33,8 +33,44 @@
     </div>
 
     <div class="bottom">
-
+        <div class="pie1">
+            <h3 class="center">Percentage of International Students</h3>
+            <canvas id="pie1"></canvas>
+        </div>
+        <div class="pie2">
+            <h3 class="center">Female to Male Ratio</h3>
+            <canvas id="pie2"></canvas>
+        </div>
     </div>
+
+
+    <div class="subjects">
+        <h3 class="center">Subjects Offered</h3>
+        <div class="subject-list">
+            <div class="row1">
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </div>
+            <div class="row2">
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </div>
+            <div class="row3">
+                <ul>
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock content %}
@@ -47,23 +83,81 @@
 
 <script>
     $(document).ready(function() {
-        var ctx=document.getElementById('radar').getContext('2d');
-        var chart=new Chart(ctx, {
+        Chart.defaults.global.defaultFontSize=12;
+        // Radar Chart Start
+        var radarCtx=document.getElementById('radar').getContext('2d');
+        var radarChart=new Chart(radarCtx, {
             type: 'radar',
             data: {
                 labels: [{% for label in labels%}'{{label}}',{%endfor%}],
         datasets: [{
+            label: '{{ university.name }}',
             borderColor: '#1a237e',
             data: [{% for score in data%}'{{score}}', {%endfor%}]
-                }]
+                },
+        {
+            label: 'Average Score',
+            borderColor: '#4a237e',
+            data: [50, 70, 60, 90, 56]
+        }
+            ]
             },
 
         // Configuration options go here
         options: {
-        devicePixelRatio: 2.5
+        devicePixelRatio: 2.5,
+        "legend": {
+            display: true,
+            labels: {
+                fontSize: 13,
+            }
+
+        },
     }
         });
+    // Radar Chart 
+
+    // Pie Chart 1 Start
+    var pieCtx_1=document.getElementById('pie1');
+    var myPieChart_1=new Chart(pieCtx_1, {
+        type: 'pie',
+        data: {
+            labels: ['International', 'Local'],
+            datasets: [{
+                data: [5, 10],
+                backgroundColor: ['#d500f9', '#651fff'],
+                hoverBorderWidth: 1.1,
+            }]
+        },
+        options: {
+            devicePixelRatio: 2.5,
+            borderWidth: 4,
+            hoverBorderWidth: 0,
+        }
     });
+    // Pie Chart 1 End
+
+    // Pie Chart 2 Start
+    var pieCtx_2=document.getElementById('pie2');
+    var myPieChart_2=new Chart(pieCtx_2, {
+        type: 'pie',
+        data: {
+            labels: ['Male', 'Female'],
+            datasets: [{
+                data: [10, 27],
+                backgroundColor: ['#448aff', '#ff4081']
+            }]
+        },
+        options: {
+            devicePixelRatio: 2.5,
+            borderWidth: 4,
+            hoverBorderWidth: 0,
+        }
+    });
+    // Pie Chart 2 End
+
+    });
+
 </script>
 
 <script>

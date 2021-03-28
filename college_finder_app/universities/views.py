@@ -38,8 +38,10 @@ def university_detail(request, slug):
               'Citations', 'Industry Income', 'International Outlook']
     data = [float(university.scores_teaching),
             float(university.scores_research), float(university.scores_citations), float(university.scores_industry_income), float(university.scores_international_outlook)]
-
     info = zip(labels, data)
+
+    intl_stds = university.stats_pc_intl_students.replace("%", "")
+    subjects = university.subjects_offered
 
     return render(request, 'universities/university-detail.html', context={
         'title': university.name,
@@ -47,4 +49,6 @@ def university_detail(request, slug):
         'labels': labels,
         'data': data,
         'info': info,
+        'subjects': subjects,
+        'intl_stds': int(intl_stds),
     })
