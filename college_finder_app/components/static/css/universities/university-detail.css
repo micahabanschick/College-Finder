@@ -5,6 +5,11 @@
     --white-color: #F7F6FB;
 }
 
+.uni-header h1, .bookmark, .uni-loc h3 {
+    color: var(--first-color);
+}
+
+
 .top, .bottom {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -53,6 +58,7 @@ tbody tr:hover {
 
 .subjects {
     margin: 2em 0;
+    padding: 1em 0;
     background: #fafafa;
 }
 
@@ -66,7 +72,61 @@ tbody tr:hover {
     justify-content: space-around;
 }
 
+li {
+    list-style: none;
+    line-height: 1.6em;
+    font-weight: 600;
+}
+
+.predict-chance button {
+    width: auto;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    padding: 0.8em 1.4em;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--first-color);
+    background: transparent;
+    border: 2px solid var(--first-color);
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.predict-chance button:hover {
+    color: #fff;
+    background: var(--first-color);
+    transition: ease-in 0.22s;
+}
+
+.prev-next {
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.prev-next__btn {
+    color: #fff;
+    border: 0;
+    background-color: var(--first-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.prev-next__btn a {
+    color: #fff;
+}
+
 @media only screen and (max-width: 655px) {
+    .uni-header h1, .bookmark {
+        font-size: 1.6rem;
+    }
     .top, .bottom {
         grid-template-columns: 1fr;
         margin-top: 30px;
@@ -74,8 +134,14 @@ tbody tr:hover {
     .styled-table {
         min-width: 200px;
     }
-    subject-list {
+    .subject-list {
         display: grid;
         grid-template-columns: 1fr;
+    }
+    .prev-next {
+        flex-direction: column;
+    }
+    .prev-next__btn {
+        margin: 10px;
     }
 }
