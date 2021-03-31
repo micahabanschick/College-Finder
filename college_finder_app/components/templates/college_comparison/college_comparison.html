@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <td>No. of Students</td>
-            <td>-</td>
+            <td>{{ cc }}</td>
             <td>-</td>
             <td>-</td>
 
@@ -132,14 +132,14 @@
             source: function(request, response) {
                 var results=$.ui.autocomplete.filter(uniNames, request.term);
                 response(results.slice(0, 10));
-                // console.log(results)
             }
         });
     });
     // JQuery Autocomplete End
 
     // Getting Search Value
-    var unisForCompare=[]
+
+    var unisForCompare=["g"]
     var searchValue=document.getElementById('university-search');
     searchValue.addEventListener("keydown", function(e) {
         if (e.key==="Enter") {

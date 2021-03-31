@@ -73,9 +73,17 @@
     margin-top: 50px;
 }
 
-/* Charts test */
+/* Donut Chart Start*/
 
-/* Charts test end */
+.profile-viz {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    column-gap: 0.5em;
+    row-gap: 2em;
+    padding: 30px 0;
+}
+
+/* Donut Chart End */
 
 .charts__left, .charts__right {
     padding: 20px;

@@ -6,9 +6,8 @@
 }
 
 .uni-header h1, .bookmark, .uni-loc h3 {
-    color: var(--first-color);
+    color: #293042;
 }
-
 
 .top, .bottom {
     display: grid;
