@@ -105,7 +105,7 @@ li {
     justify-content: space-between;
 }
 
-.prev-next__btn, .modal__btn {
+.prev-next__btn, .modal___btn {
     color: #fff;
     border: 0;
     background-color: var(--first-color);
@@ -124,7 +124,7 @@ li {
 
 /* Modal Start */
 
-.modal_box {
+.modal__box {
     position: relative;
     width: 100%;
     height: 100%;
@@ -132,7 +132,7 @@ li {
     display: none;
 }
 
-.modal_bg_shadow {
+.modal__bg__shadow {
     position: fixed;
     top: 0;
     left: 0;
@@ -143,7 +143,7 @@ li {
     z-index: -1;
 }
 
-.modal_box_wrap {
+.modal__box__wrap {
     width: 550px;
     height: 250px;
     background: #fff;
@@ -154,7 +154,7 @@ li {
     border-radius: 5px;
 }
 
-.modal_header {
+.modal__header {
     color: #000;
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
@@ -162,7 +162,7 @@ li {
     font-size: 22px;
 }
 
-.modal_body {
+.modal__body {
     color: #000;
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
@@ -171,21 +171,21 @@ li {
     line-height: 21px;
 }
 
-.modal_footer {
+.modal__footer {
     padding: 20px;
     height: 60px;
 }
 
-.modal_btn_grp {
+.modal__btn__grp {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
 }
 
 .btn {
     width: 100px;
-    padding: 10px;
+    padding: 8px;
     text-align: center;
     cursor: pointer;
     color: var(--first-color);
@@ -194,19 +194,19 @@ li {
     outline: none;
 }
 
-.btn.btn_cancel {
+.btn__close {
     border: 2px solid var(--first-color);
     color: var(--first-color);
     font-weight: 650;
 }
 
-.btn.btn_cancel:hover {
+.btn:hover {
     background: var(--first-color);
     color: #fff;
     font-weight: 600;
 }
 
-.modal_box.active {
+.modal__box.active {
     display: block;
 }
 
@@ -233,7 +233,11 @@ li {
     .prev-next__btn {
         margin: 10px;
     }
-    .modal_box_wrap {
+    .modal__box__wrap {
         width: 250px;
+    }
+    .modal__body {
+        font-size: 0.8em;
+        line-height: 1.25em;
     }
 }

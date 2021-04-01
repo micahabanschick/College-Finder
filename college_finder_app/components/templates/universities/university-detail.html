@@ -85,24 +85,30 @@
         </div>
     </div>
 
-    <div class="predict-chance center modal_btn">
-        <button>Predict My Chances</button>
+    <div class="predict-chance center modal__btn">
+        <button>Predict My Chance</button>
     </div>
 
     <!-- Modal Start -->
 
-    <div class="modal_box">
-        <div class="modal_bg_shadow"></div>
-        <div class="modal_box_wrap">
-            <div class="modal_header">
+    <div class="modal__box">
+        <div class="modal__bg__shadow"></div>
+        <div class="modal__box__wrap">
+            <div class="modal__header">
                 Result
             </div>
-            <div class="modal_body">
-                You have a great chance on this university.
+            <div class="modal__body">
+                <p style="font-weight: 600;">You have <span></span> chance of getting admission on this university.</p>
+                <br>
+                <p style="font-weight: 600;">Things you can improve:</p>
+                <p>GRE, TOEFL, SOP, Letter of Recommendation</p>
             </div>
-            <div class="modal_footer">
-                <div class="modal_btn_grp">
-                    <div class="btn btn_cancel modal_close">Close</div>
+            <div class="modal__footer">
+                <div class="modal__btn__grp">
+                    <div class="disclaimer">
+                        <a href="#">Learn how it is calculated</a>
+                    </div>
+                    <div class="btn btn_close modal__close">Close</div>
                 </div>
             </div>
         </div>
@@ -161,6 +167,9 @@
             fontSize: 15
         },
         scale: {
+            gridLines: {
+                color: 'silver'
+            },
             ticks: {
                 beginAtZero: true,
                 max: 100,
@@ -225,12 +234,12 @@
     // Pie Chart 2 End
 
     // Modal Start
-    $(".modal_btn").click(function() {
-        $(".modal_box").addClass("active");
+    $(".modal__btn").click(function() {
+        $(".modal__box").addClass("active");
     });
 
-    $(".modal_close").click(function() {
-        $(".modal_box").removeClass("active");
+    $(".modal__close").click(function() {
+        $(".modal__box").removeClass("active");
     });
     // Modal End
     

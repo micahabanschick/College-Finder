@@ -60,6 +60,13 @@ def university_detail(request, slug):
     next_uni = Universities.objects.filter(
         id__gt=university.id).order_by('rank_order').first()
 
+    uni_overall_score = university.scores_overall
+    uni_overall_score_temp = uni_overall_score.split("–")[0]
+
+    
+
+
+
     return render(request, 'universities/university-detail.html', context={
         'title': university.name,
         'university': university,

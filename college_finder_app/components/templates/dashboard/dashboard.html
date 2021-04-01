@@ -52,7 +52,7 @@
       <div class="charts__left">
         <div class="charts__left__title">
           <div>
-            <h1>Reports</h1>
+            <h1>Profile Visualized</h1>
           </div>
           <i class='bx bxs-report'></i>
         </div>
@@ -125,7 +125,6 @@
 
     </div>
   </div>
-  {{ profile_strength }}
 </div>
 
 {% endblock content %}
@@ -149,7 +148,7 @@
             backgroundColor: ["#1a237e", "#eee"],
             borderColor: 'white',
             borderWidth: '1px',
-            data: [{{ profile_strength }}, 1-{{ profile_strength }}]
+            data: [{{ user.profile.chance_of_admit }}, 1-{{ user.profile.chance_of_admit }}]
     }
         ]
       },
@@ -157,7 +156,7 @@
     cutoutPercentage: 60,
     title: {
       'display': true,
-      'text': 'Your Overall Profile Strength',
+      'text': 'Overall Profile Strength',
       'position': 'bottom'
     },
     "legend": {

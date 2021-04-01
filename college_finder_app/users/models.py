@@ -18,6 +18,8 @@ class Profile(models.Model):
     uni_score = models.IntegerField(blank=True, null=True)
     CHOICES = [(1, 'Yes'), (0, 'No')]
     research = models.IntegerField(max_length=1, choices=CHOICES, default=0)
+    chance_of_admit = models.DecimalField(
+        decimal_places=2, max_digits=3, blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username}\'s Profile'

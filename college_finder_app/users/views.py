@@ -16,6 +16,7 @@ from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .forms import UserUpdateForm, ProfileUpdateForm
+import pickle
 
 username_pattern = re.compile(
     r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
@@ -211,5 +212,29 @@ def profile_update_form(request):
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
         u_form = UserUpdateForm(instance=request.user)
+
+    # Saving Chance of Admit Start
+    profile_obj = request.user.profile
+    null_count = 0
+    for f in ["avatar", "bio", "gpa", "gre_score", "toefl_score", "lor_score", "research"]:
+        if getattr(profile_obj, f, None) is None:
+            null_count += 1
+    profile_completed = int((10 - null_count) / 10 * 100)
+
+    with open('lr_model', 'rb') as f:
+        mp = pickle.load(f)
+
+    if profile_completed == 100:
+        chance_of_admit = float(mp.predict([[profile_obj.gre_score, profile_obj.toefl_score, profile_obj.uni_score,
+                                              profile_obj.sop_score, profile_obj.lor_score,  profile_obj.gpa, profile_obj.research]]))
+    else:
+        chance_of_admit = 0
+
+    chance_of_admit = chance_of_admit
+
+    profile_obj.chance_of_admit = chance_of_admit
+    profile_obj.save()
+
+    # Saving Chance of Admit End
 
     return render(request, 'users/update-profile.html', {'u_form': u_form, 'p_form': p_form, 'title': 'Update Profile'})
