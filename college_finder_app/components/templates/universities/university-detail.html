@@ -85,9 +85,29 @@
         </div>
     </div>
 
-    <div class="predict-chance center">
+    <div class="predict-chance center modal_btn">
         <button>Predict My Chances</button>
     </div>
+
+    <!-- Modal Start -->
+
+    <div class="modal_box">
+        <div class="modal_bg_shadow"></div>
+        <div class="modal_box_wrap">
+            <div class="modal_header">
+                Result
+            </div>
+            <div class="modal_body">
+                You have a great chance on this university.
+            </div>
+            <div class="modal_footer">
+                <div class="modal_btn_grp">
+                    <div class="btn btn_cancel modal_close">Close</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
 
     <!-- Navigation to other Universities -->
     <div class="prev-next">
@@ -204,7 +224,15 @@
     });
     // Pie Chart 2 End
 
+    // Modal Start
+    $(".modal_btn").click(function() {
+        $(".modal_box").addClass("active");
+    });
 
+    $(".modal_close").click(function() {
+        $(".modal_box").removeClass("active");
+    });
+    // Modal End
     
     });
 

@@ -125,6 +125,7 @@
 
     </div>
   </div>
+  {{ profile_strength }}
 </div>
 
 {% endblock content %}
@@ -146,7 +147,8 @@
           {
             label: "Overall Profile",
             backgroundColor: ["#1a237e", "#eee"],
-            borderColor: 'transparent',
+            borderColor: 'white',
+            borderWidth: '1px',
             data: [{{ profile_strength }}, 1-{{ profile_strength }}]
     }
         ]
@@ -177,7 +179,8 @@
         {
           label: "GPA",
           backgroundColor: ["#1a237e", "#eee"],
-          borderColor: 'transparent',
+          borderColor: 'white',
+          borderWidth: '1px',
           data: [{{ user.profile.gpa }}, 4-{{ user.profile.gpa }}]
   }
         ]
@@ -208,7 +211,8 @@
         {
           label: "GRE",
           backgroundColor: ["#1a237e", "#eee"],
-          borderColor: 'transparent',
+          borderColor: 'white',
+          borderWidth: '1px',
           data: [{{ user.profile.gre_score }}, 340-{{ user.profile.gre_score }}]
   }
         ]
@@ -239,7 +243,8 @@
         {
           label: "TOEFL",
           backgroundColor: ["#1a237e", "#eee"],
-          borderColor: 'transparent',
+          borderColor: 'white',
+          borderWidth: '1px',
           data: [{{ user.profile.toefl_score }}, 120-{{ user.profile.toefl_score }}]
   }
         ]
