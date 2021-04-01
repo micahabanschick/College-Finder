@@ -12,8 +12,8 @@
       <img src="{{ user.profile.avatar.url }}" alt="">
       <div class="main__greeting">
         <h1>Hello, {{name}}!</h1>
-        {% if request.user.profile.bio != 'None' %}
-        <p>{{ request.user.profile.bio }}</p>
+        {% if user.profile.bio != 'None' %}
+        <p>{{ user.profile.bio }}</p>
         {% else %}
         <p>Set a custom bio <a href="{% url 'update_profile' %}"><i class='bx bx-edit'></i></a> </p>
         {% endif %}
@@ -87,22 +87,22 @@
 
           <div class="card1">
             <h2>GPA</h2>
-            <h3>{{ request.user.profile.gpa }}</h3>
+            <h3>{{ user.profile.gpa }}</h3>
           </div>
 
           <div class="card1">
             <h2>GRE</h2>
-            <h3>{{ request.user.profile.gre_score }}</h3>
+            <h3>{{ user.profile.gre_score }}</h3>
           </div>
 
           <div class="card1">
             <h2>TOEFL</h2>
-            <h3>{{ request.user.profile.toefl_score }}</h3>
+            <h3>{{ user.profile.toefl_score }}</h3>
           </div>
 
           <div class="card1">
             <h2>Research</h2>
-            {% if request.user.profile.research == 1 %}
+            {% if user.profile.research == 1 %}
             <box-icon name='check-circle'></box-icon>
             {% else %}
             <box-icon name='x'></box-icon>
@@ -111,12 +111,12 @@
 
           <div class="card1">
             <h2>SOP</h2>
-            <progress value="{{ request.user.profile.sop_score }}" max="5"> </progress>
+            <progress value="{{ user.profile.sop_score }}" max="5"> </progress>
           </div>
 
           <div class="card1">
             <h2>LOR</h2>
-            <progress value="{{ request.user.profile.lor_score }}" max="5"> </progress>
+            <progress value="{{ user.profile.lor_score }}" max="5"> </progress>
           </div>
 
         </div>

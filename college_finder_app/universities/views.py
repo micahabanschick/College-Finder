@@ -63,9 +63,29 @@ def university_detail(request, slug):
     uni_overall_score = university.scores_overall
     uni_overall_score_temp = uni_overall_score.split("–")[0]
 
-    
+    chance_of_admit_pct = request.user.profile.chance_of_admit * 100
+    chance_texts = ['very high', 'high', 'good',
+                    'low', 'very low', 'no']
 
+    if chance_of_admit_pct != 0:
+        chance = float(chance_of_admit_pct) - float(uni_overall_score_temp)
 
+        if chance >= 30:
+            chance_text = chance_texts[0]
+        if chance < 30 and chance >= 20:
+            chance_text = chance_texts[1]
+        if chance < 20 and chance >= 5:
+            chance_text = chance_texts[2]
+        if chance < 5 and chance >= 0:
+            chance_text = chance_texts[3]
+        if chance < 0 and chance >= -20:
+            chance_text = chance_texts[4]
+        if chance < -20:
+            chance_text = chance_texts[5]
+
+        predict_result = f'You have {chance_text.upper()} chance of getting admission on this university.'
+    else:
+        predict_result = 'You must have 100% profile completion in order to predict chances.'
 
     return render(request, 'universities/university-detail.html', context={
         'title': university.name,
@@ -78,5 +98,6 @@ def university_detail(request, slug):
         'subjects': subject_list,
         'prev_uni': prev_uni,
         'next_uni': next_uni,
-        'col1': col1, 'col2': col2, 'col3': col3
+        'col1': col1, 'col2': col2, 'col3': col3,
+        'predict_result': predict_result,
     })
