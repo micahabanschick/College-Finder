@@ -25,7 +25,7 @@ urlpatterns = [
     path('compare', include('college_comparison.urls')),
     path('bookmarks', include('bookmarks.urls')),
     path('blogs', include('blogs.urls')),
-    path('help', include('get_help.urls')),
+    path('faqs', include('faqs.urls')),
     path('', include('users.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
 ]

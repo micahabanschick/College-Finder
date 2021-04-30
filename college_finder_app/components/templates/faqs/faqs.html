@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/faqs/faqs.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+<h1>Frequently Asked Questions</h1>
+<div class="acc">
+    <button class="accordion">Are the rankings and statistics reliable?</button>
+    <div class="panel">
+        <p>This site uses the data from Times Higher Education's website which is considered as very genuine magazine
+            for world universities rankings and statistics.</p>
+    </div>
+
+    <button class="accordion">How is Chance of Admission calculated?</button>
+    <div class="panel">
+        <p>We use Machine Learning algorithm to calculate student's overall profile strength. Based on that and
+            university's overall score on various factors, it matches how the university fits with the student's profile
+            and shows the result.</p>
+    </div>
+
+    <button class="accordion">Is my personal information safe on this site?</button>
+    <div class="panel">
+        <p>Yes. We only store users personal information to provide features like admission chance prediction. We don't
+            share these credentials with third parties.</p>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+
+<script>
+    // Accordion Start
+    const acc=document.getElementsByClassName("accordion");
+    let acc_index;
+
+    for (acc_index=0; acc_index<acc.length; acc_index++) {
+        acc[acc_index].addEventListener("click", function() {
+            this.classList.toggle("active-acc");
+
+            /* Toggle between hiding and showing the active panel */
+            let panel=this.nextElementSibling;
+            if (panel.style.display==="block") {
+                panel.style.display="none";
+            } else {
+                panel.style.display="block";
+            }
+        });
+    }
+
+    // Accordion End
+</script>
+
+<script>
+    const linkColor=document.querySelector("#faqs");
+    linkColor.classList.add("active");
+</script>
+
+{% endblock script %}
