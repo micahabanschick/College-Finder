@@ -108,7 +108,7 @@ class RegistrationView(View):
                 email_message.send()
 
                 messages.add_message(request, messages.SUCCESS,
-                                     'Account created successfully. Check your email to confirm your account.')
+                                     'Account created successfully. Check your email to activate your account.')
                 return redirect('login')
 
             except (ConnectionError, ConnectionAbortedError, ConnectionRefusedError, ConnectionDoesNotExist, ConnectionResetError):

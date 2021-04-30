@@ -1,8 +1,6 @@
 /*===== GOOGLE FONTS =====*/
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600,700');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
 /*===== VARIABLES CSS =====*/
 
 :root {
@@ -18,7 +16,7 @@
     --grey: #eee;
     /*===== Font and typography =====*/
     --body-font: 'Nunito', sans-serif;
-    --second-font: 'Poppins', 'Nunito', 'Open Sans', arial;
+    --second-font: 'Poppins', 'Nunito' arial;
     --normal-font-size: 1rem;
     /*===== z index =====*/
     --z-fixed: 100;

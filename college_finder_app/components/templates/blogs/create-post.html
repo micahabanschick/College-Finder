@@ -29,7 +29,7 @@
 
     <div>
         <label for="tags">Tags</label>
-        <input type="text" data-role="tagsinput" name="tags" class="form-control" placeholder="Separate with comma">
+        <input type="text" data-role="tagsinput" name="tags" class="form-control" placeholder="Separate with comma" required>
         <p style="font-size: 1em;">Common Tags:
             {% for mt in common_tags %}
         <p style="display: inline-block; font-size: 0.9em;" class="tag">&bull; {{mt}} </p>

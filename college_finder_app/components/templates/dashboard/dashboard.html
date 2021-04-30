@@ -12,7 +12,7 @@
       <img src="{{ user.profile.avatar.url }}" alt="">
       <div class="main__greeting">
         <h1>Hello, {{name}}!</h1>
-        {% if user.profile.bio != 'None' %}
+        {% if user.profile.bio != None %}
         <p>{{ user.profile.bio }}</p>
         {% else %}
         <p>Set a custom bio <a href="{% url 'update_profile' %}"><i class='bx bx-edit'></i></a> </p>

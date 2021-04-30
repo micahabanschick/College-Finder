@@ -169,6 +169,14 @@ li {
     height: 60px;
 }
 
+.disclaimer, .disclaimer a {
+    color: var(--first-color);
+}
+
+.disclaimer a:hover {
+    border-bottom: 1px solid var(--first-color);
+}
+
 .modal__btn__grp {
     display: flex;
     justify-content: space-between;
