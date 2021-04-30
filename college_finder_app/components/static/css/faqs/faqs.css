@@ -12,7 +12,7 @@
     border: none;
     outline: none;
     transition: 0.4s;
-    font-size: 1em;
+    font-size: 1.05em;
     font-weight: 600;
     font-family: var(--body-font);
 }
@@ -29,4 +29,21 @@
     padding: 0 18px;
     display: none;
     overflow: hidden;
+    font-family: var(--second-font);
+}
+
+/* Icons */
+
+.accordion:after {
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active-acc:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
 }

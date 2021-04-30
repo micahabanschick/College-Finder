@@ -1,10 +1,3 @@
-:root {
-    /*===== Colors =====*/
-    --first-color: #1a237e;
-    --first-color-light: #AFA5D9;
-    --white-color: #F7F6FB;
-}
-
 .container {
     background: #fafafa;
 }
@@ -51,7 +44,7 @@
     height: 70px;
     padding: 42px;
     border-radius: 10px;
-    background: #fff;
+    background: var(--white);
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
     border-top: 2px solid var(--first-color);
 }
@@ -88,7 +81,7 @@
 .charts__left, .charts__right {
     padding: 20px;
     border-radius: 10px;
-    background: #fff;
+    background: var(--white);
     box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
 }
 
@@ -111,11 +104,11 @@
 }
 
 .charts__left__title>i, .charts__right__title>i {
-    color: #fff;
+    color: var(--white);
     font-size: 20px;
     background: var(--first-color);
     border-radius: 200px 0 200px 200px;
-    border: 0px solid #fff;
+    border: 0px solid var(--white);
     padding: 15px;
 }
 
@@ -127,7 +120,7 @@
 }
 
 .card1 {
-    background: #eee;
+    background: var(--grey);
     color: var(--first-color);
     text-align: center;
     padding: 25px;

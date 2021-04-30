@@ -1,12 +1,3 @@
-:root {
-    /*===== Colors =====*/
-    --first-color: #1a237e;
-    --first-color-light: #AFA5D9;
-    --white-color: #F7F6FB;
-    /*===== Font and typography =====*/
-    --body-font: 'Nunito', sans-serif;
-}
-
 .title {
     display: flex;
     justify-content: center;

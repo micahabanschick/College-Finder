@@ -39,7 +39,7 @@
     <hr>
 </div>
 <div class="home-articles max-width-1 m-auto font2">
-    <h2 class="center">You may also like</h2>
+    <h2 class="text-center">You may also like</h2>
     <div class="row">
 
         {% if previous_post %}
@@ -48,7 +48,7 @@
             <div class="home-article-img">
                 <img src="{{ previous_post.image_url }}" alt="{{ previous_post.title }}">
             </div>
-            <div class="home-article-content font1 center">
+            <div class="home-article-content font1 text-center">
                 <a href="{% url 'blog_detail' previous_post.slug %}">
                     <h3>{{ previous_post.title }}</h3>
                 </a>
@@ -66,7 +66,7 @@
             <div class="home-article-img">
                 <img src="{{ next_post.image_url }}" alt="{{ next_post.title }}">
             </div>
-            <div class="home-article-content font1 center">
+            <div class="home-article-content font1 text-center">
                 <a href="{% url 'blog_detail' next_post.slug %}">
                     <h3>{{ next_post.title }}</h3>
                 </a>

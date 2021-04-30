@@ -1,6 +1,8 @@
 /*===== GOOGLE FONTS =====*/
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Poppins:200i,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600,700');
 /*===== VARIABLES CSS =====*/
 
 :root {
@@ -9,9 +11,14 @@
     /*===== Colors =====*/
     --first-color: #1a237e;
     --first-color-light: #AFA5D9;
+    --second-color: #512da8;
+    --white: #fff;
+    --black: #000;
     --white-color: #F7F6FB;
+    --grey: #eee;
     /*===== Font and typography =====*/
     --body-font: 'Nunito', sans-serif;
+    --second-font: 'Poppins', 'Nunito', 'Open Sans', arial;
     --normal-font-size: 1rem;
     /*===== z index =====*/
     --z-fixed: 100;
@@ -59,8 +66,8 @@ main {
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
-    background-color: white;
-    border: 1.8px solid #eee;
+    background-color: var(--white);
+    border: 1.8px solid var(--grey);
     z-index: var(--z-fixed);
     transition: .5s;
 }
@@ -202,7 +209,7 @@ main {
     max-width: max-content;
     margin-bottom: 0.4em;
     background-color: #d64242;
-    color: white;
+    color: var(--white);
     transition: opacity 0.6s;
     border-radius: 0.5em;
 }
@@ -225,7 +232,7 @@ main {
 }
 
 .closebtn {
-    color: white;
+    color: var(--white);
     font-weight: bold;
     font-size: 22px;
     cursor: pointer;
