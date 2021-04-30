@@ -38,8 +38,16 @@
         <div class="header__img dropdown">
             <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
             <div id="dropdown" class="dropdown-content">
-                <a href="{% url 'update_profile' %}">Settings</a>
-                <a href="#">Change Theme</a>
+                <a class="dropdown-item" href="{% url 'update_profile' %}">Settings</a>
+
+                <div class="dropdown-item switch-theme">
+                    <p>Theme</p>
+                    <div class="toggle-btn" id="theme-toggle">
+                        <input type="checkbox">
+                        <span></span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
@@ -114,8 +122,6 @@
 
     {% endblock script %}
 
-    <!--===== BOXICONS JS =====-->
-    <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
 
     <!--===== MAIN JS =====-->
     <script src="{%static 'js/main.js'%}"></script>

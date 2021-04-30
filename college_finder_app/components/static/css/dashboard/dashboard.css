@@ -97,7 +97,7 @@
     margin-bottom: 5px;
 }
 
-.charts__left__title>div>p, .charts__right__title>div>p {
+.charts__right__title>div>p {
     font-size: 14px;
     font-weight: 700;
     color: var(--first-color-light);
