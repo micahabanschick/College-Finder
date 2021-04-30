@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'college_comparison.apps.CollegeComparisonConfig',
     'bookmarks.apps.BookmarksConfig',
     'blogs.apps.BlogsConfig',
-    'get_help.apps.GetHelpConfig',
+    'faqs.apps.FaqsConfig',
     'users.apps.UsersConfig',
 ]
 
@@ -164,7 +164,8 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
