@@ -1,5 +1,5 @@
 .container {
-    background: #fafafa;
+    background: var(--white-color);
 }
 
 .main__container {
@@ -17,17 +17,19 @@
     margin-right: 20px;
 }
 
+.main__greeting {
+    color: var(--first-color);
+    margin-bottom: 5px;
+}
+
 .main__greeting>h1 {
     font-size: 24px;
-    color: var(--first-color);
     margin-bottom: 5px;
 }
 
 .main__greeting>p {
     font-size: 14px;
     font-weight: 700;
-    color: var(--first-color);
-    margin-bottom: 5px;
 }
 
 .main__cards {
@@ -55,7 +57,8 @@
     justify-content: space-between;
 }
 
-.card__inner>span {
+.profile-stats {
+    font-weight: 500;
     font-size: 25px;
 }
 
@@ -89,22 +92,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--first-color);
 }
 
 .charts__left__title>div>h1, .charts__right__title>div>h1 {
     font-size: 24px;
-    color: var(--first-color);
     margin-bottom: 5px;
 }
 
-.charts__right__title>div>p {
+.charts__right__title>div>p, .charts__right__title i {
     font-size: 14px;
     font-weight: 700;
-    color: var(--first-color-light);
+    color: var(--second-color);
 }
 
 .charts__left__title>i, .charts__right__title>i {
-    color: var(--white);
+    color: #fff;
     font-size: 20px;
     background: var(--first-color);
     border-radius: 200px 0 200px 200px;
@@ -146,7 +149,8 @@
         gap: 10px;
         margin-bottom: 0;
     }
-    .card__inner>span {
+    .profile-stats {
+        font-weight: 500;
         font-size: 20px;
     }
 }

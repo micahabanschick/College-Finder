@@ -6,7 +6,7 @@
 
 .uni a {
     text-decoration: underline;
-    color: #222;
+    color: var(--black-second);
 }
 
 /* Search */
@@ -18,9 +18,13 @@
     margin: 1em auto;
 }
 
+input {
+    background-color: var(--white-color);
+}
+
 .searchTerm {
     width: 100%;
-    border: 2px solid #ccc;
+    border: 1.8px solid var(--black-second);
     padding: 8px;
     height: 2em;
     font-size: 1.2em;
@@ -29,7 +33,7 @@
 }
 
 .searchTerm:focus {
-    color: #666;
+    color: var(--black);
 }
 
 .table-responsive {
@@ -45,15 +49,12 @@
 }
 
 .table td, .table th {
-    border: 1px solid #bdc3c7;
+    color: var(--black);
+    border: 1px solid var(--first-color-light);
     padding: 0.5em;
     vertical-align: top;
     text-align: center;
     font-weight: 600;
-}
-
-.table tr:nth-child(odd) td {
-    background-color: #f5f6fa;
 }
 
 .table tr td:first-child {
@@ -61,7 +62,7 @@
 }
 
 .table th {
-    background-color: #f3f3f3;
+    background-color: var(--white-color);
     font-size: 110%;
     font-weight: 700;
 }
@@ -81,8 +82,7 @@
 }
 
 .table tr.even:hover td, .table tr:hover td {
-    color: #222;
-    background-color: #f7f1e3;
+    color: var(--black-second);
 }
 
 .tg-bf {

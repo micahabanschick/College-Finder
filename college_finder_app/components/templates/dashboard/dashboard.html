@@ -23,26 +23,26 @@
     <div class="main__cards">
 
       <div class="card">
-        <box-icon name='pie-chart-alt' type='solid'></box-icon>
+        <i class='bx bx-pie-chart-alt bx-sm'></i>
         <div class="card__inner">
           <p class="text-primary-p">Profile Completion</p>
-          <span class="font-bold text-title">{{ profile_completed }}%</span>
+          <p class="profile-stats">{{ profile_completed }}%</p>
         </div>
       </div>
 
       <div class="card">
-        <box-icon name='time'></box-icon>
+        <i class='bx bx-time bx-sm'></i>
         <div class="card__inner">
           <p class="text-primary-p">Last Signed In</p>
-          <span class="font-bold text-title">{{ current_time }}</span>
+          <p class="profile-stats">{{ current_time }}</p>
         </div>
       </div>
 
       <div class="card">
-        <box-icon name='bookmarks'></box-icon>
+        <i class='bx bx-bookmarks bx-sm'></i>
         <div class="card__inner">
           <p class="text-primary-p">Bookmarked Colleges</p>
-          <span class="font-bold text-title">{{ bookmarks_count }}</span>
+          <p class="profile-stats">{{ bookmarks_count }}</p>
         </div>
       </div>
 
@@ -103,9 +103,9 @@
           <div class="card1">
             <h2>Research</h2>
             {% if user.profile.research == 1 %}
-            <box-icon name='check-circle'></box-icon>
+            <i class='bx bx-check-circle bx-sm'></i>
             {% else %}
-            <box-icon name='x'></box-icon>
+            <i class='bx bx-x bx-sm'></i>
             {% endif %}
           </div>
 

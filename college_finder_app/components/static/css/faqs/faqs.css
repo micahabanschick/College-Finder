@@ -15,12 +15,14 @@
     font-size: 1.05em;
     font-weight: 600;
     font-family: var(--body-font);
+    color: var(--black);
+    background-color: var(--grey);
 }
 
 /* Add a background color to the button if it is clicked on (add the .active-acc class with JS), and when you move the mouse over it (hover) */
 
-.active-acc, .accordion:hover {
-    background-color: #ccc;
+.accordion:hover {
+    background-color: var(--first-color-light);
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -38,7 +40,7 @@
     content: '\02795';
     /* Unicode character for "plus" sign (+) */
     font-size: 13px;
-    color: #777;
+    color: var(--grey);
     float: right;
     margin-left: 5px;
 }

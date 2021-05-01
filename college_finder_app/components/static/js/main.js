@@ -1,4 +1,4 @@
-/*===== SHOW NAVBAR  =====*/
+/*===== NAVBAR  =====*/
 const showNavbar = (toggleId, navId, bodyId, headerId) => {
     const toggle = document.getElementById(toggleId),
         nav = document.getElementById(navId),
@@ -22,6 +22,8 @@ const showNavbar = (toggleId, navId, bodyId, headerId) => {
 
 showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
 
+
+/*===== DROPDOWN  =====*/
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function dropdownFunction() {
@@ -42,7 +44,8 @@ window.onclick = function(event) {
     }
 }
 
-// ALERTS
+
+/*===== ALERTS  =====*/
 const close = document.getElementsByClassName("closebtn");
 let i;
 

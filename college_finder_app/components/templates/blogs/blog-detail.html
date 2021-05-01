@@ -8,7 +8,11 @@
 {% block content %}
 
 <div class="blog-route">
-    <p><a href="{% url 'blogs' %}">Home</a> / <a href="{% url 'tagged' blog.tags.all.first.slug %}">{{ blog.tags.all.first }}</a> / <a href="#">{{ blog.title }}</a></p>
+    <p>
+        <a href="{% url 'blogs' %}">Home</a> /
+        <a href="{% url 'tagged' blog.tags.all.first.slug %}">{{blog.tags.all.first }}</a> /
+        <a href="#">{{ blog.title}}</a>
+    </p>
 </div>
 <div class="post-img">
     <img src="{{ blog.image_url }}" alt="{{ blog.title }}">
@@ -52,9 +56,11 @@
                 <a href="{% url 'blog_detail' previous_post.slug %}">
                     <h3>{{ previous_post.title }}</h3>
                 </a>
-                <div>{{ previous_post.author }}</div>
-                <span>{{ previous_post.posted_on }} | {{ previous_post.description|length|intdiv:1500 }} mins
-                    read</span>
+                <div>
+                    <p>Written By: {{ previous_post.author }}</p>
+                </div>
+                <p><span>{{ previous_post.posted_on }} | {{ previous_post.description|length|intdiv:1500 }} mins
+                        read</span></p>
             </div>
         </div>
         {% endif %}
@@ -70,8 +76,10 @@
                 <a href="{% url 'blog_detail' next_post.slug %}">
                     <h3>{{ next_post.title }}</h3>
                 </a>
-                <div>{{ next_post.author }}</div>
-                <span>{{ next_post.posted_on }} | {{ next_post.description|length|intdiv:1500 }} mins read</span>
+                <div>
+                    <p>Written By: {{ next_post.author }}</p>
+                </div>
+                <p><span>{{ next_post.posted_on }} | {{ next_post.description|length|intdiv:1500 }} mins read</span></p>
             </div>
         </div>
         {% endif %}

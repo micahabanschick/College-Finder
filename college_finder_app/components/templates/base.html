@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
         integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
 
+    <!-- ===== Theme ===== -->
+    <link rel="stylesheet" id="theme" href="{% static 'css/themes/light.css' %}" />
+
     <!-- ===== CSS ===== -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     {% block extracss %}
@@ -43,7 +46,7 @@
                 <div class="dropdown-item switch-theme">
                     <p>Theme</p>
                     <div class="toggle-btn" id="theme-toggle">
-                        <input type="checkbox">
+                        <input id="theme-switcher" type="checkbox" onchange="swapStyle()">
                         <span></span>
                     </div>
                 </div>
@@ -122,6 +125,34 @@
 
     {% endblock script %}
 
+    <script>
+        /*===== THEME SWITCHER  =====*/
+        let selectedTheme=localStorage.getItem('theme');
+        let cssFile="{%static 'css'%}"
+        if (selectedTheme=='dark') {
+            document.querySelector('#theme-switcher').checked=true;
+            document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+
+        }
+
+        const swapStyle=() => {
+            try {
+                let checkedValue=document.querySelector('#theme-switcher:checked').value;
+                if (checkedValue=="on") {
+                    localStorage.setItem('theme', 'dark')
+                    document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+                }
+                else {
+                    localStorage.setItem('theme', 'light')
+                    document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+
+                }
+            } catch (error) {
+                localStorage.setItem('theme', 'light')
+                document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+            }
+        }
+    </script>
 
     <!--===== MAIN JS =====-->
     <script src="{%static 'js/main.js'%}"></script>

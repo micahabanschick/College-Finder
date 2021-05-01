@@ -1,5 +1,5 @@
 .uni-header h1, .bookmark, .uni-loc h3 {
-    color: #293042;
+    color: var(--black-second);
 }
 
 .top, .bottom {
@@ -22,9 +22,13 @@
 
 thead tr {
     background-color: var(--first-color);
-    color: var(--white);
+    color: #fff;
     font-weight: 800;
     text-align: left;
+}
+
+tbody tr {
+    color: var(--black);
 }
 
 th, td {
@@ -36,22 +40,14 @@ tbody tr {
     font-weight: 600;
 }
 
-tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
 tbody tr:last-of-type {
     border-bottom: 2px solid var(--first-color);
-}
-
-tbody tr:hover {
-    color: var(--first-color);
 }
 
 .subjects {
     margin: 2em 0;
     padding: 1em 0;
-    background: #fafafa;
+    background: var(--white-color);
 }
 
 .subject-list {
@@ -68,6 +64,7 @@ li {
     list-style: none;
     line-height: 1.6em;
     font-weight: 600;
+    color: var(--black-second);
 }
 
 .predict-chance button {
@@ -77,16 +74,16 @@ li {
     padding: 0.8em 1.4em;
     margin-bottom: 1.5rem;
     font-weight: 600;
-    color: var(--first-color);
+    color: var(--black-second);
     background: transparent;
-    border: 2px solid var(--first-color);
+    border: 2px solid var(--black-second);
     border-radius: 5px;
     cursor: pointer;
     outline: none;
 }
 
 .predict-chance button:hover {
-    color: var(--white);
+    color: #fff;
     background: var(--first-color);
     transition: ease-in 0.22s;
 }
@@ -99,7 +96,7 @@ li {
 }
 
 .prev-next__btn, .modal___btn {
-    color: var(--white);
+    color: #fff;
     border: 0;
     background-color: var(--first-color);
     padding: 0.5rem 1rem;
@@ -170,7 +167,7 @@ li {
 }
 
 .disclaimer, .disclaimer a {
-    color: var(--first-color);
+    color: var(--black-second);
 }
 
 .disclaimer a:hover {
@@ -184,26 +181,21 @@ li {
     height: 100%;
 }
 
-.btn {
+.modal__close {
     width: 100px;
     padding: 8px;
     text-align: center;
     cursor: pointer;
-    color: var(--first-color);
-    border: 2px solid var(--first-color);
+    border: 2px solid var(--black-second);
+    color: var(--black-second);
     border-radius: 5px;
     outline: none;
-}
-
-.btn__close {
-    border: 2px solid var(--first-color);
-    color: var(--first-color);
     font-weight: 650;
 }
 
-.btn:hover {
+.modal__close:hover {
     background: var(--first-color);
-    color: var(--white);
+    color: #fff;
     font-weight: 600;
 }
 
