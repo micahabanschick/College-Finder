@@ -1,4 +1,4 @@
-from django.db.utils import ConnectionDoesNotExist, Error
+from django.db.utils import ConnectionDoesNotExist
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages

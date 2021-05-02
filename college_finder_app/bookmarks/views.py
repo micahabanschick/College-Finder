@@ -31,6 +31,7 @@ def bookmarks_page(request):
         data = user.bookmarks.filter(
             Q(name__icontains=search_query) | Q(location__icontains=search_query)).distinct()
         title = f'Search results for {search_query}'
+        temp_data = list(reversed(data))
     else:
         data = user.bookmarks.all()
         temp_data = list(reversed(data))
@@ -39,7 +40,7 @@ def bookmarks_page(request):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     bookmarked_unis = user.bookmarks.all()
-    
+
     context = {
         'title': title,
         'universities': page_obj,

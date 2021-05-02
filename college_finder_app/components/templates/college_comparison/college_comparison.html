@@ -18,7 +18,7 @@
     <table class="table">
 
         <tr>
-            <th>CRITERIA</th>
+            <th>INDEX</th>
             <th class="uni"> <a href="#">UNIVERSITY 1</a>&nbsp<span title="discard" class="discardbtn">&times;</span>
             </th>
             <th class="uni"> <a href="#">UNIVERSITY 2</a>&nbsp<span title="discard" class="discardbtn">&times;</span>
@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <td>No. of Students</td>
-            <td>{{ cc }}</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
 
@@ -139,7 +139,7 @@
 
     // Getting Search Value
 
-    var unisForCompare=["g"]
+    var unisForCompare=[]
     var searchValue=document.getElementById('university-search');
     searchValue.addEventListener("keydown", function(e) {
         if (e.key==="Enter") {
