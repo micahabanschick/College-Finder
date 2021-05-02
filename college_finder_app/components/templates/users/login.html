@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
+    <!-- ===== Theme ===== -->
+    <link rel="stylesheet" id="theme" href="{% static 'css/themes/light.css' %}" />
+
     <link rel="stylesheet" href="{% static 'css/login.css' %}" />
     {% if title %}
     <title>College Finder | {{title}}</title>
@@ -123,7 +126,7 @@
 
         <div class="alerts">
             {% if messages %}
-            {% for message in  messages%}
+            {% for message in messages%}
             <div class="alert {{message.tags}}" id="alert">
                 <p>{{message}}</p>
                 <i class='bx bx-x closebtn'></i>
@@ -132,9 +135,18 @@
             {% endif %}
         </div>
     </div>
-    <!-- ===== CHANGING MODES ===== -->
+
     <script>
+        /*===== CHANGING MODES =====*/
         let mode="{{mode}}";
+
+        /*===== THEME SWITCHER  =====*/
+        let selectedTheme=localStorage.getItem('theme');
+        let cssFile="{%static 'css'%}"
+        if (selectedTheme=='dark') {
+            document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+        }
+
     </script>
 
     <script src="{%static 'js/login.js'%}"></script>
