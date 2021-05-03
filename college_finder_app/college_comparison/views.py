@@ -11,6 +11,7 @@ for university in universities:
     uni_names.append(university.name)
 unis_for_compare = []
 
+
 @csrf_exempt
 def college_comparison_page(request):
     if request.method == 'POST':
@@ -25,6 +26,10 @@ def college_comparison_page(request):
         else:
             messages.add_message(request, messages.WARNING,
                                  'University Not Found.')
+
+    discard_uni = request.GET.get('discard_uni')
+    if discard_uni:
+        unis_for_compare.pop(int(discard_uni))
 
     context = {
         'title': 'College Comparison',

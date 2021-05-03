@@ -5,8 +5,11 @@
 }
 
 .uni a {
-    text-decoration: underline;
     color: var(--black-second);
+}
+
+.uni a:hover {
+    text-decoration: underline;
 }
 
 /* Search */
@@ -70,7 +73,7 @@ input {
 
 /* Discard Button */
 
-.discardbtn {
+#discard {
     font-weight: bold;
     font-size: 22px;
     line-height: 20px;
@@ -78,7 +81,7 @@ input {
     transition: 0.3s;
 }
 
-.discardbtn:hover {
+#discard:hover {
     color: red;
 }
 
