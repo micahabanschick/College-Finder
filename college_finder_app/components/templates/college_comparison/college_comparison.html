@@ -10,111 +10,104 @@
 
 <!-- Search -->
 <div class="search">
-    <input type="text" name="search" class="searchTerm" id="university-search" placeholder="Search for Universities..">
+    <form method="post" id="search-form">
+        <input type="text" name="search" class="searchTerm" id="university-search"
+            placeholder="Search for Universities..">
+    </form>
 </div>
 
-<!-- Comparison Table -->
+<!-- Comparison Table Start-->
+{% if unis_for_compare %}
 <div class='table-responsive'>
     <table class="table">
 
         <tr>
             <th>INDEX</th>
-            <th class="uni"> <a href="#">UNIVERSITY 1</a>&nbsp<span title="discard" class="discardbtn">&times;</span>
+            {% for uni in unis_for_compare %}
+            <th class="uni"> <a href="{% url 'university_detail' uni.slug %}">{{uni.name}}</a>&nbsp<span title="discard"
+                    class="discardbtn">&times;</span>
             </th>
-            <th class="uni"> <a href="#">UNIVERSITY 2</a>&nbsp<span title="discard" class="discardbtn">&times;</span>
-            </th>
-            <th class="uni"> <a href="#">UNIVERSITY 3</a>&nbsp<span title="discard" class="discardbtn">&times;</span>
-            </th>
+            {% endfor %}
         </tr>
+
         <tr>
             <td>Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Location</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.location}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>No. of Students</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_number_students}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>International Students</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_pc_intl_students}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Students per staff</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_student_staff_ratio}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Female to Male Ratio</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_female_male_ratio}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Teaching Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_teaching_rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Research Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_research_rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Citation Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_citations_rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Industry Income Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_industry_income_rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>International Outlook Rank</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_international_outlook_rank}}</td>
+            {% endfor %}
         </tr>
         <tr>
             <td>Overall Score</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_overall}}</td>
+            {% endfor %}
         </tr>
 
     </table>
-
 </div>
 
+{% endif %}
+<!-- Comparison Table Start-->
 
 {% endblock content %}
 
@@ -139,21 +132,23 @@
 
     // Getting Search Value
 
-    var unisForCompare=[]
-    var searchValue=document.getElementById('university-search');
-    searchValue.addEventListener("keydown", function(e) {
-        if (e.key==="Enter") {
-            var uniQuery=searchValue.value;
-            if (uniNames.includes(uniQuery)) {
-                if (unisForCompare.length<3&&(!unisForCompare.includes(uniQuery))) {
-                    unisForCompare.push(uniQuery);
-                    console.log(unisForCompare);
-                }
+    $(document).on('submit', '#search-form', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "college_comparison" %}',
+            data:
+            {
+                searched_uni: $("#university-search").val(),
+            },
+            success: function() {
             }
-        }
+        })
     });
 
     // Getting Search Value End
+
+
 </script>
 
 
