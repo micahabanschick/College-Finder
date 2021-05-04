@@ -1,11 +1,10 @@
 {% extends "university-lists.html" %}
 
-
 {% block search_field %}
 <!-- Search -->
 <form class="search" action="{% url 'universities' %}">
-  <input type="text" name="search" class="searchTerm" value="{{ search_query }}"
-    placeholder="Search by name or location">
+  <input type="text" name="search" class="searchTerm" id="universities-search" value="{{ search_query }}"
+    placeholder="Search by name or location..">
   <button type="submit" class="searchButton">
     <i class='bx bx-search'></i>
   </button>
@@ -14,6 +13,24 @@
 
 
 {% block script %}
+<!-- JQuery Autocomplete Start -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+  const uniNames={{ uni_names|safe|escape }};
+  $(function() {
+
+    $("#universities-search").autocomplete({
+      source: function(request, response) {
+        var results=$.ui.autocomplete.filter(uniNames, request.term);
+        response(results.slice(0, 5));
+      }
+    });
+  });
+    // JQuery Autocomplete End
+</script>
+
 <script>
 
   const linkColor=document.querySelector("#universities");

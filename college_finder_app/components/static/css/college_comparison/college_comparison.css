@@ -25,6 +25,18 @@ input {
     background-color: var(--white-color);
 }
 
+/* Autocomplete UI */
+
+.ui-menu {
+    color: var(--black-second);
+    background: var(--white);
+    width: 250px;
+}
+
+.ui-menu-item {
+    border-bottom: 1px solid var(--grey);
+}
+
 .searchTerm {
     width: 100%;
     border: 1.8px solid var(--black-second);

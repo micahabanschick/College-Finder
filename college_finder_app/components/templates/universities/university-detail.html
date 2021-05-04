@@ -210,7 +210,11 @@
         devicePixelRatio: 2.5,
             borderWidth: 4,
                 hoverBorderWidth: 0,
+                    legend: {
+            reverse: true,
+                onClick: (e) => e.stopPropagation()
         }
+    }
     });
     // Pie Chart 1 End
 
@@ -219,17 +223,21 @@
     var myPieChart_2=new Chart(pieCtx_2, {
         type: 'pie',
         data: {
-            labels: ['Male', 'Female'],
+            labels: ['Female', 'Male'],
             datasets: [{
-                data: [49, 51],
-                backgroundColor: ['#448aff', '#f06292']
-            }]
+                data: [{{ female_stds }}, {{ male_stds }}],
+        backgroundColor: ['#f06292', '#448aff']
+    }]
         },
-        options: {
-            devicePixelRatio: 2.5,
+    options: {
+        devicePixelRatio: 2.5,
             borderWidth: 4,
-            hoverBorderWidth: 0,
+                hoverBorderWidth: 0,
+                    legend: {
+            reverse: true,
+                onClick: (e) => e.stopPropagation()
         }
+    }
     });
     // Pie Chart 2 End
 

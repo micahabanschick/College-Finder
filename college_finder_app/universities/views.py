@@ -4,6 +4,11 @@ from .models import Universities
 from django.db.models import Q
 import ast
 
+universities = Universities.objects.all()
+uni_names = []
+for university in universities:
+    uni_names.append(university.name)
+
 
 def universities_page(request):
 
@@ -28,7 +33,9 @@ def universities_page(request):
         'universities': page_obj,
         'page_obj': page_obj,
         'search_query': search_query,
-        'bookmarked_unis': bookmarked_unis
+        'bookmarked_unis': bookmarked_unis,
+        'data': data,
+        'uni_names': uni_names,
     }
     return render(request, 'universities/universities.html', context)
 
@@ -43,6 +50,8 @@ def university_detail(request, slug):
 
     intl_stds = int(university.stats_pc_intl_students.replace("%", ""))
     local_stds = 100-intl_stds
+    female_stds = university.stats_female_male_ratio.split(':')[0]
+    male_stds = university.stats_female_male_ratio.split(':')[1]
     subjects = university.subjects_offered
     subject_list = ast.literal_eval(subjects)
     subjects_count = len(subject_list)
@@ -95,6 +104,8 @@ def university_detail(request, slug):
         'info': info,
         'intl_stds': intl_stds,
         'local_stds': local_stds,
+        'female_stds': female_stds,
+        'male_stds': male_stds,
         'subjects': subject_list,
         'prev_uni': prev_uni,
         'next_uni': next_uni,

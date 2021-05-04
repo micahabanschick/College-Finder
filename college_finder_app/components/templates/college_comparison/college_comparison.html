@@ -124,7 +124,7 @@
         $("#university-search").autocomplete({
             source: function(request, response) {
                 var results=$.ui.autocomplete.filter(uniNames, request.term);
-                response(results.slice(0, 10));
+                response(results.slice(0, 5));
             }
         });
     });

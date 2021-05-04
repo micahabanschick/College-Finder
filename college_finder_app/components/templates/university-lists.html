@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extracss %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'css/universities/universities.css' %}">
 {% endblock extracss %}
 
@@ -13,7 +14,8 @@
 <!-- Search Results -->
 {% if search_query %}
 <div class="search-results">
-    <p>Search Results for: &nbsp<b>{{ search_query.upper }}</b></p>
+    <p class="center">Search Results for: &nbsp<b>{{ search_query.upper }}</b></p>
+    <p class="center"><b>{{ data | length }}</b>&nbsp result(s) found.</p>
 </div>
 {% endif %}
 
@@ -66,7 +68,7 @@
             <a href="{% url 'toggle_bookmark' university.id %}">
                 <i class='bx bx-bookmark university-card__bookmark'></i>
             </a>
-            
+
             {% endif %}
 
         </div>

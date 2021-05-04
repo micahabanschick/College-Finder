@@ -11,6 +11,17 @@ input {
     background-color: var(--white-color);
 }
 
+// Autocomplete UI
+.ui-menu{
+    color: var(--black-second);
+    background: var(--white);
+    width: 290px;
+}
+
+.ui-menu-item{
+        border-bottom: 1px solid var(--grey);
+}
+
 .searchTerm {
     width: 100%;
     border: 1.8px solid var(--black-second);
@@ -30,6 +41,7 @@ input {
     width: 40px;
     height: 2em;
     border: 1.8px solid var(--black-second);
+    border-left: none;
     text-align: center;
     color: var(--first-color);
     background-color: var(--white-color);
@@ -46,8 +58,6 @@ input {
 
 // Search Results
 .search-results {
-    display: flex;
-    justify-content: center;
     margin: 1em;
     font-size: 1.1em;
 }

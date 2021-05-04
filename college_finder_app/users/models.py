@@ -19,7 +19,7 @@ class Profile(models.Model):
     CHOICES = [(1, 'Yes'), (0, 'No')]
     research = models.IntegerField(max_length=1, choices=CHOICES, default=0)
     chance_of_admit = models.DecimalField(
-        decimal_places=2, max_digits=3, blank=True, null=True)
+        decimal_places=2, max_digits=3, blank=True, null=True, default=0.0)
 
     def __str__(self):
         return f'{self.user.username}\'s Profile'
