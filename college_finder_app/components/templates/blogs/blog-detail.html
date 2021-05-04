@@ -46,6 +46,24 @@
     <h2 class="text-center">You may also like</h2>
     <div class="row">
 
+        {% if next_post %}
+
+        <div class="home-article more-post">
+            <div class="home-article-img">
+                <img src="{{ next_post.image_url }}" alt="{{ next_post.title }}">
+            </div>
+            <div class="home-article-content font1 text-center">
+                <a href="{% url 'blog_detail' next_post.slug %}">
+                    <h3>{{ next_post.title }}</h3>
+                </a>
+                <div>
+                    <p>Written By: {{ next_post.author }}</p>
+                </div>
+                <p><span>{{ next_post.posted_on }} | {{ next_post.description|length|intdiv:1500 }} mins read</span></p>
+            </div>
+        </div>
+        {% endif %}
+
         {% if previous_post %}
 
         <div class="home-article more-post">
@@ -61,25 +79,6 @@
                 </div>
                 <p><span>{{ previous_post.posted_on }} | {{ previous_post.description|length|intdiv:1500 }} mins
                         read</span></p>
-            </div>
-        </div>
-        {% endif %}
-
-
-        {% if next_post %}
-
-        <div class="home-article more-post">
-            <div class="home-article-img">
-                <img src="{{ next_post.image_url }}" alt="{{ next_post.title }}">
-            </div>
-            <div class="home-article-content font1 text-center">
-                <a href="{% url 'blog_detail' next_post.slug %}">
-                    <h3>{{ next_post.title }}</h3>
-                </a>
-                <div>
-                    <p>Written By: {{ next_post.author }}</p>
-                </div>
-                <p><span>{{ next_post.posted_on }} | {{ next_post.description|length|intdiv:1500 }} mins read</span></p>
             </div>
         </div>
         {% endif %}
