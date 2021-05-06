@@ -39,7 +39,7 @@
 
                     <input type="submit" value="Login" class="btn solid" />
                     <a href="#" class="social-text">Forgot Password?</a>
-                    <p class="social-text">Sign in with social platforms</p>
+                    <p class="social-text">Proceed with social platforms</p>
                     <div class="social-media">
                         <a href="{% url 'social:begin' 'facebook' %}" class="social-icon" id="facebook">
                             <i class='bx bxl-facebook'></i>
@@ -84,15 +84,6 @@
                     </div>
 
                     <input type="submit" class="btn" value="Sign up" />
-                    <p class="social-text">Or Sign up with social platforms</p>
-                    <div class="social-media">
-                        <a href="{% url 'social:begin' 'facebook' %}" class="social-icon" id="facebook">
-                            <i class='bx bxl-facebook'></i>
-                        </a>
-                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-icon" id="google">
-                            <i class='bx bxl-google'></i>
-                        </a>
-                    </div>
                 </form>
             </div>
         </div>

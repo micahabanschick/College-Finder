@@ -42,10 +42,10 @@ def universities_page(request):
 
 def university_detail(request, slug):
     university = Universities.objects.get(slug=slug)
-    labels = ['Teaching', 'Research',
-              'Citations', 'Industry Income', 'International Outlook']
-    data = [float(university.scores_teaching),
-            float(university.scores_research), float(university.scores_citations), float(university.scores_industry_income), float(university.scores_international_outlook)]
+    labels = ['International Outlook', 'Teaching', 'Research',
+              'Citations', 'Industry Income']
+    data = [float(university.scores_international_outlook), float(university.scores_teaching),
+            float(university.scores_research), float(university.scores_citations), float(university.scores_industry_income)]
     info = zip(labels, data)
 
     intl_stds = int(university.stats_pc_intl_students.replace("%", ""))

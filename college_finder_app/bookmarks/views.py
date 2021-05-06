@@ -47,5 +47,6 @@ def bookmarks_page(request):
         'page_obj': page_obj,
         'search_query': search_query,
         'bookmarked_unis': bookmarked_unis,
+        'data': data,
     }
     return render(request, 'bookmarks/bookmarks.html', context)

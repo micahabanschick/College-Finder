@@ -135,3 +135,12 @@ input {
         white-space: nowrap
     }
 }
+
+@media screen and (max-width: 350px) {
+    .search, .ui-menu {
+        width: 200px;
+    }
+    .searchTerm, .searchButton {
+        font-size: 1em;
+    }
+}

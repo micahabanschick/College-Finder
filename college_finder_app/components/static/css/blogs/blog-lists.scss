@@ -1,5 +1,5 @@
 .search {
-    width: 290px;
+    width: 260px;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -13,6 +13,7 @@ input {
 
 .searchTerm {
     width: 100%;
+    color: var(--black);
     border: 1.8px solid var(--black-second);
     border-right: none;
     padding: 8px;
@@ -22,14 +23,11 @@ input {
     outline: none;
 }
 
-.searchTerm:focus {
-    color: var(--black);
-}
-
 .searchButton {
     width: 40px;
     height: 2em;
     border: 1.8px solid var(--black-second);
+    border-left: none;
     text-align: center;
     color: var(--first-color);
     background-color: var(--white-color);
@@ -39,7 +37,7 @@ input {
     outline: none;
 }
 
-.searchButton i{
+.searchButton i {
     margin-top: 4px;
     color: var(--black-second);
 }
@@ -251,4 +249,24 @@ input {
 .pagination-previous,
 .pagination-next {
     color: var(--first-color);
+}
+
+@media screen and (max-width: 350px) {
+
+    .search {
+        width: 200px;
+    }
+
+    .searchTerm, .searchButton {
+        font-size: 1em;
+    }
+
+    .pagination {
+        margin: 0.4em;
+        font-size: 1em;
+    }
+
+    .pagination-number {
+        margin: 0;
+    }
 }

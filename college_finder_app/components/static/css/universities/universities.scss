@@ -1,5 +1,5 @@
 .search {
-    width: 290px;
+    width: 260px;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -15,7 +15,7 @@ input {
 .ui-menu{
     color: var(--black-second);
     background: var(--white);
-    width: 290px;
+    width: 260px;
 }
 
 .ui-menu-item{
@@ -24,6 +24,7 @@ input {
 
 .searchTerm {
     width: 100%;
+    color: var(--black);
     border: 1.8px solid var(--black-second);
     border-right: none;
     padding: 8px;
@@ -31,10 +32,6 @@ input {
     font-size: 1.2em;
     border-radius: 5px 0 0 5px;
     outline: none;
-}
-
-.searchTerm:focus {
-    color: var(--black);
 }
 
 .searchButton {
@@ -138,19 +135,6 @@ input {
     font-weight: 600;
 }
 
-@media screen and (min-width: 730px) {
-    .universities {
-        grid-template-columns: repeat(auto-fill, minmax(207px, 1fr));
-    }
-}
-
-@media screen and (min-width: 925px) and (max-width: 959px) {
-    .universities {
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    }
-}
-
-
 /* Pagination */
 
 .pagination {
@@ -170,7 +154,6 @@ input {
     border-radius: 0.4rem;
     color: var(--first-color);
     font-weight: 500;
-
 }
 
 .pagination-current {
@@ -195,4 +178,32 @@ input {
 .pagination-previous,
 .pagination-next {
     color: var(--first-color);
+}
+
+@media screen and (min-width: 730px) {
+    .universities {
+        grid-template-columns: repeat(auto-fill, minmax(207px, 1fr));
+    }
+}
+
+@media screen and (min-width: 925px) and (max-width: 959px) {
+    .universities {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .search, .ui-menu {
+        width: 200px;
+    }
+    .searchTerm, .searchButton{
+        font-size: 1em;
+    }
+    .pagination{
+        margin: 0.4em;
+        font-size: 1em;
+    }
+    .pagination-number {
+        margin: 0;
+    }
 }
