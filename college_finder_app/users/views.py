@@ -11,12 +11,14 @@ from django.db import IntegrityError
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import get_template
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import DjangoUnicodeDecodeError, force_bytes, force_text
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .forms import UserUpdateForm, ProfileUpdateForm
 import pickle
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+
 
 username_pattern = re.compile(
     r'^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
@@ -104,7 +106,6 @@ class RegistrationView(View):
                     [email],
                 )
                 email_message.content_subtype = 'html'
-
                 email_message.send()
 
                 messages.add_message(request, messages.SUCCESS,
@@ -130,6 +131,7 @@ class RegistrationView(View):
 
 class LoginView(View):
     def get(self, request):
+
         if request.user.is_authenticated:
             return redirect('dashboard')
         return render(request, 'users/login.html', context={'mode': 'signin', })
@@ -226,7 +228,7 @@ def profile_update_form(request):
 
     if profile_completed == 100:
         chance_of_admit = float(mp.predict([[profile_obj.gre_score, profile_obj.toefl_score, profile_obj.uni_score,
-                                              profile_obj.sop_score, profile_obj.lor_score,  profile_obj.gpa, profile_obj.research]]))
+                                             profile_obj.sop_score, profile_obj.lor_score,  profile_obj.gpa, profile_obj.research]]))
     else:
         chance_of_admit = 0
 
@@ -238,3 +240,82 @@ def profile_update_form(request):
     # Saving Chance of Admit End
 
     return render(request, 'users/update-profile.html', {'u_form': u_form, 'p_form': p_form, 'title': 'Update Profile'})
+
+
+def forgot_password_page(request):
+
+    if request.method == 'POST':
+        email_to_reset = request.POST['email-for-reset']
+        if not validate_email(email_to_reset):
+            messages.add_message(request, messages.WARNING,
+                                 'Email is invalid.')
+
+        user = User.objects.filter(email=email_to_reset)
+        if user.exists():
+            current_site = get_current_site(request)
+            email_subject = 'Reset your Password'
+            message = get_template('users/reset-password-email.html').render(context={
+                'user': user,
+                'domain': current_site.domain,
+                'user_id': urlsafe_base64_encode(force_bytes(user[0].pk)),
+                'token': PasswordResetTokenGenerator().make_token(user[0])
+            })
+
+            email_message = EmailMessage(
+                email_subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [email_to_reset],
+            )
+            email_message.content_subtype = 'html'
+            email_message.send()
+            messages.add_message(request, messages.INFO,
+                                 'We have sent you an email with instructions to reset your password.')
+        messages.add_message(request, messages.WARNING,
+                             'User with that email does not exist.')
+        return render(request, 'users/forgot-password.html')
+    else:
+        return render(request, 'users/forgot-password.html')
+
+
+def reset_password_page(request, uidb64, token):
+
+    if request.method == 'POST':
+        context = {
+            'uidb64': uidb64,
+            'token': token,
+            'has_error': False
+        }
+        new_password = request.POST.get('new-password')
+        new_password_repeat = request.POST.get('confirm-password')
+
+        if len(new_password) < 8:
+            messages.add_message(
+                request, messages.ERROR, 'Your password must not be less than 8 characters.')
+            context['has_error'] = True
+
+        if new_password != new_password_repeat:
+            messages.add_message(request, messages.ERROR,
+                                 'Password does not match.')
+            context['has_error'] = True
+
+        if context['has_error'] == True:
+            return render(request, 'users/reset-password.html', context)
+        try:
+            user_id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=user_id)
+            user.set_password(new_password)
+            user.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Passwords Changed successfully. You can now log in with your new password.')
+            return redirect('login')
+
+        except DjangoUnicodeDecodeError as identifier:
+            messages.add_message(request, messages.ERROR,
+                                 'Something went wrong. Please try again.')
+            return render(request, 'users/reset-password.html', context)
+    context = {
+        'uidb64': uidb64,
+        'token': token,
+    }
+    return render(request, 'users/reset-password.html', context)

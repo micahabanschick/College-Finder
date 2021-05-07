@@ -57,6 +57,7 @@
           <i class='bx bxs-report'></i>
         </div>
 
+        {% if profile_completed == 100 %}
         <div class="profile-viz">
           <div class="overall-score">
             <canvas id="overall-doughnut-chart"></canvas>
@@ -72,6 +73,10 @@
           </div>
 
         </div>
+
+        {% else %}
+        <p>After completing your profile, you'll see nice visualization here.</p>
+        {% endif %}
       </div>
 
       <div class="charts__right">

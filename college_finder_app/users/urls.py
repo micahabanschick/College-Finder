@@ -11,4 +11,8 @@ urlpatterns = [
          views.ActivateAccountView.as_view(), name='activate'),
     path('settings', login_required(
         views.profile_update_form), name='update_profile'),
+    path('forgot-password', views.forgot_password_page,
+         name='forgot-password'),
+    path('reset-password/<uidb64>/<token>',
+         views.reset_password_page, name='reset-password'),
 ]

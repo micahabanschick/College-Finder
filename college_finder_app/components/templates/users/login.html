@@ -39,26 +39,7 @@
                     </div>
 
                     <input type="submit" value="Login" class="btn solid" />
-                    <p class="modal__btn" id="forgot-password">Forgot Password?</p>
-                    <!-- Modal Start -->
-                    <div class="modal__box">
-                        <div class="modal__box__wrap">
-                            <div class="modal__header">
-                                <div class="header__text">
-                                    Reset Password
-                                </div>
-                                <div class="modal__close"><i class='bx bx-x'></i></div>
-                            </div>
-                            <div class="modal__body">
-                                <p>Enter the email associated with your account and you'll get an email with
-                                    instructions to reset your password.</p>
-                                <br>
-                                <input id="reset-email" type="email">
-                                <button class="modal__submit">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal End -->
+                    <a href="{% url 'forgot-password' %}" class="social-text" id="forgot-password">Forgot Password?</a>
                     <p class="social-text">Proceed with social platforms</p>
                     <div class="social-media">
                         <a href="{% url 'social:begin' 'facebook' %}" class="social-icon" id="facebook">
@@ -152,8 +133,8 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
         </script>
 
-    <script>
 
+    <script>
         /*===== CHANGING MODES =====*/
         let mode="{{mode}}";
 
@@ -163,27 +144,6 @@
         if (selectedTheme=='dark') {
             document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
         }
-
-        // Modal Start
-        $(document).ready(function() {
-            $("#forgot-password").click(function() {
-
-                $(".modal__box").addClass("active");
-                $('.login-cred').attr('required', false);
-                $('#reset-email').attr('required', true);
-                $('form').submit(function(event) {
-                    event.preventDefault();
-                });
-            });
-
-            $(".modal__close").click(function() {
-                $(".modal__box").removeClass("active");
-                $('.login-cred').attr('required', true);
-            });
-        });
-    // Modal End
-
-
     </script>
 
     <script src="{%static 'js/login.js'%}"></script>
