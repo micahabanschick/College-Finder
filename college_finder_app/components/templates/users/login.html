@@ -28,17 +28,37 @@
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class='bx bxs-user'></i>
-                        <input type="text" placeholder="Username" name="username" value="{{form.username}}" required />
+                        <input class="login-cred" type="text" placeholder="Username" name="username"
+                            value="{{form.username}}" required />
                     </div>
 
                     <div class="input-field">
                         <i class='bx bxs-lock-alt'></i>
-                        <input type="password" placeholder="Password" name="password" value="{{form.password}}"
-                            required />
+                        <input class="login-cred" type="password" placeholder="Password" name="password"
+                            value="{{form.password}}" required />
                     </div>
 
                     <input type="submit" value="Login" class="btn solid" />
-                    <a href="#" class="social-text">Forgot Password?</a>
+                    <p class="modal__btn" id="forgot-password">Forgot Password?</p>
+                    <!-- Modal Start -->
+                    <div class="modal__box">
+                        <div class="modal__box__wrap">
+                            <div class="modal__header">
+                                <div class="header__text">
+                                    Reset Password
+                                </div>
+                                <div class="modal__close"><i class='bx bx-x'></i></div>
+                            </div>
+                            <div class="modal__body">
+                                <p>Enter the email associated with your account and you'll get an email with
+                                    instructions to reset your password.</p>
+                                <br>
+                                <input id="reset-email" type="email">
+                                <button class="modal__submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal End -->
                     <p class="social-text">Proceed with social platforms</p>
                     <div class="social-media">
                         <a href="{% url 'social:begin' 'facebook' %}" class="social-icon" id="facebook">
@@ -127,7 +147,13 @@
         </div>
     </div>
 
+    <!--===== JQUERY =====-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+        </script>
+
     <script>
+
         /*===== CHANGING MODES =====*/
         let mode="{{mode}}";
 
@@ -137,6 +163,26 @@
         if (selectedTheme=='dark') {
             document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
         }
+
+        // Modal Start
+        $(document).ready(function() {
+            $("#forgot-password").click(function() {
+
+                $(".modal__box").addClass("active");
+                $('.login-cred').attr('required', false);
+                $('#reset-email').attr('required', true);
+                $('form').submit(function(event) {
+                    event.preventDefault();
+                });
+            });
+
+            $(".modal__close").click(function() {
+                $(".modal__box").removeClass("active");
+                $('.login-cred').attr('required', true);
+            });
+        });
+    // Modal End
+
 
     </script>
 
