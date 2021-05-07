@@ -1,9 +1,11 @@
 from django.shortcuts import render
 import time
+from universities.models import Universities
 
 t = time.localtime()
 current_time = time.strftime("%I:%M %p", t)
 
+universities = Universities.objects.all()
 
 context = {
     'title': 'Dashboard',
@@ -12,6 +14,18 @@ context = {
     'profile_completed': 0,
     'bookmarks_count': 0,
 }
+
+uni_bookmark_counts = []
+trending_unis = []
+for university in universities:
+    num = university.bookmarks.count()
+    uni_bookmark_counts.append(num)
+
+trending_unis_index = sorted(range(
+    len(uni_bookmark_counts)), key=lambda i: uni_bookmark_counts[i], reverse=True)[:10]
+
+for index in trending_unis_index:
+    trending_unis.extend(Universities.objects.filter(id=index))
 
 
 def dashboard_page(request):
@@ -28,5 +42,6 @@ def dashboard_page(request):
 
     bookmarks_count = request.user.bookmarks.count()
     context['bookmarks_count'] = bookmarks_count
+    context['trending_unis'] = trending_unis
 
     return render(request, 'dashboard/dashboard.html', context)

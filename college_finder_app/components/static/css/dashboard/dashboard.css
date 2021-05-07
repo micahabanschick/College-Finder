@@ -81,6 +81,61 @@
 
 /* Donut Chart End */
 
+/* Trending University Start */
+
+.list {
+    list-style: none;
+    max-width: 90%;
+}
+
+.item {
+    display: block;
+    clear: both;
+    padding-bottom: 0.1rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    position: relative;
+    counter-increment: list;
+}
+
+.item:before {
+    font: bold 1.25rem/1 var(--second-font);
+    content: counter(list);
+    width: 1.6rem;
+    height: 1.6rem;
+    float: left;
+    margin: 0 1.5rem 0.5rem 0;
+    color: var(--white-color);
+    background: var(--first-color) linear-gradient(to bottom right, var(--first-color) 25%, var(--second-color));
+    text-shadow: 0 0 2px var(--first-color);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    shape-outside: ellipse();
+    z-index: 1;
+}
+
+.item:after {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background: var(--first-color);
+    z-index: -1;
+    border-top-left-radius: 3px;
+}
+
+.headline {
+    color: var(--black-second);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+/* Trending University End */
+
 .charts__left, .charts__right {
     padding: 20px;
     border-radius: 10px;
