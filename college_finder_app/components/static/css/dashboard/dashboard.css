@@ -83,6 +83,10 @@
 
 /* Trending University Start */
 
+.trending-unis {
+    margin-top: 10px;
+}
+
 .list {
     list-style: none;
     max-width: 90%;
@@ -218,6 +222,10 @@
         padding: 20px 0;
         width: 250px;
     }
+    .list, .headline {
+        font-size: 0.8rem;
+        line-height: 1em;
+    }
 }
 
 @media only screen and (max-width: 640px) {
@@ -234,7 +242,36 @@
     .main__cards, .charts__left__cards {
         grid-template-columns: 1fr;
     }
+    .charts__left, .charts__right {
+        padding: 1em;
+        border-radius: 0.5em;
+    }
+    .charts__left__title>div>h1, .charts__right__title>div>h1 {
+        font-size: 1.2em;
+    }
+    .charts__left__title>i, .charts__right__title>i {
+        display: none;
+    }
     .profile-viz {
         gap: 0.6em;
+    }
+    .list, .headline {
+        font-size: 0.8rem;
+        line-height: 0.4em;
+        margin-bottom: 1em;
+    }
+    .item {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+    .item:before {
+        font: bold 1rem/1 var(--second-font);
+        width: 1.2rem;
+        height: 1.2rem;
+        margin: 0 1rem 0.3rem 0;
+    }
+    .item:after {
+        width: 1rem;
+        height: 1rem;
     }
 }

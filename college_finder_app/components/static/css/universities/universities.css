@@ -26,7 +26,7 @@ input {
   color: var(--black);
   border: 1.8px solid var(--black-second);
   border-right: none;
-  padding: 8px;
+  padding: 0.53em;
   height: 2em;
   font-size: 1.2em;
   border-radius: 5px 0 0 5px;
@@ -207,19 +207,33 @@ input {
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 460px) {
+  .pagination-number {
+    margin: 0 0.1em;
+    padding: 0.2em 0.2em;
+    border-radius: 0.2rem;
+  }
+  .pagination-action {
+    padding: 0.2em;
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 360px) {
   .search, .ui-menu {
     width: 200px;
   }
   .searchTerm, .searchButton {
     font-size: 1em;
   }
-  .pagination {
-    margin: 0.4em;
-    font-size: 1em;
-  }
   .pagination-number {
-    margin: 0;
+    margin: 0 0.1em;
+    padding: 0.1em 0.1em;
+    border-radius: 0.1rem;
+  }
+  .pagination-action {
+    padding: 0.1em;
+    font-size: 1em;
   }
 }
 /*# sourceMappingURL=universities.css.map */
