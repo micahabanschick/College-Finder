@@ -21,9 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9oz4rysio4zbxo@2vw#1h(sszzkx50lrv#0&_p$0iru1p(skr+'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -145,6 +142,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -155,7 +153,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'components/media')
 MEDIA_URL = '/media/'
 
 load_dotenv()
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
