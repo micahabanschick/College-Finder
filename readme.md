@@ -1,7 +1,7 @@
 # College Finder Appplication
 
-![walkthrough](./walkthrough.gif)
-![Predicting Chances + Dark Mode](./chance_prediction.gif)
+![walkthrough](walkthrough.gif)
+![Predicting Chances + Dark Mode](chance_prediction.gif)
 
 ### [https://collegefinderapp.herokuapp.com](https://collegefinderapp.herokuapp.com/)
 
