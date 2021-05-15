@@ -294,7 +294,7 @@ form.sign-in-form {
     justify-content: space-between;
     padding: 0.8em;
     margin-bottom: 0.1em;
-    background-color: red;
+    background-color: #f44336;
     color: #fff;
     transition: opacity 0.6s;
     border-radius: 0.5em;
@@ -305,15 +305,15 @@ form.sign-in-form {
 }
 
 .alert.success {
-    background-color: #34c240;
+    background-color: #4caf50;
 }
 
 .alert.info {
-    background-color: #0090e0;
+    background-color: #2196f3;
 }
 
 .alert.warning {
-    background-color: #fa9f47;
+    background-color: #ff9800;
 }
 
 .closebtn {

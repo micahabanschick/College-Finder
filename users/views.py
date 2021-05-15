@@ -68,7 +68,7 @@ class RegistrationView(View):
 
         if not is_safe_username(reg_username):
             messages.add_message(
-                request, messages.INFO, f'"{reg_username}" is not allowed for username.')
+                request, messages.WARNING, f'"{reg_username}" is not allowed for username.')
             has_error = True
 
         if not username_pattern.match(reg_username):
