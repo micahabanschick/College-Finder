@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/college_comparison/college_comparison.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+<h3 class="title center">Add upto 3 Universities for Comparison</h3>
+
+<!-- Search -->
+<form class="search" method="post" id="search-form">
+    <input type="text" name="search" class="searchTerm" id="university-search" placeholder="Search Universities..">
+    <button type="submit" class="searchButton">
+        <i class='bx bx-plus'></i>
+    </button>
+</form>
+
+<!-- Comparison Table Start-->
+{% if unis_for_compare %}
+<div class='table-responsive'>
+    <table class="table">
+
+        <tr>
+            <th>INDEX</th>
+            {% for uni in unis_for_compare %}
+            <th class="uni"> <a href="{% url 'university_detail' uni.slug %}">{{uni.name}}</a>&nbsp<span title="discard"
+                    data-id="{{ forloop.counter0 }}" id="discard">&times;</span>
+            </th>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            <td>Location</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.location}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>No. of Students</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_number_students}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>International Students</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_pc_intl_students}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Students per staff</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_student_staff_ratio}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Female to Male Ratio</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.stats_female_male_ratio}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Teaching Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_teaching_rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Research Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_research_rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Citation Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_citations_rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Industry Income Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_industry_income_rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>International Outlook Rank</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_international_outlook_rank}}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Overall Score</td>
+            {% for uni in unis_for_compare %}
+            <td>{{uni.scores_overall}}</td>
+            {% endfor %}
+        </tr>
+
+    </table>
+</div>
+
+{% endif %}
+<!-- Comparison Table Start-->
+
+{% endblock content %}
+
+{% block script %}
+
+<!-- JQuery Autocomplete Start -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    const uniNames={{ uni_names|safe|escape }};
+    $(function() {
+
+        $("#university-search").autocomplete({
+            source: function(request, response) {
+                var results=$.ui.autocomplete.filter(uniNames, request.term);
+                response(results.slice(0, 5));
+            }
+        });
+    });
+    // JQuery Autocomplete End
+
+    // Getting Search Value
+
+    $(document).on('submit', '#search-form', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "college_comparison" %}',
+            data:
+            {
+                searched_uni: $("#university-search").val(),
+            },
+            success: function() {
+                location.reload();
+            }
+        })
+    });
+
+    // Getting Search Value End
+
+    // On Clicking Discard button remove that university from compare list
+    $(document).on('click', '#discard', function(e) {
+        $.ajax({
+            type: 'GET',
+            url: '{% url "college_comparison" %}',
+            data:
+            {
+                discard_uni: $(this).data("id"),
+            },
+            success: function() {
+                location.reload();
+            }
+        })
+    });
+
+
+</script>
+
+
+<script>
+    const linkColor=document.querySelector("#college-comparison");
+    linkColor.classList.add("active");
+</script>
+{% endblock script %}

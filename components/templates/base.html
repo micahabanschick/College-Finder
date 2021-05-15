@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- ===== JQUERY UI ===== -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!--===== Chart JS =====-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
+        integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+    <!-- ===== THEME ===== -->
+    <link rel="stylesheet" id="theme" href="{% static 'css/themes/light.css' %}" />
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+    <!-- ===== FAVICON ===== -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    {% block extracss %}
+
+    {% endblock extracss %}
+
+    {% if title %}
+    <title>College Finder | {{title}}</title>
+    {% else %}
+    <title>College Finder</title>
+    {% endif %}
+</head>
+
+<body id="body-pd">
+    <header class="header" id="header">
+        <div class="header__toggle">
+            <i class="bx bx-menu" id="header-toggle"></i>
+        </div>
+
+        <div class="header__img dropdown">
+            <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
+            <div id="dropdown" class="dropdown-content">
+                <a class="dropdown-item" href="{% url 'update_profile' %}">Settings</a>
+
+                <div class="dropdown-item switch-theme">
+                    <p>Theme</p>
+                    <div class="toggle-btn" id="theme-toggle">
+                        <input id="theme-switcher" type="checkbox" onchange="swapStyle()">
+                        <span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="{% url 'dashboard' %}" class="nav__logo">
+                    <i class="bx bxs-graduation nav__logo-icon"></i>
+                    <span class="nav__logo-name">College Finder</span>
+                </a>
+
+                <div class="nav__list">
+                    <a href="{% url 'dashboard' %}" class="nav__link" id="dashboard">
+                        <i class="bx bx-grid-alt nav__icon" title="Dashboard"></i>
+                        <span class="nav__name">Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'universities' %}" class="nav__link" id="universities">
+                        <i class="bx bxs-institution nav__icon" title="Universities"></i>
+                        <span class="nav__name">Universities</span>
+                    </a>
+
+                    <a href="{% url 'college_comparison' %}" class="nav__link" id="college-comparison">
+                        <i class="bx bx-transfer nav__icon" title="College Comparison"></i>
+                        <span class="nav__name">College Comparison</span>
+                    </a>
+
+                    <a href="{% url 'bookmarks' %}" class="nav__link" id="bookmarks">
+                        <i class="bx bx-bookmark nav__icon" title="Bookmarks"></i>
+                        <span class="nav__name">Bookmarks</span>
+                    </a>
+
+                    <a href="{% url 'blogs' %}" class="nav__link" id="blogs">
+                        <i class="bx bx-news nav__icon" title="Blogs"></i>
+                        <span class="nav__name">Blogs</span>
+                    </a>
+
+                    <a href="{% url 'faqs' %}" class="nav__link" id="faqs">
+                        <i class="bx bx-chat nav__icon" title="FAQs"></i>
+                        <span class="nav__name">FAQs</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="{% url 'logout' %}" class="nav__link" id="log-out">
+                <i class="bx bx-log-out nav__icon" title="Log Out"></i>
+                <span class="nav__name">Log Out</span>
+            </a>
+        </nav>
+    </div>
+
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+
+        <div class="alerts">
+            {% if messages %}
+            {% for message in messages%}
+            <div class="alert center {{message.tags}}" id="alert">
+                <p>{{message}}</p>
+                <i class='bx bx-x closebtn'></i>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </main>
+
+    {% block script %}
+
+    {% endblock script %}
+
+    <script>
+        /*===== THEME SWITCHER  =====*/
+        let selectedTheme=localStorage.getItem('theme');
+        let cssFile="{%static 'css'%}"
+        if (selectedTheme=='dark') {
+            document.querySelector('#theme-switcher').checked=true;
+            document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+        }
+
+        const swapStyle=() => {
+            try {
+                let checkedValue=document.querySelector('#theme-switcher:checked').value;
+                if (checkedValue=="on") {
+                    localStorage.setItem('theme', 'dark')
+                    document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+                }
+                else {
+                    localStorage.setItem('theme', 'light')
+                    document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+
+                }
+            } catch (error) {
+                localStorage.setItem('theme', 'light')
+                document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+            }
+        }
+    </script>
+
+    <!--===== MAIN JS =====-->
+    <script src="{%static 'js/main.js'%}"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mathfilters %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/blogs/blog-detail.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+
+<div class="blog-route">
+    <p>
+        <a href="{% url 'blogs' %}">Home</a> /
+        <a href="{% url 'tagged' blog.tags.all.first.slug %}">{{blog.tags.all.first }}</a> /
+        <a href="#">{{ blog.title}}</a>
+    </p>
+</div>
+<div class="post-img">
+    <img src="{{ blog.image_url }}" alt="{{ blog.title }}">
+</div>
+
+<div class="m-auto blog-post-content max-width-2 m-auto my-2">
+    <h1 class="font1">{{ blog.title }}</h1>
+    <div class="max-width-1 m-auto">
+        <hr>
+    </div>
+    <div class="blogpost-meta">
+        <div class="author-info">
+            <div>
+                <b>
+                    <p> <i class='bx bx-pencil'></i> {{ blog.author }}</p>
+                </b>
+            </div>
+            <div>
+                <p><i class='bx bx-calendar'></i> {{ blog.posted_on }}</p>
+                <p><i class='bx bx-show'></i> {{ blog.description|length|intdiv:800 }} mins read</p>
+            </div>
+        </div>
+    </div>
+    <p>{{ blog.description }}</p>
+</div>
+
+<div class="max-width-1 m-auto">
+    <hr>
+</div>
+<div class="home-articles max-width-1 m-auto font2">
+    <h2 class="text-center">You may also like</h2>
+    <div class="row">
+
+        {% if next_post %}
+
+        <div class="home-article more-post">
+            <div class="home-article-img">
+                <img src="{{ next_post.image_url }}" alt="{{ next_post.title }}">
+            </div>
+            <div class="home-article-content font1 text-center">
+                <a href="{% url 'blog_detail' next_post.slug %}">
+                    <h3>{{ next_post.title }}</h3>
+                </a>
+                <div>
+                    <p>Written By: {{ next_post.author }}</p>
+                </div>
+                <p><span>{{ next_post.posted_on }} | {{ next_post.description|length|intdiv:800 }} mins read</span></p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if previous_post %}
+
+        <div class="home-article more-post">
+            <div class="home-article-img">
+                <img src="{{ previous_post.image_url }}" alt="{{ previous_post.title }}">
+            </div>
+            <div class="home-article-content font1 text-center">
+                <a href="{% url 'blog_detail' previous_post.slug %}">
+                    <h3>{{ previous_post.title }}</h3>
+                </a>
+                <div>
+                    <p>Written By: {{ previous_post.author }}</p>
+                </div>
+                <p><span>{{ previous_post.posted_on }} | {{ previous_post.description|length|intdiv:800 }} mins
+                        read</span></p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+
+    const linkColor=document.querySelector("#blogs");
+    linkColor.classList.add("active");
+</script>
+{% endblock script %}

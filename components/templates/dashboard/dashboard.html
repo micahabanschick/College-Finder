@@ -1,0 +1,328 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tz %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+
+<div class="container">
+  <div class="main__container">
+    <div class="main__title">
+      <img src="{{ user.profile.avatar.url }}" alt="">
+      <div class="main__greeting">
+        <h1>Hello, {{name}}!</h1>
+        {% if user.profile.bio != '' %}
+        <p>{{ user.profile.bio }}</p>
+        {% else %}
+        <p>Set a custom bio <a href="{% url 'update_profile' %}"><i class='bx bx-edit edit__text'></i></a></p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="main__cards">
+
+      <div class="card">
+        <i class='bx bx-pie-chart-alt bx-sm'></i>
+        <div class="card__inner">
+          <p class="text-primary-p">Profile Completion</p>
+          <p class="profile-stats">{{ profile_completed }}%</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-time bx-sm'></i>
+        <div class="card__inner">
+          <p class="text-primary-p">Last Signed In</p>
+          <p class="profile-stats">{% localtime on %}
+            {{ current_time }}
+            {% endlocaltime %}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <i class='bx bx-bookmarks bx-sm'></i>
+        <div class="card__inner">
+          <p class="text-primary-p">Bookmarked Colleges</p>
+          <p class="profile-stats">{{ bookmarks_count }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="charts">
+      <div class="charts__left">
+        {% if profile_completed == 100 or not trending_unis %}
+        <div class="charts__left__title">
+          <div>
+            <h1>Profile Summary</h1>
+          </div>
+          <i class='bx bxs-report'></i>
+        </div>
+        <div class="profile-viz">
+          <div class="gpa-score">
+            <canvas id="gpa-doughnut-chart"></canvas>
+          </div>
+          <div class="gre-score">
+            <canvas id="gre-doughnut-chart"></canvas>
+          </div>
+          <div class="toefl-score">
+            <canvas id="toefl-doughnut-chart"></canvas>
+          </div>
+          <div class="overall-score">
+            <canvas id="overall-doughnut-chart"></canvas>
+          </div>
+        </div>
+
+        {% else %}
+        <div class="charts__left__title">
+          <div>
+            <h1>Trending Universities</h1>
+          </div>
+          <i class='bx bx-trending-up'></i>
+        </div>
+        <div class="trending-unis">
+          <ol class="list">
+            {% for uni in trending_unis %}
+            <li class="item">
+              <a href="{% url 'university_detail' uni.slug %}" class="headline">
+                {{ uni.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        {% endif %}
+      </div>
+
+      <div class="charts__right">
+        {% if profile_completed == 100 and trending_unis %}
+        <div class="charts__right__title">
+          <div>
+            <h1>Trending Universities</h1>
+          </div>
+          <i class='bx bx-trending-up'></i>
+        </div>
+        <div class="trending-unis">
+          <ol class="list">
+            {% for uni in trending_unis %}
+            <li class="item">
+              <a href="{% url 'university_detail' uni.slug %}" class="headline">
+                {{ uni.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        {% else %}
+        <div class="charts__right__title">
+          <div>
+            <h1>Academics</h1>
+            <p>Click to Edit <a href="{% url 'update_profile' %}#academics"><i class='bx bx-edit edit__text'></i></a>
+            </p>
+          </div>
+          <i class='bx bxs-medal'></i>
+        </div>
+
+        <div class="charts__right__cards">
+
+          <div class="card1">
+            <h2>GPA</h2>
+            <h3>{{ user.profile.gpa }}</h3>
+          </div>
+
+          <div class="card1">
+            <h2>GRE</h2>
+            <h3>{{ user.profile.gre_score }}</h3>
+          </div>
+
+          <div class="card1">
+            <h2>TOEFL</h2>
+            <h3>{{ user.profile.toefl_score }}</h3>
+          </div>
+
+          <div class="card1">
+            <h2>Research</h2>
+            {% if user.profile.research == 1 %}
+            <i class='bx bx-check-circle bx-sm'></i>
+            {% else %}
+            <i class='bx bx-x bx-sm'></i>
+            {% endif %}
+          </div>
+
+          <div class="card1">
+            <h2>SOP</h2>
+            <progress value="{{ user.profile.sop_score }}" max="5"> </progress>
+          </div>
+
+          <div class="card1">
+            <h2>Rec. Letters</h2>
+            <progress value="{{ user.profile.lor_score }}" max="5"> </progress>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<!--===== JQUERY =====-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+  </script>
+
+<script>
+  $(document).ready(function() {
+
+    // GPA Chart Start
+    new Chart(document.getElementById("gpa-doughnut-chart"), {
+      type: 'doughnut',
+      data: {
+        labels: ["GPA", "Remaining"],
+        datasets: [
+          {
+            label: "GPA",
+            backgroundColor: ["#1a237e", "#AFA5D9"],
+            borderColor: 'white',
+            borderWidth: '1px',
+            data: [{{ user.profile.gpa }}, 4-{{ user.profile.gpa }}]
+    }
+        ]
+      },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutoutPercentage: 60,
+    title: {
+      'display': true,
+      'text': 'GPA',
+      'position': 'bottom'
+    },
+    "legend": {
+      display: false,
+    },
+    tooltips: {
+      enabled: false
+    }
+  }
+    });
+  // GPA Score Chart End
+
+  // GRE Chart Start
+  new Chart(document.getElementById("gre-doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["GRE", "Remaining"],
+      datasets: [
+        {
+          label: "GRE",
+          backgroundColor: ["#1a237e", "#AFA5D9"],
+          borderColor: 'white',
+          borderWidth: '1px',
+          data: [{{ user.profile.gre_score }}, 340-{{ user.profile.gre_score }}]
+  }
+        ]
+      },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutoutPercentage: 60,
+    title: {
+      'display': true,
+      'text': 'GRE',
+      'position': 'bottom'
+    },
+    "legend": {
+      display: false,
+    },
+    tooltips: {
+      enabled: false
+    }
+  }
+    });
+  // GRE Score Chart End
+
+  // TOEFL Chart Start
+  new Chart(document.getElementById("toefl-doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["TOEFL", "Remaining"],
+      datasets: [
+        {
+          label: "TOEFL",
+          backgroundColor: ["#1a237e", "#AFA5D9"],
+          borderColor: 'white',
+          borderWidth: '1px',
+          data: [{{ user.profile.toefl_score }}, 120-{{ user.profile.toefl_score }}]
+  }
+        ]
+      },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutoutPercentage: 60,
+    title: {
+      'display': true,
+      'text': 'TOEFL',
+      'position': 'bottom'
+    },
+    "legend": {
+      display: false,
+    },
+    tooltips: {
+      enabled: false
+    }
+  }
+    });
+  // TOEFL Score Chart End
+
+  // Overall Score Chart Start
+  new Chart(document.getElementById("overall-doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Your Profile", "Remaining"],
+      datasets: [
+        {
+          label: "Overall Profile",
+          backgroundColor: ["#1a237e", "#AFA5D9"],
+          borderColor: 'white',
+          borderWidth: '1px',
+          data: [{{ user.profile.chance_of_admit }}, 1-{{ user.profile.chance_of_admit }}]
+  }
+        ]
+      },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutoutPercentage: 60,
+    title: {
+      'display': true,
+      'text': 'Overall Profile Strength',
+      'position': 'bottom'
+    },
+    "legend": {
+      display: false,
+    },
+    tooltips: {
+      enabled: false
+    }
+  }
+    });
+  // Overall Score Chart End
+
+  });
+</script>
+
+<script>
+  const linkColor=document.querySelector("#dashboard");
+  linkColor.classList.add("active");
+</script>
+{% endblock script %}

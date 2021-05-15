@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'css/universities/university-detail.css' %}">
+{% endblock extracss %}
+
+{% block content %}
+<div class="uni-header center">
+    <h1>{{ university.name }}
+        <a href="{% url 'toggle_bookmark' university.id %}">
+            {% if university in request.user.bookmarks.all %}
+            <i class='bx bxs-bookmark bookmark'></i>
+            {% else %}
+            <i class='bx bxs-bookmark-plus bookmark'></i>
+            {% endif %}
+        </a>
+    </h1>
+</div>
+<div class="uni-loc">
+    <h4 class="center">{{ university.location }}</h4>
+</div>
+
+<div class="container">
+    <div class="top">
+        <div class="radar chart">
+            <canvas id="radar"></canvas>
+        </div>
+        <div class="table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, score in info %}
+                    <tr>
+                        <td>{{ index }}</td>
+                        <td>{{ score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="pie1 chart">
+            <h3 class="center">Percentage of Students</h3>
+            <canvas id="pie1"></canvas>
+        </div>
+        <div class="pie2 chart">
+            <h3 class="center">Male and Female Ratio</h3>
+            <canvas id="pie2"></canvas>
+        </div>
+    </div>
+
+
+    <div class="subjects">
+        <h3 class="center">Subjects Offered</h3>
+        <div class="subject-list">
+            <div class="col1">
+                <ul>
+                    {% for subject in col1 %}
+                    <li>{{subject}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col2">
+                <ul>
+                    {% for subject in col2 %}
+                    <li>{{subject}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col3">
+                <ul>
+                    {% for subject in col3 %}
+                    <li>{{subject}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="predict-chance center modal__btn">
+        <button>Predict My Chance</button>
+    </div>
+
+    <!-- Modal Start -->
+
+    <div class="modal__box">
+        <div class="modal__bg__shadow"></div>
+        <div class="modal__box__wrap">
+            <div class="modal__header">
+                Result
+            </div>
+            <div class="modal__body">
+                <p style="font-weight: 600;">{{ predict_result }}</p>
+                <br>
+                <p style="font-weight: 600;">Things you can improve:</p>
+                <p>GRE, TOEFL, SOP, Letter of Recommendation</p>
+            </div>
+            <div class="modal__footer">
+                <div class="modal__btn__grp">
+                    <div class="disclaimer">
+                        <i class='bx bx-info-circle'></i> <a href="{% url 'faqs' %}">Learn how it is calculated</a>
+                    </div>
+                    <div class="modal__close">Close</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+
+    <!-- Navigation to other Universities -->
+    <div class="prev-next">
+        {% if prev_uni %}
+        <!-- Previous link sticks to the left -->
+        <a class="prev-next__btn" href="{% url 'university_detail' prev_uni.slug %}"><i class='bx bxs-chevron-left'
+                aria-hidden="true" title="Previous University"></i> {{ prev_uni.name}}</a>
+        {% endif %}
+
+        {% if next_uni %}
+        <!-- Next link sticks to the right -->
+        <a class="prev-next__btn" href="{% url 'university_detail' next_uni.slug %}">{{ next_uni.name }} <i
+                class='bx bxs-chevron-right' aria-hidden="true" title="Next University"></i></a>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<!--===== JQUERY =====-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+    </script>
+
+<script>
+    // Modal Start
+    const modalBtn=document.querySelector('.modal__btn');
+    const modalBox=document.querySelector('.modal__box');
+    const modalClose=document.querySelector('.modal__close');
+
+    modalBtn.addEventListener('click', () => {
+        modalBox.classList.add('active');
+    });
+
+    modalClose.addEventListener('click', () => {
+        modalBox.classList.remove('active');
+    });
+    // Modal End
+
+    // Charts
+    $(document).ready(function() {
+        Chart.defaults.global.defaultFontSize=12;
+        // Radar Chart Start
+        var radarCtx=document.getElementById('radar').getContext('2d');
+        var radarChart=new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: [{% for label in labels%}'{{label}}',{%endfor%}],
+        datasets: [{
+            label: 'Score',
+            borderColor: '#1a237e',
+            pointBackgroundColor: '#1a237e',
+            backgroundColor: 'rgba(26, 35, 126, 0.25)',
+            data: [{% for score in data%}'{{score}}', {%endfor%}]
+                },
+            ]
+            },
+
+        // Configuration options go here
+        options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Index and Scores',
+            fontSize: 15
+        },
+        scale: {
+            gridLines: {
+                color: 'silver'
+            },
+            ticks: {
+                beginAtZero: true,
+                max: 100,
+                callback: function() { return "" },
+                backdropColor: "rgba(0, 0, 0, 0)"
+            },
+            pointLabels: {
+                fontSize: 13
+            },
+        },
+        devicePixelRatio: 2.5,
+        tooltips: {
+            enabled: true,
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    return data.datasets[tooltipItem.datasetIndex].label+' : '+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                }
+            }
+        },
+        "legend": {
+            display: false,
+        },
+    }
+        });
+    // Radar Chart 
+
+    // Pie Chart 1 Start
+    var pieCtx_1=document.getElementById('pie1');
+    var myPieChart_1=new Chart(pieCtx_1, {
+        type: 'pie',
+        data: {
+            labels: ['International', 'Local'],
+            datasets: [{
+                data: [{{ intl_stds }}, {{ local_stds }}],
+        backgroundColor: ['#ff5722', '#2196f3'],
+        hoverBorderWidth: 1.1,
+    }]
+        },
+    options: {
+        responsive: true,
+            devicePixelRatio: 2.5,
+                borderWidth: 4,
+                    hoverBorderWidth: 0,
+                        legend: {
+            reverse: true,
+                onClick: (e) => e.stopPropagation()
+        }
+    }
+    });
+    // Pie Chart 1 End
+
+    // Pie Chart 2 Start
+    var pieCtx_2=document.getElementById('pie2');
+    var myPieChart_2=new Chart(pieCtx_2, {
+        type: 'pie',
+        data: {
+            labels: ['Female', 'Male'],
+            datasets: [{
+                data: [{{ female_stds }}, {{ male_stds }}],
+        backgroundColor: ['#f06292', '#448aff']
+    }]
+        },
+    options: {
+        responsive: true,
+            devicePixelRatio: 2.5,
+                borderWidth: 4,
+                    hoverBorderWidth: 0,
+                        legend: {
+            reverse: true,
+                onClick: (e) => e.stopPropagation()
+        }
+    }
+    });
+    // Pie Chart 2 End
+    
+    });
+
+</script>
+
+<script>
+    const linkColor=document.querySelector("#universities");
+    linkColor.classList.add("active");
+</script>
+{% endblock script %}
