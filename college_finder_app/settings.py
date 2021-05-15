@@ -139,7 +139,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-SECRET_KEY = '9oz4rysio4zbxo@2vw#1h(sszzkx50lrv#0&_p$0iru1p(skr+'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

@@ -46,9 +46,9 @@ virtualenv env
 
 To activate:
 
-On windows`\env\Scripts\activate.bat`
+On windows `\env\Scripts\activate.bat`
 
-or, Using git CLI`source ./env/Scripts/activate`
+or, Using git CLI `source ./env/Scripts/activate`
 
 ### 4. Install python packages
 
