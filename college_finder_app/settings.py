@@ -26,13 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['collegefinderapp.herokuapp.com', '127.0.0.1']
 
+ADMINS = [('College Finder', 'collegefinderapplication@gmail.com')]
 
 # Application definition
 
@@ -197,9 +198,9 @@ sentry_sdk.init(
     send_default_pii=True,
 )
 
-DATABASE_URL = os.environ['DATABASE_URL']
+# DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 DATABASES['default'] = dj_database_url.config(
     conn_max_age=600, ssl_require=True)
