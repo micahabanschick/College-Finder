@@ -305,7 +305,7 @@ form.sign-in-form {
 }
 
 .alert.success {
-    background-color: #4caf50;
+    background-color: #52b202;
 }
 
 .alert.info {
@@ -313,7 +313,7 @@ form.sign-in-form {
 }
 
 .alert.warning {
-    background-color: #ff9800;
+    background-color: #ff9100;
 }
 
 .closebtn {

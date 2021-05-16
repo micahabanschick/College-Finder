@@ -11,10 +11,11 @@ A platform for graduate college aspirants.
 
 - Beautiful interactive dashboard with vizualization
 - More than 1500 universities
+- Admission Chance Prediction using Machine Learning algorithm
 - College Comparison
 - Blogs
-- Bookmark feature
-- Dark Mode Support
+- Bookmarks feature
+- Dark Mode
 - All Device Responsive
 
 ## Getting started with development
@@ -51,7 +52,7 @@ To activate:
 
 On windows `\env\Scripts\activate.bat`
 
-or, Using git CLI `source ./env/Scripts/activate`
+Linux or, Using git CLI `source ./env/Scripts/activate`
 
 ### 4. Install python packages
 

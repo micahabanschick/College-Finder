@@ -107,7 +107,7 @@ class RegistrationView(View):
                 email_message = EmailMessage(
                     email_subject,
                     message,
-                    settings.EMAIL_HOST_USER,
+                    settings.DEFAULT_FROM_EMAIL,
                     [email],
                 )
                 email_message.content_subtype = 'html'
@@ -273,7 +273,7 @@ def forgot_password_page(request):
             email_message = EmailMessage(
                 email_subject,
                 message,
-                settings.EMAIL_HOST_USER,
+                settings.DEFAULT_FROM_EMAIL,
                 [email_to_reset],
             )
             email_message.content_subtype = 'html'
