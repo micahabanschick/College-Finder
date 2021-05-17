@@ -161,7 +161,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'components/static'),
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 load_dotenv()
 SECRET_KEY = os.environ['SECRET_KEY']
