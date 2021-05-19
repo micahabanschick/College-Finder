@@ -47,7 +47,7 @@
         </div>
 
         <div class="header__img dropdown">
-            <img onclick="dropdownFunction()" class="dropbtn" src="{% static 'img/avatar.png' %}" alt="Profile" />
+            <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
             <div id="dropdown" class="dropdown-content">
                 <a class="dropdown-item" href="{% url 'update_profile' %}">Settings</a>
 
@@ -136,10 +136,9 @@
     <script>
         /*===== THEME SWITCHER  =====*/
         let selectedTheme=localStorage.getItem('theme');
-        let cssFile="{%static 'css'%}"
         if (selectedTheme=='dark') {
             document.querySelector('#theme-switcher').checked=true;
-            document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+            document.getElementById('theme').href="{%static 'css/themes/dark.css'%}";
         }
 
         const swapStyle=() => {
@@ -147,16 +146,16 @@
                 let checkedValue=document.querySelector('#theme-switcher:checked').value;
                 if (checkedValue=="on") {
                     localStorage.setItem('theme', 'dark')
-                    document.getElementById('theme').href=cssFile+'/themes/'+'dark.css';
+                    document.getElementById('theme').href="{%static 'css/themes/dark.css'%}";
                 }
                 else {
                     localStorage.setItem('theme', 'light')
-                    document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+                    document.getElementById('theme').href="{%static 'css/themes/light.css'%}";
 
                 }
             } catch (error) {
                 localStorage.setItem('theme', 'light')
-                document.getElementById('theme').href=cssFile+'/themes/'+'light.css';
+                document.getElementById('theme').href="{%static 'css/themes/light.css'%}";
             }
         }
     </script>

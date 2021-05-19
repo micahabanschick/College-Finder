@@ -10,7 +10,7 @@
 <div class="container">
   <div class="main__container">
     <div class="main__title">
-      <img src="{% static 'img/avatar.png' %}" alt="">
+      <img src="{{ user.profile.avatar.url }}" alt="">
       <div class="main__greeting">
         <h1>Hello, {{name}}!</h1>
         {% if user.profile.bio != '' %}

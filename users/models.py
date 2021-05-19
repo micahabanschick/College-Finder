@@ -6,8 +6,8 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    # THIS FEATURE IS LOCKED UNTIL I CONFIGURE EXTERNAL FILE STORAGE
-    # avatar = models.ImageField(default='avatar.png', upload_to='profile_pics')
+    # SUBJECT TO CHANGE AFTER S3 BUCKET SETUP
+    avatar = models.ImageField(default='avatar.png', upload_to='profile_pics')
     bio = models.TextField(blank=True, null=True, default='')
     gpa = models.DecimalField(
         decimal_places=2, max_digits=3, blank=True, null=True)
@@ -26,7 +26,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}\'s Profile'
 
-    # THIS FEATURE IS LOCKED UNTIL I CONFIGURE EXTERNAL FILE STORAGE
+    # SUBJECT TO CHANGE AFTER S3 BUCKET SETUP
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
 

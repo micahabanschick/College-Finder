@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'social_django',
     'taggit',
@@ -153,8 +154,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = 'components/static/'
-MEDIA_URL = 'components/media/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'components/media')
 
 STATICFILES_DIRS = [
@@ -186,7 +187,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Sentry
 sentry_sdk.init(
-    dsn="https://b5b99558b8844a5c8c04ce2ddae45344@o673374.ingest.sentry.io/5768124",
+    dsn=os.environ['dsn'],
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
