@@ -25,7 +25,11 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'avatar', 'gpa', 'gre_score',
+        fields = ['bio', 'gpa', 'gre_score',
                   'toefl_score', 'sop_score', 'lor_score', 'uni_score', 'research']
+
+        # THIS FEATURE IS LOCKED UNTIL I CONFIGURE EXTERNAL FILE STORAGE
+        # fields = ['bio', 'avatar', 'gpa', 'gre_score',
+        #           'toefl_score', 'sop_score', 'lor_score', 'uni_score', 'research']
         widgets = {'research': forms.RadioSelect}
         
