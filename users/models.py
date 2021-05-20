@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     # SUBJECT TO CHANGE AFTER S3 BUCKET SETUP
-    avatar = models.ImageField(default='avatar.png', upload_to='profile_pics')
+    # avatar = models.ImageField(default='avatar.png', upload_to='profile_pics')
     bio = models.TextField(blank=True, null=True, default='')
     gpa = models.DecimalField(
         decimal_places=2, max_digits=3, blank=True, null=True)

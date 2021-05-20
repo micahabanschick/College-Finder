@@ -47,7 +47,7 @@
         </div>
 
         <div class="header__img dropdown">
-            <img onclick="dropdownFunction()" class="dropbtn" src="{{ user.profile.avatar.url }}" alt="Profile" />
+            <img onclick="dropdownFunction()" class="dropbtn" src="{% static 'img/avatar.png' %}" alt="Profile" />
             <div id="dropdown" class="dropdown-content">
                 <a class="dropdown-item" href="{% url 'update_profile' %}">Settings</a>
 
