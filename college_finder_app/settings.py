@@ -162,7 +162,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'components/static'),
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 load_dotenv()
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -207,5 +207,5 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 DATABASES['default'] = dj_database_url.config(
     conn_max_age=600, ssl_require=True)
 
-Activate Django-Heroku.
+# Activate Django-Heroku.
 django_heroku.settings(locals())
