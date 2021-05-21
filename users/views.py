@@ -172,8 +172,8 @@ class LoginView(View):
             return render(request, 'users/login.html', status=401, context=context)
 
         login(request, user)
-        messages.add_message(request, messages.SUCCESS,
-                             'Logged in.')
+        messages.add_message(request, messages.INFO,
+                             'This is a beta version of the application. Some features are compromised to favour heroku deployment.')
         return redirect('dashboard')
 
 
