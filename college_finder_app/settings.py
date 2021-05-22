@@ -162,7 +162,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'components/static'),
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'college_finder_app.storage.WhiteNoiseStaticFilesStorage'
 
 load_dotenv()
 SECRET_KEY = os.environ['SECRET_KEY']
