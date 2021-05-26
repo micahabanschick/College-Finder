@@ -524,7 +524,7 @@ input {
 @media screen and (max-width: 460px) {
     .alerts {
         left: 1em;
-	max-width: 95%;
+	width:95%;
     }
     .pagination-number {
         margin: 0 0.1em;

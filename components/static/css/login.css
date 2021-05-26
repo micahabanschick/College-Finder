@@ -515,7 +515,7 @@ form.sign-in-form {
         left: 50%;
     }
     .alerts {
-	max-width: 95%;
+	width:95%;
         left: 1em;
     }
 }
