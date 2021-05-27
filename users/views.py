@@ -173,7 +173,7 @@ class LoginView(View):
 
         login(request, user)
         messages.add_message(request, messages.INFO,
-                             'This is a beta version of the application. Some features are compromised to favour heroku deployment.')
+                             'Logged In.')
         return redirect('dashboard')
 
 
