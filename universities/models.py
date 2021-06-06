@@ -29,5 +29,5 @@ class University(models.Model):
     stats_pc_intl_students = models.CharField(max_length=5, null=False)
     stats_female_male_ratio = models.CharField(
         max_length=16, null=False, blank=True)
-    subjects_offered = models.TextField()
+    subjects_offered = models.TextField(max_length=1000)
     bookmarks = models.ManyToManyField(User, related_name='bookmarks', blank=True)
