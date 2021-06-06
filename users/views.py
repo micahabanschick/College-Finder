@@ -173,7 +173,7 @@ class LoginView(View):
 
         login(request, user)
         messages.add_message(request, messages.INFO,
-                             'Logged In.')
+                             'This is a beta version of the application. Some features are compromised to settle deployment issues.')
         return redirect('dashboard')
 
 
