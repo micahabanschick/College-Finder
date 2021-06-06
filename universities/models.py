@@ -23,7 +23,7 @@ class University(models.Model):
     scores_international_outlook_rank = models.IntegerField()
     slug = models.SlugField(default='not-found')
     location = models.TextField()
-    stats_number_students = models.IntegerField()
+    stats_number_students = models.CharField(max_length=8)
     stats_student_staff_ratio = models.DecimalField(
         max_digits=4, decimal_places=1)
     stats_pc_intl_students = models.CharField(max_length=5, null=False)
