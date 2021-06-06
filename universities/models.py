@@ -6,7 +6,7 @@ class University(models.Model):
     
     rank_order = models.IntegerField()
     rank = models.CharField(max_length=16)
-    name = models.TextField()
+    name = models.TextField(max_length=85)
     scores_overall = models.CharField(max_length=16, null=False)
     scores_overall_rank = models.IntegerField()
     scores_teaching = models.DecimalField(max_digits=4, decimal_places=1)
