@@ -6,7 +6,7 @@ class University(models.Model):
     
     rank_order = models.IntegerField()
     rank = models.CharField(max_length=16)
-    name = models.TextField(max_length=85)
+    name = models.TextField()
     scores_overall = models.CharField(max_length=16, null=False)
     scores_overall_rank = models.IntegerField()
     scores_teaching = models.DecimalField(max_digits=4, decimal_places=1)
@@ -21,7 +21,7 @@ class University(models.Model):
     scores_international_outlook = models.DecimalField(
         max_digits=4, decimal_places=1)
     scores_international_outlook_rank = models.IntegerField()
-    slug = models.SlugField(default='not-found')
+    slug = models.SlugField(default='not-found', max_length=255)
     location = models.TextField()
     stats_number_students = models.CharField(max_length=8)
     stats_student_staff_ratio = models.DecimalField(
@@ -29,5 +29,5 @@ class University(models.Model):
     stats_pc_intl_students = models.CharField(max_length=5, null=False)
     stats_female_male_ratio = models.CharField(
         max_length=16, null=False, blank=True)
-    subjects_offered = models.TextField(max_length=1000)
+    subjects_offered = models.TextField()
     bookmarks = models.ManyToManyField(User, related_name='bookmarks', blank=True)
