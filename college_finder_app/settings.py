@@ -168,6 +168,7 @@ STATICFILES_STORAGE = 'college_finder_app.storage.WhiteNoiseStaticFilesStorage'
 load_dotenv()
 SECRET_KEY = os.environ['SECRET_KEY']
 EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
@@ -180,7 +181,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'dashboard'
+# LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
