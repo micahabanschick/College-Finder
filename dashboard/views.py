@@ -6,7 +6,7 @@ t = time.localtime()
 current_time = time.strftime("%I:%M %p", t)
 
 try:
-    universities = University.objects.all()
+    universities = University.objects.all().order_by('id')
     uni_bookmark_counts = []
     trending_unis = []
     for university in universities:
