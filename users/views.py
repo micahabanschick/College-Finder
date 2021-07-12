@@ -163,9 +163,9 @@ class LoginView(View):
 
         user = authenticate(request, username=username, password=password)
 
-        if request.user.is_active == False:
-            messages.add_message(
-                request, messages.INFO, 'You have not activated your account yet. Please check your email and verify your account first.')
+        #if request.user.is_active == False:
+         #    messages.add_message(
+          #      request, messages.INFO, 'You have not activated your account yet. Please check your email and verify your account first.')
 
         if not user and not context['has_error']:
             messages.add_message(request, messages.ERROR,
