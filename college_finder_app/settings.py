@@ -167,7 +167,7 @@ STATICFILES_STORAGE = 'college_finder_app.storage.WhiteNoiseStaticFilesStorage'
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY') 
-EMAIL_HOST = os.getenv['EMAIL_HOST']
+EMAIL_HOST = os.getenv['EMAIL_HOST',0]
 EMAIL_HOST_USER = os.getenv['EMAIL_HOST_USER']
 EMAIL_BACKEND = os.getenv['EMAIL_BACKEND']
 DEFAULT_FROM_EMAIL = os.getenv['DEFAULT_FROM_EMAIL']
