@@ -189,7 +189,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Sentry
 sentry_sdk.init(
-    dsn=os.environ['dsn'],
+    dsn=os.getenv('dsn'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
@@ -202,7 +202,7 @@ sentry_sdk.init(
     send_default_pii=True,
 )
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
