@@ -17,6 +17,9 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
 
 if __name__ == '__main__':
     main()
