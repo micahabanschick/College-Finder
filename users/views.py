@@ -139,45 +139,45 @@ class RegistrationView(View):
 class LoginView(View):
     def get(self, request):
 
-        if request.user.is_authenticated:
-            return redirect('dashboard')
-        return render(request, 'users/login.html', context={'mode': 'signin', })
+        # if request.user.is_authenticated:
+        #     return redirect('dashboard')
+        # return render(request, 'users/login.html', context={'mode': 'signin', })
 
     def post(self, request):
-        context = {
-            'form': request.POST,
-            'has_error': False
-        }
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        # context = {
+        #     'form': request.POST,
+        #     'has_error': False
+        # }
+        # username = request.POST.get('username')
+        # password = request.POST.get('password')
 
-        if username == '':
-            messages.add_message(request, messages.ERROR,
-                                 'Username is required.')
-            context['has_error'] = True
+        # if username == '':
+        #     messages.add_message(request, messages.ERROR,
+        #                          'Username is required.')
+        #     context['has_error'] = True
 
-        if password == '':
-            messages.add_message(request, messages.ERROR,
-                                 'Password is required.')
-            context['has_error'] = True
+        # if password == '':
+        #     messages.add_message(request, messages.ERROR,
+        #                          'Password is required.')
+        #     context['has_error'] = True
 
-        user = authenticate(request, username=username, password=password)
+        # user = authenticate(request, username=username, password=password)
 
-        #if request.user.is_active == False:
-         #    messages.add_message(
-          #      request, messages.INFO, 'You have not activated your account yet. Please check your email and verify your account first.')
+        # #if request.user.is_active == False:
+        #  #    messages.add_message(
+        #   #      request, messages.INFO, 'You have not activated your account yet. Please check your email and verify your account first.')
 
-        if not user and not context['has_error']:
-            messages.add_message(request, messages.ERROR,
-                                 'Invalid Log In credentials.')
-            context['has_error'] = True
+        # if not user and not context['has_error']:
+        #     messages.add_message(request, messages.ERROR,
+        #                          'Invalid Log In credentials.')
+        #     context['has_error'] = True
 
-        if context['has_error']:
-            return render(request, 'users/login.html', status=401, context=context)
+        # if context['has_error']:
+        #     return render(request, 'users/login.html', status=401, context=context)
 
-        login(request, user)
-        messages.add_message(request, messages.INFO,
-                             'This is a beta version of the application. Some features are compromised to settle deployment issues.')
+        # login(request, user)
+        # messages.add_message(request, messages.INFO,
+        #                      'This is a beta version of the application. Some features are compromised to settle deployment issues.')
         return redirect('dashboard')
 
 
