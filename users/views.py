@@ -138,12 +138,14 @@ class RegistrationView(View):
 
 class LoginView(View):
     def get(self, request):
+        return redirect('dashboard')
 
         # if request.user.is_authenticated:
         #     return redirect('dashboard')
         # return render(request, 'users/login.html', context={'mode': 'signin', })
 
     def post(self, request):
+        return redirect('dashboard')
         # context = {
         #     'form': request.POST,
         #     'has_error': False
@@ -178,7 +180,7 @@ class LoginView(View):
         # login(request, user)
         # messages.add_message(request, messages.INFO,
         #                      'This is a beta version of the application. Some features are compromised to settle deployment issues.')
-        return redirect('dashboard')
+        # return redirect('dashboard')
 
 
 class ActivateAccountView(View):
