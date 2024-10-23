@@ -142,10 +142,6 @@ class LoginView(View):
     def get(self, request):
         return redirect('dashboard')
 
-        # if request.user.is_authenticated:
-        #     return redirect('dashboard')
-        # return render(request, 'users/login.html', context={'mode': 'signin', })
-
     def post(self, request):
         return redirect('dashboard')
         # context = {
