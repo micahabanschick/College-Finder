@@ -20,13 +20,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dashboard/', include('dashboard.urls')),
+    path('', include('dashboard.urls')),
+    path('users/', include('users.urls')),
     path('universities/', include('universities.urls')),
     path('compare/', include('college_comparison.urls')),
     path('bookmarks/', include('bookmarks.urls')),
     path('blogs/', include('blogs.urls')),
     path('faqs/', include('faqs.urls')),
-    path('', include('users.urls')),
     # path('oauth/', include('social_django.urls', namespace='social')),
 ]
 
