@@ -25,6 +25,8 @@ username_pattern = re.compile(
 
 
 class RegistrationView(View):
+    return redirect('dashboard')
+    
     def get(self, request):
         if request.user.is_authenticated:
             return redirect('dashboard')
